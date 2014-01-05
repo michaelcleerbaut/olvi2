@@ -47,7 +47,7 @@ function validate_vak(){
                 if($('#huisnummer').val() == ""){
                     $('#huisnummer').css('borderColor','#d46363');
                 }
-                check_validation(message,"validate","gegevens_kind_a",result);
+                check_validation(message,"validate","gegevens_kind_a","");
                 return false;
             }
                            
@@ -86,7 +86,7 @@ function validate_vak(){
                 if($('#huisnummer').val() == ""){
                     $('#huisnummer').css('borderColor','#d46363');
                 }
-                check_validation(message,"validate","gegevens_kind_b",result);
+                check_validation(message,"validate","gegevens_kind_b","");
                 return false;
             }
                            
@@ -955,7 +955,7 @@ function validate_vak(){
                 if($('#geboorteplaats').val() == ""){
                     $('#geboorteplaats').css('borderColor','#d46363');
                 }
-                check_validation(message,"validate","save_gegevens_kind_inschrijving",result);
+                check_validation(message,"validate","save_gegevens_kind_inschrijving","");
                 return false;
             }
         
@@ -1067,7 +1067,7 @@ function validate_vak(){
         
         case "baso":
             if($('#baso').val() == ""){
-                check_validation("U moet een keuze maken","validate","baso",result);
+                check_validation("U moet een keuze maken","validate","baso","");
                 return false;
             }
             
