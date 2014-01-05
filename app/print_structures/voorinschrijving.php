@@ -10,12 +10,6 @@
         "1" => "app/views/prints/voorinschrijving/algemeen.tpl"
     );
 
-    echo "<pre>";
-    print_r($_GET);
-    print_r($_POST);
-    print_r($_SESSION);
-    echo "</pre>";
-
     // check if id_inschrijving or id_leerling is known
     if($_GET['id_inschrijving'] != "" && $_GET['id_leerling'] != ""){
         $id_inschrijving = $_GET['id_inschrijving'];
