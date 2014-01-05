@@ -1087,7 +1087,7 @@ function validate_vak(){
     }
                                   
         
-    check_validation(message,"validate","algemene check_validation onderaan",result);
+    check_validation(message,"validate","algemene check_validation onderaan","");
                 
         
         
