@@ -5,9 +5,9 @@
 
     $header_vars = array(
         "js_includes" => "
-        <script type=\"text/javascript\" src=\"app/js/inschrijving_forms.js\"></script>
-        <script type=\"text/javascript\" src=\"app/js/preload.js\"></script>
-        <script type=\"text/javascript\" src=\"app/js/validate.js\"></script>
+        <script type=\"text/javascript\" src=\"/app/js/inschrijving_forms.js\"></script>
+        <script type=\"text/javascript\" src=\"/app/js/preload.js\"></script>
+        <script type=\"text/javascript\" src=\"/app/js/validate.js\"></script>
         ",
         "isForm" => $isForm
     );
