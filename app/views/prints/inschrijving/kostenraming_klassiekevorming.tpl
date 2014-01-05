@@ -115,5 +115,5 @@
 
 
 <div style="margin-top:100px;border-top: solid thin #000;text-align:right;padding-right:50px;padding-top:10px;">
-schooljaar 2013 - 2014
+schooljaar 2014 - 2015
 </div>
