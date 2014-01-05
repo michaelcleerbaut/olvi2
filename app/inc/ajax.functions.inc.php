@@ -3684,8 +3684,7 @@ HTML;
                 
         include('/pdf_voorinschrijving.php');        
 
-        
-        $to      = 'michael.cleerbaut@hotmail.com';
+                
         $subject = 'Bevestiging voorinschrijving';
         $headers = 'From: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
             'Reply-To: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
@@ -3721,7 +3720,7 @@ MSG;
         
         if($leerling['email'] != ""){
             mail($leerling['email'], $subject, $message, $headers);
-            mail("michael.cleerbaut@hotmail.com", $subject . " - Verstuurd naar: {$leerling['email']}", $message, $headers);   
+            mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);   
         }        
 
 

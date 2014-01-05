@@ -5,7 +5,6 @@ require_once('lib/tcpdf/tcpdf.php');
 
 require_once('app/inc/mysql.functions.inc.php');
                                        
-//$id_inschrijving = "661";
                       
   $query = "
     SELECT l.*, i.*, c.*, o.studiekeuze, a.uur, a.dag FROM inschrijving i
