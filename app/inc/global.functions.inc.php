@@ -54,7 +54,7 @@
     }
 
     function dbg($txt){
-        file_put_contents("log/debug.txt",$txt."\n",FILE_APPEND);    
+        file_put_contents("/log/debug.txt",$txt."\n",FILE_APPEND);    
     }
     
     function list_nationaliteiten($nationaliteit = ""){
