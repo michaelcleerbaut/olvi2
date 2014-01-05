@@ -6,9 +6,9 @@
         <th colspan="2">Ouders verklaren hierbij dat hun zoon / dochter tijdens de middagpauze</th>        
     </tr>
     <tr>
-        <td><label><input type="radio" id="middag_school" name="middag" style="width:20px;" value="op school blijft en zijn / haar lunch gebruikt in de leerlingenrefter" [MIDDAGSCHOOL]> op school blijft en zijn / haar lunch gebruikt in de leerlingenrefter</label></td>
-        <td><label><input type="radio" id="middag_thuis" name="middag" style="width:20px;margin-left:50px;" value="naar huis komt" [MIDDAGTHUIS]> naar huis komt</label></td>
-        <td><label><input type="radio" id="middag_half" name="middag" style="width:20px;margin-left:50px;" value="soms naar huis komt" [MIDDAGHALF]>soms naar huis komt</label></td>
+        <td><label><input type="radio" id="middag_school" name="middag" style="width:20px;" value="op school blijft en zijn / haar lunch gebruikt in de leerlingenrefter" [MIDDAGSCHOOL]> intern</label></td>
+        <td><label><input type="radio" id="middag_thuis" name="middag" style="width:20px;margin-left:50px;" value="naar huis komt" [MIDDAGTHUIS]> extern</label></td>
+        <td><label><input type="radio" id="middag_half" name="middag" style="width:20px;margin-left:50px;" value="soms naar huis komt" [MIDDAGHALF]>half extern</label></td>
     </tr>    
 </table>
 
@@ -18,8 +18,7 @@
     </tr>    
     <tr>
         <td><label><input type="checkbox" name="thuis_ma" value="YES" style="width: 20px;" [CHKTHUISMA]> Maandag</label></td>
-        <td><label><input type="checkbox" name="thuis_di" value="YES" style="width: 20px;margin-left:40px;" [CHKTHUISDI]> Dinsdag</label></td>
-        <td><label><input type="checkbox" name="thuis_wo" value="YES" style="width: 20px;margin-left:40px;" [CHKTHUISWO]> Woensdag</label></td>
+        <td><label><input type="checkbox" name="thuis_di" value="YES" style="width: 20px;margin-left:40px;" [CHKTHUISDI]> Dinsdag</label></td>        
         <td><label><input type="checkbox" name="thuis_do" value="YES" style="width: 20px;margin-left:40px;" [CHKTHUISDO]> Donderdag</label></td>
         <td><label><input type="checkbox" name="thuis_vr" value="YES" style="width: 20px;margin-left:40px;" [CHKTHUISVR]> Vrijdag</label></td>
     </tr>

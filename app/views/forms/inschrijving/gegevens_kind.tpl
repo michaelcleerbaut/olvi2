@@ -41,25 +41,21 @@
         <th>Geboortedatum</th>
         <td><input type="text" id="geboortedatum" value="[GEBOORTEDATUM]" class="datepicker" tabindex="3"></td>
 
-        <th>Telefoon v/d leerling</th>
+        <th>GSM v/d leerling</th>
         <td><input type="text" id="tel" value="[TELEFOON]" tabindex="7"></td>        
     </tr>
     <tr>
         <th>Geboorteplaats</th>
         <td><input type="text" id="geboorteplaats" value="[GEBOORTEPLAATS]" tabindex="4"></td>        
 
-        <th>GSM v/d leerling</th>
-        <td><input type="text" id="gsm" value="[GSM]" tabindex="8"></td>            
-    </tr>
-    <tr>
-        <th></th>
-        <td></td>        
-        
         <th>Email v/d leerling</th>
         <td><input type="text" id="email" value="[EMAIL]" tabindex="8"></td>        
     </tr>
     <tr>
         <td colspan="4" class="spacer"></td>
+    </tr>
+    <tr>
+        <td></td><th colspan="3">Adres leerling</th>
     </tr>
     <tr>
         <th>Straat + nr</th>
@@ -77,7 +73,7 @@
         <td colspan="4" class="spacer"></td>
     </tr>    
     <tr>
-        <th></th>
+        <th>Lagere school</th>
         <td colspan="3"><div class="link" id="search_lagere_school"><div class="search" style="float:left;"></div> <div style="float:left;line-height: 23px;cursor: pointer;"><strong>Zoek jouw lagere school</strong></div></div></td>
     </tr>
     <tr class="kind_vorigeschool_static [HIDE_VORIGESCHOOL_STATIC]">
