@@ -27,7 +27,7 @@
 <?php
     foreach($pages as $page){
         echo "<div class=\"page\">";            
-            include("/".$page);
+            include($page);
         echo "</div>";        
     }
 ?>
