@@ -1,5 +1,5 @@
 <div style="border-bottom: solid thin #000;height: 80px;position: relative;">
-    <img src="afb/olvi_logo.png" width="80" style="position: absolute;margin-left:100px;" />
+    <img src="/public/img/olvi_logo.png" width="80" style="position: absolute;margin-left:100px;" />
     
     <div style="float:left;">
         <span style="font-size:14px;">OLVI-MIDDENSCHOOL BOOM</span><br>
