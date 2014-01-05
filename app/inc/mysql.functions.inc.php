@@ -1,19 +1,7 @@
 <?
-
-    if($_SERVER['REMOTE_ADDR'] == "127.0.0.1"){
-        $mysql['host']         =    "localhost";
-        $mysql['user']        =    "mcreations";
-        $mysql['pass']        =    "l061t3ch132";
-        $mysql['db']        =    "olviboom";        
-    } else {    
-        $mysql['host']         =    "mysql-3.priorweb.be";
-        $mysql['user']        =    "onzelievevrouwi";
-        $mysql['pass']        =    "we2TMwyn";
-        $mysql['db']        =    "inschrijving_ms";
-    }                   
-                   
-$link = mysql_connect($mysql['host'],$mysql['user'],$mysql['pass']) or die(mysql_errno() . ": " . mysql_error());
-mysql_select_db($mysql['db'],$link);
+   
+$link = mysql_connect(DB_HOST,DB_USER,DB_PASS) or die(mysql_errno() . ": " . mysql_error());
+mysql_select_db(DB_DB,$link);
 mysql_set_charset('utf8',$link); 
 
 
