@@ -3699,9 +3699,12 @@ HTML;
         $headers = 'From: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
             'Reply-To: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
             'Content-Type: text/html';
+            
+        $web_domain = WEB_DOMAIN;
+            
         $message = <<<MSG
             
-            <img src="http://www.olviboom.be/middenschooltest/afb/logo_jpg.jpg" alt="Olvi Boom Middenschool">
+            <img src="{$web_domain}/public/img/logo_jpg.jpg" alt="Olvi Boom Middenschool">
             
             <p>Beste, </p>
             
@@ -3709,7 +3712,7 @@ HTML;
                         
             
             <p>
-                <a href="http://www.olviboom.be/middenschooltest/pdfs/{$filename}.pdf">Klik op deze link om het voorinschrijving overzicht te downloaden.</a>
+                <a href="{$web_domain}/data/pdfs/{$filename}.pdf">Klik op deze link om het voorinschrijving overzicht te downloaden.</a>
             </p>
             
             <p>
@@ -3718,7 +3721,7 @@ HTML;
             </p>
             
 
-            <img src="http://www.olviboom.be/middenschooltest/afb/handtekening.jpg" alt="Olvi Boom">
+            <img src="{$web_domain}/public/img/handtekening.jpg" alt="Olvi Boom">
                         
 MSG;
         

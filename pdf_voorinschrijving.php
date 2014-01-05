@@ -97,7 +97,7 @@ class MYPDF extends TCPDF {
                     </table>
                 </td>
                 <td width="150">                
-                       <img src="afb/olvi_logo.png" width="60">
+                       <img src="/public/img/olvi_logo.png" width="60">
                 </td>
                 <td width="150">
                     $title_volgnummerA<br>

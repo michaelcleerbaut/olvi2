@@ -32,10 +32,10 @@ body{
 }
 
 .checkbox_checked{
-    background: url('../afb/checkboxes.png');
+    background: url('/public/img/checkboxes.png');
 }
 .checkbox_notchecked{
-    background: url('../afb/checkboxes.png');
+    background: url('/public/img/checkboxes.png');
     background-position: bottom;
 }
 

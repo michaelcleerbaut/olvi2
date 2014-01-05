@@ -1,6 +1,6 @@
 <table style="width:100%;padding-bottom: 20px;border-bottom: solid thin #000;">
     <tr>
-        <td valign="top" style="width:120px;"><img src="afb/olvi_logo.png" width="100" /></td>
+        <td valign="top" style="width:120px;"><img src="/public/img/olvi_logo.png" width="100" /></td>
         <td valign="top">
             <table style="width:100%;">
                 <tr><td style="padding-bottom: 10px;border-bottom: solid thin #000;">Onze-Lieve-Vrouwinstituut Boom vzw - Bassinstraat 15 - 2850 Boom</td></tr>
