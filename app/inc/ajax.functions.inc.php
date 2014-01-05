@@ -3702,7 +3702,7 @@ HTML;
                         
             
             <p>
-                <a href="{$web_domain}/data/pdfs/{$filename}.pdf">Klik op deze link om het voorinschrijving overzicht te downloaden.</a>
+                <a href="{$web_domain}data/pdfs/{$filename}.pdf">Klik op deze link om het voorinschrijving overzicht te downloaden.</a>
             </p>
             
             <p>
@@ -3714,13 +3714,13 @@ HTML;
             <img src="{$web_domain}/public/img/handtekening.jpg" alt="Olvi Boom">
                         
 MSG;
-        
-        //mail("coordinatie@olviboom.be", $subject, $message, $headers);
+                
         
         
         if($leerling['email'] != ""){
             mail($leerling['email'], $subject, $message, $headers);
-            mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);   
+            mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);
+            mail("coordinatie@olviboom.be", $subject. " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);   
         }        
 
 
