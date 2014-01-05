@@ -3682,7 +3682,7 @@ HTML;
     function voorinschrijving_email($id_inschrijving){
                                                     
                 
-        include('/pdf_voorinschrijving.php');        
+        include('pdf_voorinschrijving.php');        
 
                 
         $subject = 'Bevestiging voorinschrijving';
