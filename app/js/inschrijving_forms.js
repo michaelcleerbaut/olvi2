@@ -74,31 +74,31 @@ function print_triggers(){
     // PRINT BUTTONS
     if($('#print_inschrijving').length > 0){
         $('#print_inschrijving').click(function(){
-            window.open("/print/inschrijving"); 
+            window.open("/prt/inschrijving"); 
         });
     }    
 
     if($('#print_vip_leerproblemen').length > 0){
         $('#print_vip_leerproblemen').click(function(){
-            window.open("/print/vip_leerproblemen");
+            window.open("/prt/vip_leerproblemen");
         });
     }
 
     if($('#print_vip_gedragsproblemen').length > 0){
         $('#print_vip_gedragsproblemen').click(function(){
-            window.open("/print/vip_gedragsproblemen");
+            window.open("/prt/vip_gedragsproblemen");
         });
     }
 
     if($('#print_vip_gezondheidsproblemen').length > 0){
         $('#print_vip_gezondheidsproblemen').click(function(){
-            window.open("/print/vip_gezondheidsproblemen");
+            window.open("/prt/vip_gezondheidsproblemen");
         });
     }
 
     if($('#print_voorinschrijving').length > 0){
         $('#print_voorinschrijving').click(function(){        
-            window.open("/print/voorinschrijving");
+            window.open("/prt/voorinschrijving");
         });
     }
 
@@ -112,7 +112,7 @@ function eindwoord_inschrijving_functions(){
 
 
     $('#print_inschrijving').click(function(){
-        window.open("/print/inschrijving"); 
+        window.open("/prt/inschrijving"); 
     });        
 
     $('#ookastroom_inschrijving').click(function(){

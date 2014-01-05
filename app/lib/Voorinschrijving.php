@@ -70,7 +70,7 @@ HTML;
                 $html .= "<th class=\"left\"><a href=\"/panel/voorinschrijvingen/show/{$stroom}/{$row['i_id']}\">$naam</a></th>";
                 $html .= "<td class=\"center\">{$row['volgnummer']} </td>";
                 $html .= "<td class=\"center\">$volgnummerandere</td>";
-                $html .= "<td class=\"center\"><a href=\"/print/voorinschrijving/{$row['i_id']}/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
+                $html .= "<td class=\"center\"><a href=\"/prt/voorinschrijving/{$row['i_id']}/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['invullen'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/edit/{$_GET['param1']}/{$row['i_id']}\">Edit</a></td>" : "";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/delete/{$row['i_id']}/{$_GET['param1']}\" class=\"confirm\">Verwijder</a></td>" : "";
                 $html .= "</tr>";

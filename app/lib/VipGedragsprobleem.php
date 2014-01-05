@@ -22,7 +22,7 @@
                 $html .= "<tr>";
                 $html .= "<th class=\"left\"><a href=\"/panel/vip_gedragsproblemen/show/{$row['v_id']}\">$naam</a></th>";                        
                 $html .= "<td class=\"center\">{$row['opgemaakt_door']}</td>";
-                $html .= "<td class=\"center\"><a href=\"/print/vip/vip_gedragsproblemen/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
+                $html .= "<td class=\"center\"><a href=\"/prt/vip/vip_gedragsproblemen/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['vip_gedragsproblemen']['bewerken'] == "YES" ? "<td class=\"center\"><a href=\"/panel/vip_gedragsproblemen/edit/{$row['v_id']}\">Edit</a></td>" : "";
                 $html .= $_SESSION['gebruiker']['rights']['vip_gedragsproblemen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/vip_gedragsproblemen/delete/{$row['v_id']}\" class=\"confirm\">Verwijder</a></td>" : "";
                 $html .= "</tr>";

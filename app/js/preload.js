@@ -589,7 +589,7 @@ function preload(preload_key){
                 }            
 
                 $('#print_voorinschrijving').click(function(){        
-                    window.open("/print/voorinschrijving");
+                    window.open("/prt/voorinschrijving");
                     $('#print_voorinschrijving').fadeOut(100);
                 });
             });

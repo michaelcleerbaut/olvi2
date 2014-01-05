@@ -21,7 +21,7 @@
                 $html .= "<tr>";
                 $html .= "<th class=\"left\"><a href=\"/panel/vip_andereproblemen/show/{$row['v_id']}\">$naam</a></th>";                        
                 $html .= "<td class=\"center\">{$row['opgemaakt_door']}</td>";
-                $html .= "<td class=\"center\"><a href=\"/print/vip/vip_andereproblemen/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
+                $html .= "<td class=\"center\"><a href=\"/prt/vip/vip_andereproblemen/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['vip_andereproblemen']['bewerken'] == "YES" ? "<td class=\"center\"><a href=\"/panel/vip_andereproblemen/edit/{$row['v_id']}\">Edit</a></td>" : "";
                 $html .= $_SESSION['gebruiker']['rights']['vip_andereproblemen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/vip_andereproblemen/delete/{$row['v_id']}\" class=\"confirm\">Verwijder</a></td>" : "";
                 $html .= "</tr>";

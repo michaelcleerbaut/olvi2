@@ -7,11 +7,11 @@ RewriteEngine On
 
 RewriteRule ^form/([A-Za-z0-9_.-]+)/?$    form.php?f=$1
 
-RewriteRule ^print/([A-Za-z0-9_.-]+)/?$                                         print.php?p=$1
-RewriteRule ^print/([A-Za-z0-9_.-]+)/([0-9]+)/?$                                print.php?p=$1&id_inschrijving=$2
-RewriteRule ^print/([A-Za-z0-9_.-]+)/([0-9]+)/([0-9]+)/?$                       print.php?p=$1&id_inschrijving=$2&id_leerling=$3
+RewriteRule ^prt/([A-Za-z0-9_.-]+)/?$                                         print.php?p=$1
+RewriteRule ^prt/([A-Za-z0-9_.-]+)/([0-9]+)/?$                                print.php?p=$1&id_inschrijving=$2
+RewriteRule ^prt/([A-Za-z0-9_.-]+)/([0-9]+)/([0-9]+)/?$                       print.php?p=$1&id_inschrijving=$2&id_leerling=$3
 
-RewriteRule ^print/vip/([A-Za-z0-9_.-]+)/([0-9]+)/?$                            print.php?p=$1&id_leerling=$2
+RewriteRule ^prt/vip/([A-Za-z0-9_.-]+)/([0-9]+)/?$                            print.php?p=$1&id_leerling=$2
 
 
 RewriteRule ^panel/([A-Za-z0-9_.-]+)/?$                                                                     panel_router.php?p=$1
