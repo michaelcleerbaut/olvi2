@@ -38,7 +38,7 @@
             
             foreach($menu_items as $page => $data){                
                 $right = explode("@@@",$data['right']);                                
-                $menu .= $_SESSION['gebruiker']['rights'][$right[0]][$right[1]] == "YES" ? "<li><a href=\"form/$page\">{$data['title']}</a></li>" : "";               
+                $menu .= $_SESSION['gebruiker']['rights'][$right[0]][$right[1]] == "YES" ? "<li><a href=\"frm/$page\">{$data['title']}</a></li>" : "";               
             }
                         
             

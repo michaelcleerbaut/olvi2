@@ -5,9 +5,9 @@
 
     $header_vars = array(
         "js_includes" => "
-        <script type=\"text/javascript\" src=\"/app/js/inschrijving_forms.js\"></script>
-        <script type=\"text/javascript\" src=\"/app/js/preload.js\"></script>
-        <script type=\"text/javascript\" src=\"/app/js/validate.js\"></script>
+        <script type=\"text/javascript\" src=\"app/js/inschrijving_forms.js\"></script>
+        <script type=\"text/javascript\" src=\"app/js/preload.js\"></script>
+        <script type=\"text/javascript\" src=\"app/js/validate.js\"></script>
         ",
         "isForm" => $isForm
     );
@@ -28,7 +28,7 @@
                 
     
     // GET STEPS
-    include("/app/form_structures/{$_GET['f']}.php");
+    include("app/form_structures/{$_GET['f']}.php");
     
     
     // PUT STEP SLIDES IN OB      
@@ -44,7 +44,7 @@
         $validate = $step['validate'] != "" ? "validate=\"{$step['validate']}\"" : "";
                                 
         echo "<div class=\"vak\" $validate preload=\"{$step['preload']}\">";
-            include("/app/views/forms/".$step['tpl']);
+            include("app/views/forms/".$step['tpl']);
         echo "</div>";        
     }
     

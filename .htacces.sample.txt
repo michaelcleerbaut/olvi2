@@ -5,7 +5,7 @@ ErrorDocument 404 /oops.php
 RewriteEngine On
 
 
-RewriteRule ^form/([A-Za-z0-9_.-]+)/?$    form.php?f=$1
+RewriteRule ^frm/([A-Za-z0-9_.-]+)/?$    form.php?f=$1
 
 RewriteRule ^prt/([A-Za-z0-9_.-]+)/?$                                         print.php?p=$1
 RewriteRule ^prt/([A-Za-z0-9_.-]+)/([0-9]+)/?$                                print.php?p=$1&id_inschrijving=$2

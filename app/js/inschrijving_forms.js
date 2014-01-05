@@ -42,7 +42,7 @@ $(document).ready(function(){
     // VARIA
     if($('#nieuwe_inschrijving_beginnen').length > 0){    
         $('#nieuwe_inschrijving_beginnen').click(function(){
-            window.location = "/form/inschrijving"; 
+            window.location = "/frm/inschrijving"; 
         });
     }
 
@@ -107,7 +107,7 @@ function print_triggers(){
 function eindwoord_inschrijving_functions(){
 
     $('#nieuwe_inschrijving_beginnen').click(function(){
-        window.location = "/form/inschrijving"; 
+        window.location = "/frm/inschrijving"; 
     });
 
 

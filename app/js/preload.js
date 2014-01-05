@@ -580,7 +580,7 @@ function preload(preload_key){
                 function timer(){
                     count=count-1;
                     if (count <= 0){
-                        window.location = "/form/voorinschrijving_" + $('#stroom').val();
+                        window.location = "/frm/voorinschrijving_" + $('#stroom').val();
                         clearInterval(counter);                                               
                         return;
                     }
