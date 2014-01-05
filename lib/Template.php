@@ -17,7 +17,7 @@
               }
           }
           
-          include("/".VIEW_PATH."/".$tpl.".php");
+          include(VIEW_PATH."/".$tpl.".php");
           
       }
       
