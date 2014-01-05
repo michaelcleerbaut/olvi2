@@ -54,7 +54,7 @@
         
         $dbh = MyPDO::getConnection();
         
-        $sth = $dbh->query("SELECT * FROM nationaliteiten");
+        $sth = $dbh->prepare("SELECT * FROM nationaliteiten");
         $sth->execute();
         $html = "<option value=\"\"></option>";
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
