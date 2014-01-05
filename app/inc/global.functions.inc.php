@@ -39,13 +39,6 @@
         return false;    
     }
 
-    function write_to_queryfile($title,$query){
-
-        $msg = date("Y-m-d H:i") . " - " . $title . " ### " . $query . "\n";
-
-        file_put_contents("log/queryfile.txt",$msg,FILE_APPEND);
-
-    }      
 
     function print_r2($arr){
         echo "<pre>";
@@ -54,7 +47,7 @@
     }
 
     function dbg($txt){
-        file_put_contents("/log/debug.txt",$txt."\n",FILE_APPEND);    
+        file_put_contents("log/debug.txt",$txt."\n",FILE_APPEND);    
     }
     
     function list_nationaliteiten($nationaliteit = ""){

@@ -296,8 +296,6 @@
             $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','B','1','{$_SESSION['gebruiker']['id']}','{$date}')";
             query($query);
             
-            write_to_queryfile("check_volgnummer_exists_b",$query);
-            
             $_SESSION['id_inschrijving'] = mysql_insert_id();
                     
             $return = "id" . $_SESSION['id_leerling'];
@@ -587,8 +585,7 @@ HTML;
         $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
         $return = query($query);
         
-        write_to_queryfile("save_ooka",$query);
-        
+
         $_SESSION['volgnummer_a'] = $volgnummer_a;
         
         return $return;
@@ -1993,8 +1990,6 @@ HTML;
         $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','A','1','{$_SESSION['gebruiker']['id']}','{$date}')";
         query($query);
         
-        write_to_queryfile("volgnummer_toekennen_a",$query);
-        
         $_SESSION['id_inschrijving'] = mysql_insert_id();
         
         $_SESSION['volgnummer_a'] = $volgnummer;
@@ -2050,8 +2045,6 @@ HTML;
         
         $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`definschrijving`,`def_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','{$stroom}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
         query($query);
-        
-        write_to_queryfile("get_nieuw_volgnummer",$query);
         
         $_SESSION['id_inschrijving'] = mysql_insert_id();
         
@@ -3642,8 +3635,6 @@ HTML;
             
             $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`definschrijving`,`def_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
             $return = query($query);
-            
-            write_to_queryfile("save_ooka_inschrijving",$query);
             
             $_SESSION['volgnummer_a'] = $volgnummer_a;
         }
