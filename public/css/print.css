@@ -1,0 +1,68 @@
+html,body{
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+
+body{
+    font-family: Tahoma, Arial, Helvetica, sans-serif;    
+    font-size: 12px;
+}
+
+
+.noprint{
+    display:none;
+}
+
+.page{    
+    width: 670px;
+    height: 960px;
+    margin-left: 50px;
+    page-break-after: always;     
+    padding-top: 20px;
+}
+
+.fontlicht{
+    color: #CCC;
+}
+
+.checkbox_checked, .checkbox_notchecked{
+    width: 16px;
+    height: 15px;    
+}
+
+.checkbox_checked{
+    background: url('../afb/checkboxes.png');
+}
+.checkbox_notchecked{
+    background: url('../afb/checkboxes.png');
+    background-position: bottom;
+}
+
+
+
+
+.vip_tabel{
+    border: none;
+    margin-top: 20px;
+}
+
+.vip_tabel td{
+    height: 84px;
+}
+
+.vip_tabel_meerdere_kolommen td:nth-child(1){
+    width: 150px;
+}
+
+.vip_tabel_meerdere_kolommen td:nth-child(2), .vip_tabel_meerdere_kolommen td:nth-child(3){
+    width: 20px;
+}
+
+.vip_tabel_meerdere_kolommen td:nth-child(4){
+    width: 250px;
+}
+    
+.vip_tabel_meerdere_kolommen td:nth-child(5){
+    width: 150px;
+}

@@ -1,0 +1,718 @@
+html,body{
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+
+body{
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    background: url('../img/background2.jpg') #373737;    
+    background-position: center -0px;
+    background-repeat: no-repeat;
+    min-width: 1000px;
+    color: #000;}
+
+    
+    
+    
+.logo{    
+    position: absolute;
+    width: 290px;
+    height: 82px;    
+    margin: 5px 0px 0px 10px;    
+    background: url('../img/logo_klein.png');
+}    
+.header{
+    position: relative;
+    width: 1000px;
+    height: 90px;
+    /*background: url('../img/header2.png');*/
+    margin: auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+    
+.header .titel{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    color: #78c0d8;
+    font-size: 24px;
+}
+
+
+.checkbox_checked, .checkbox_notchecked{
+    width: 16px;
+    height:16px;
+    float:left;   
+}
+    
+
+.checkbox_checked{
+    background: url('../img/checkboxes.png');
+}
+.checkbox_notchecked{
+    background: url('../img/checkboxes.png');
+    background-position: bottom;
+}
+
+
+
+
+
+/* uit vroegere cpanel */
+/* LINKS */
+a:link{
+    color: #78c0d8;
+}
+
+a:hover{
+    color: #fff;
+}
+
+a:visited{
+    color: #78c0d8;
+}
+
+a:active{
+    color: #78c0d8;
+}
+
+
+
+
+/* FORM SPECIALS */
+
+
+.error_form{
+    font-size: 12px;
+    color: #bc3333;    
+}
+
+
+
+
+
+/* NAVIGATIE */
+.nav{
+    position: absolute;
+    top: 0px;
+    left: 0px;    
+}
+
+
+.nav .btn{  
+    float:left;
+    background-color: #f7f7f7;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+.nav .btn a{
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.nav .btn:hover{
+    background-color: #8bc63c;
+}
+
+.nav .btn:hover a{
+    color: #fff;
+}
+
+
+
+
+ul.opties li .pointer, table.opties th .pointer{    
+    background: url('../img/pointer.png') center top;    
+}
+
+
+
+
+/* OVERZICHT LIJST */
+.list{
+    width: 100%;
+}
+
+.list th, .list td{
+    padding: 10px 5px 10px 5px;
+}
+
+.list th{
+    background-color: #8bc63c;
+}
+
+.list tr:nth-child(even) td{
+    background-color: #f7f7f7;    
+}
+
+.list tr:nth-child(odd) td{
+    background-color: #e3e3e3;    
+}
+
+.list tr:hover td{
+    background-color: #b9cd9e;
+    cursor: pointer;
+}
+
+
+
+/* RECHTEN */
+.rights{
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.rights .rightname, .rights .right{
+    float:left;
+    padding: 5px 10px 5px 10px;
+    min-height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.rights .rightname{
+    background-color: #ccc;
+    font-weight: bold;    
+    width: 200px;   
+}
+
+.rights .right{
+    background-color:#b3df79;
+}
+
+
+.submit{
+    margin:0 !important;
+    text-align:center !important;
+    padding:10px !important;
+    float:right !important;
+    font-weight: normal !important;
+    font-size: 14px !important;
+    
+}
+
+
+/* OPGESLAGEN BALK */
+.succes, .noti_success{
+    position: absolute;
+    width: 1000px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #53cd4d;
+    margin: -40px 0px 0px -110px;    
+    border: solid thin #e4e4e4;
+}
+
+.error_msg, .noti_error{
+    position: absolute;
+    width: 1000px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #f00;
+    margin: -40px 0px 0px -110px;    
+    border: solid thin #f00;
+}
+
+
+
+
+
+
+#loading{
+    display: none;
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    z-index: 800;    
+    box-shadow: 0px 0px 5px #333;    
+    border-radius: 10px;
+    padding: 20px;
+    background: url('../img/loading.gif') center no-repeat #FFF;
+    line-height: 110px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    left: 50%;
+    margin-left: -70px;
+    margin-top: 80px;
+}
+
+
+.clear{
+    clear:both;
+}
+
+
+
+input.groot{
+    padding: 10px;
+    font-size: 24px;
+    line-height: 24px;    
+}
+
+
+input.error_input{
+    border-color: #d46363;
+}
+
+
+.error{
+    display:none;
+    position: absolute;
+    padding: 10px 20px 10px 20px;
+    margin-top: -10px;
+    background-color: #f5f5f5;
+    color: #f00;
+    font-weight: bold;
+    font-size: 12px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+
+
+
+
+
+/* autoselect */
+.autocomplete2 {
+    background:#FFF;
+    border: solid thin #f5f5f5;
+    box-shadow: 0px 0px 2px #333;            
+    moz-box-shadow: 0px 0px 2px #333;            
+    cursor:default;
+    text-align:left;
+    width: 400px;
+    max-height:200px;
+    overflow:auto;    
+    margin:-6px 6px 6px -6px;
+    font-style: normal;
+    /* IE6 specific: */
+    _height:350px; 
+    _margin:0;
+    _overflow-x:hidden; 
+}
+
+.autocomplete2 .selected{
+    background:#F0F0F0; 
+}
+
+.autocomplete2 div{
+    padding: 5px 0px 5px 10px;
+    font-size: 12px;
+    border-bottom: solid thin #f5f5f5;    
+    white-space:nowrap;
+}
+
+.autocomplete2 div:hover{
+    background-color: #8bc63c;
+    color: #FFF;
+    cursor: pointer;
+    
+}
+
+.autocomplete2 strong{    
+    color:#000;
+}
+
+
+
+
+
+/* titels en uitleggen vak */
+.intro{
+    font-weight: bold;
+    font-size: 32px;
+    color: #575757;    
+    text-align:center;
+    margin-top: 100px;
+}
+
+.subintro{
+    text-align:center;
+    margin: 10px 0px 10px 0px;    
+}
+
+.subtitel, .subtitelCenter{
+    font-size: 24px;
+    margin: 10px 0px 10px 0px;
+}
+
+.subtitelCenter{
+    text-align:center;
+}
+
+.info, .infoCenter{
+    margin: 10px 0px 10px 0px;
+    font-size: 14px;
+}
+
+.infoCenter{
+    text-align: center;
+}
+
+
+
+/* BUTTONS */
+.btnBig, .btnMedium, .btnSmall{
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.btnBig{
+    padding: 20px;
+    font-size: 18px;
+    margin: 20px;    
+}
+
+.btnMedium{
+    padding: 10px;
+    font-size: 14px;
+    margin: 10px;        
+}
+
+.btnSmall{
+    font-size: 12px;
+    padding: 3px;
+    margin: 3px;
+}
+
+.btnSmall{
+    border: solid thin #ccc;
+}
+
+
+.btnBig:hover, .btnMedium:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 2px #333;
+    background-color: #8bc63c;
+}
+
+.btnSmall:hover{
+    cursor: pointer;    
+    background-color: #8bc63c;    
+}
+
+.btnBigActive, .btnMediumActive, .btnSmallActive{
+    background-color: #8bc63c;    
+}
+
+.btnBigActive:hover, .btnMediumActive:hover, .btnSmallActive{
+    background-color: #b3df79;
+}
+
+
+a.btnBig, a.btnMedium, a.btnSmall{
+    background-color: #b3df79;
+    color: #000;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+
+
+
+.print_icon{
+    position: relative;
+    width: 24px;
+    height: 21px;
+    background: url('/public/img/print.png');
+    left: 50%;
+    margin-left: -12px;
+    margin-right: 5px;    
+}
+
+.formulier, .formulierdubbel{
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.formulier th.left, .formulierdubbel th.left{
+    background-color: #eee;
+    padding: 10px;
+    width: 150px;
+    text-align: left;
+}
+
+.formulier td.right, .formulierdubbel td.right{
+    padding: 10px;
+}
+
+.formulier input, .formulier select, .formulierdubbel input, .formulierdubbel select, .formulier textarea, .formulierdubbbel textarea{
+    padding: 5px;    
+    font-size: 14px;
+    background-color: #f2f2f2;
+    border: solid thin #eee;
+}
+
+.formulier textarea, .formulierdubbel textarea{
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.formulier input{
+    width: 570px;
+}
+.formulier select{
+    width: 582px;
+}
+
+
+.formulierdubbel input{
+    width: 175px;
+}
+ 
+.formulierdubbel select{
+    width: 200px;    
+}
+
+
+
+.formulier td.spacer, .formulierdubbel td.spacer{
+    height: 40px;
+}
+
+.formulier td, .formulierdubbel td{
+    height: 20px;
+}
+
+.formulier th, .formulierdubbel th{
+    width: 190px;
+    text-align:left;  
+    
+}
+
+.formulier .disabled td, .formulier .disabled th, .formulier .disabled input, .formulierdubbel .disabled td, .formulierdubbel .disabled th, .formulierdubbel .disabled input, .disabled input, .disabled textarea{
+    color: #d2d2d2;
+}
+
+.formulier .disabled input, .formulierdubbel .disabled input, .disabled textarea{
+    background-color: #f7f7f7;
+}
+
+
+
+
+.small{
+    font-size: 10px;
+    font-weight: normal;
+}
+
+
+
+
+
+
+
+
+
+#ui-datepicker-div{
+    font-size: 10px;
+}
+
+.search{
+    height: 23px;
+    width: 23px;
+    background: url('../img/search.png') no-repeat;
+    background-position: top;
+}
+
+.search:hover, .link:hover .search{
+    cursor: pointer;
+    background-position: bottom;
+}
+
+.link:hover{
+    color: #8bc63c;
+    text-decoration: underline;
+}
+
+#bgOverlay{
+    display: none;
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+
+
+.vak-titel{
+    text-align:center;
+    color: #FFF;
+    background-color: #BBB;
+    font-weight: bold;
+    height: 60px;
+}
+
+
+.tbl-content{
+    width: 1000px;
+    margin: 70px auto 10px auto;
+    height: auto;
+    
+}
+
+.content-container{
+    position: relative;
+    margin-top: 50px;    
+    padding-top: 20px;
+    background-color: #fff;    
+    width: 1000px;    
+    overflow:hidden;    
+    min-height: 300px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+
+.content-container .vakken{
+    width: 15000px;
+}
+
+.content-container .vakken .vak{
+    float:left;
+    width: 780px;
+    padding: 20px 110px 20px 110px;
+    min-height: 300px;
+}
+
+
+
+
+
+
+
+table.opties{
+    width: 100%;
+    font-size: 12px;
+}
+
+table.opties th, table.opties td{
+    height: 40px;    
+    line-height: 40px;    
+    margin: 4px 0px 4px 0px;    
+    background-color: #f7f7f7;    
+}
+
+table.opties th.left{
+    padding-left: 60px;
+    cursor: pointer;
+    text-align:left;
+}
+
+table.opties td.center, table.opties th.center{
+    text-align:center;
+}
+
+table.opties tr th.top{
+    background-color: #eee;
+}
+
+
+
+
+
+
+
+ul.opties{
+    margin: 0;
+    padding: 0;  
+    list-style-type: none;
+}
+
+ul.opties li{
+    width: 720px;
+    height: 40px;    
+    line-height: 40px;    
+    margin: 4px 0px 4px 0px;    
+    background-color: #f7f7f7;
+    padding-left: 60px;
+    cursor: pointer;
+}
+
+ul.opties li .pointer, table.opties th .pointer{    
+    position: absolute;    
+    width: 38px;
+    height: 40px;
+    margin-left: -60px;
+}
+
+ul.opties li:hover, table.opties tr:hover td, table.opties tr:hover th.left{
+    background-color: #8bc63c;   
+}
+
+table.opties tr:hover td:first-child{
+    border-bottom-left-radius: 5px; 
+    border-top-left-radius: 5px; 
+}
+
+
+ul.opties li:hover .pointer, table.opties tr:hover th.left .pointer{    
+    background-position: center bottom;    
+}
+
+ul.opties li a, table.opties tr th a, table.opties tr td a{
+    color: #000;
+    text-decoration: none;
+    display: block;
+}
+
+
+ul.opties li:hover a, table.opties tr:hover th a, table.opties tr:hover td a{
+    color: #FFF;
+}
+
+
+ul.nohover li:hover{
+    cursor: default !important;
+    background-color: #f7f7f7 !important;
+}
+
+
+ul.nohover li:hover .pointer{
+    background-position: top !important;
+}
+
+ul.title li{
+    background-color: #8bc63c !important;
+}
+
+ul.title li:hover{
+    background-color: #8bc63c !important;
+}
+
+ul.title li .pointer, ul.title li:hover .pointer{
+    background-position: bottom !important;
+}
+
+a.regular{
+    display:inline !important;
+    width: auto !important;
+    padding: 0 !important;
+    color: #000 !important;
+}
+
+a.regular:hover{
+    color: #8bc63c !important;
+}
+
+
+.hide{
+    display: none;
+}
+
+
+.kind_vorigeschool_manual, .herneemteerstejaar_school_manual{
+    display: none;
+}
