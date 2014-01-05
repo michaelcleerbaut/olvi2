@@ -3717,10 +3717,11 @@ HTML;
 MSG;
         
         //mail("coordinatie@olviboom.be", $subject, $message, $headers);
-        mail("michael.cleerbaut@hotmail.com", $subject, $message, $headers);
+        
         
         if($leerling['email'] != ""){
-            mail($leerling['email'], $subject, $message, $headers);   
+            mail($leerling['email'], $subject, $message, $headers);
+            mail("michael.cleerbaut@hotmail.com", $subject . " - Verstuurd naar: {$leerling['email']}", $message, $headers);   
         }        
 
 

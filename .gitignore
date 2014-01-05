@@ -3,6 +3,7 @@ config.inc.php
 log/*.txt
 log/validate/*
 log/preload/*
+data/pdfs/*
 
 
 
