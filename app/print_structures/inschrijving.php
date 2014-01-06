@@ -3,10 +3,10 @@
     $pages = array(
         "1" => "app/views/prints/inschrijving/algemene_gegevens.tpl",
         "2" => "app/views/prints/inschrijving/algemene_gegevens.tpl",
-        "4" => "app/views/prints/inschrijving/algemene_gegevens_leerlingbegeleiding.tpl",
-        "5" => "app/views/prints/inschrijving/middag.tpl",
-        "6" => "app/views/prints/inschrijving/achtergrond_kind.tpl",
-        "7" => "app/views/prints/inschrijving/basowerking.tpl"
+        "3" => "app/views/prints/inschrijving/algemene_gegevens_leerlingbegeleiding.tpl",
+        "4" => "app/views/prints/inschrijving/middag.tpl",
+        //"5" => "app/views/prints/inschrijving/achtergrond_kind.tpl",
+        "5" => "app/views/prints/inschrijving/basowerking.tpl"
     );
 
 

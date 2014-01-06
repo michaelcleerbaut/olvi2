@@ -4,15 +4,15 @@
 <table class="formulier">
     <tr>
         <th>Digitale communicatie moeder</th>
-        <td><select id="digitale_communicatie_moeder"><option value=""></option><option value="email" [CHKDIGITALECOMMUNICATIEMOEDEREMAIL]>Email</option><option value="post" [CHKDIGITALECOMMUNICATIEMOEDERPOST]>Post</option></select></td>
+        <td><select id="digitale_communicatie_moeder" tabindex="1"><option value=""></option><option value="email" [CHKDIGITALECOMMUNICATIEMOEDEREMAIL]>Email</option><option value="post" [CHKDIGITALECOMMUNICATIEMOEDERPOST]>Post</option></select></td>
     </tr>
     <tr>
         <th>Digitale communicatie vader</th>
-        <td><select id="digitale_communicatie_vader"><option value=""></option><option value="email" [CHKDIGITALECOMMUNICATIEVADEREMAIL]>Email</option><option value="post" [CHKDIGITALECOMMUNICATIEVADERPOST]>Post</option></select></td>
+        <td><select id="digitale_communicatie_vader"  tabindex="2"><option value=""></option><option value="email" [CHKDIGITALECOMMUNICATIEVADEREMAIL]>Email</option><option value="post" [CHKDIGITALECOMMUNICATIEVADERPOST]>Post</option></select></td>
     </tr>
     <tr><td colspan="2">&nbsp;</td></tr>    
     <tr>
-        <td colspan="2"><strong>Waar kan de school u of iemand van de familie bereiken tijdens de lesuren (noodnummer)</strong><input type="text" id="tel_noodnummer" value="[NOODNUMMER]" style="width: 184px;margin-left: 20px;" tabindex="1"></td>
+        <td colspan="2"><strong>Waar kan de school u of iemand van de familie bereiken tijdens de lesuren (noodnummer)</strong><input type="text" id="tel_noodnummer" value="[NOODNUMMER]" style="width: 184px;margin-left: 20px;" tabindex="3"></td>
     </tr>    
     <tr>
         <td colspan="2" class="spacer"><strong>Thuisadres indien niet bij ouders</strong></td>
@@ -20,14 +20,14 @@
     <tr>
         <th>Straat + nr</th>
         <td>
-            <input type="text" id="tweede_verblijf_straat" value="[TWEEDEVERBLIJFSTRAAT]" style="width: 387px;" tabindex="2">
-            Nr <input type="text" id="tweede_verblijf_huis_nummer" value="[TWEEDEVERBLIJFNR]" style="width: 50px;" tabindex="3">
-            Bus <input type="text" id="tweede_verblijf_bus_nummer" value="[TWEEDEVERBLIJFBUS]" style="width:50px;" tabindex="4">
+            <input type="text" id="tweede_verblijf_straat" value="[TWEEDEVERBLIJFSTRAAT]" style="width: 387px;" tabindex="4">
+            Nr <input type="text" id="tweede_verblijf_huis_nummer" value="[TWEEDEVERBLIJFNR]" style="width: 50px;" tabindex="5">
+            Bus <input type="text" id="tweede_verblijf_bus_nummer" value="[TWEEDEVERBLIJFBUS]" style="width:50px;" tabindex="6">
         </td>        
     </tr>
     <tr>
         <th>Postcode + Gemeente</th>
-        <td><input type="text" id="tweede_verblijf_postcode" value="[TWEEDEVERBLIJFPOSTCODE]" style="width:150px;" tabindex="5" autocomplete="off"> <input type="text" id="tweede_verblijf_plaats" value="[TWEEDEVERBLIJFGEMEENTE]" style="width:392px;" tabindex="6" autocomplete="off"></td>
+        <td><input type="text" id="tweede_verblijf_postcode" value="[TWEEDEVERBLIJFPOSTCODE]" style="width:150px;" tabindex="7" autocomplete="off"> <input type="text" id="tweede_verblijf_plaats" value="[TWEEDEVERBLIJFGEMEENTE]" style="width:392px;" tabindex="8" autocomplete="off"></td>
     </tr>
 </table>
 

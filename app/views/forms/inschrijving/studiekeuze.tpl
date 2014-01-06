@@ -5,7 +5,7 @@
     <tr>
         <th>Studiekeuze</th>
         <td>
-            <select id="studiekeuze">
+            <select id="studiekeuze" tabindex="1">
                 <option value=""></option>
                 [STUDIEKEUZEOPTIES]            
             </select>
@@ -13,7 +13,7 @@
     </tr>    
     <tr>
         <th>Schooljaar</th>
-        <td><input type="text" id="huidigschooljaar" value="[HUIDIGSCHOOLJAAR]" tabindex="1"></td>
+        <td><input type="text" id="huidigschooljaar" value="[HUIDIGSCHOOLJAAR]" tabindex="2"></td>
     </tr>
 </table>
 

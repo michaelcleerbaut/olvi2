@@ -147,6 +147,9 @@
         case "search_lagere_scholen":
             echo search_lagere_scholen($_POST['postcode']);
         break;
+        case "search_secundaire_scholen":
+            echo search_secundaire_scholen($_POST['postcode']);
+        break;
         case "save_idleerling_session":
             save_idleerling_session($_POST['id_leerling']);
         break;

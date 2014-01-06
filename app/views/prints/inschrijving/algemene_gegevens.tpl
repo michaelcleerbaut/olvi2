@@ -43,7 +43,7 @@
         <td>Nationaliteit:</td><td><?=$leerling['nationaliteit'];?></td>
     </tr>
     <tr>
-        <td>Telefoon leerling:</td><td><?=$leerling['tel'];?></td>
+        <td>GSM leerling:</td><td><?=$leerling['tel'];?></td>
         <td>Adres niet bij ouders:</td><td><?=$leerling['tweede_verblijf_straat'] . " " . $leerling['tweede_verblijf_huisnummer'] . $busnrTweedeVerblijf . $leerling['tweede_verblijf_postcode'] . " " . $leerling['tweede_verblijf_plaats'];?></td>
     </tr>
     <tr>
@@ -77,6 +77,10 @@
     <tr>
         <td>Email moeder:</td><td><?=$leerling['moeder_email'];?></td>
         <td>Email vader:</td><td><?=$leerling['vader_email'];?></td>
+    </tr>
+    <tr>
+        <td>Digitale communicatie moeder:</td><td><?=$leerling['digitale_communicatie_moeder'];?></td>
+        <td>Digitale communicatie vader:</td><td><?=$leerling['digitale_communicatie_vader'];?></td>
     </tr>
     <tr>
         <td>Dubbele post:</td>
@@ -115,11 +119,11 @@ Laatst bezochte school: <?=$leerling['school_vorig_schooljaar'];?>
 <table style="margin-top: 30px;" cellspacing="10">
     <tr>
         <td valign="top"><div style="width: 10px;height:10px;border: solid thin #000;"></div></td>
-        <td>Ik heb mijn zoon/dochter reeds ingeschreven in een andere school en zal de inschrijving in OLVI-middenschool voor 1-jul-2013 bevestigen of annuleren.</td>
+        <td>Ik heb mijn zoon/dochter reeds ingeschreven in een andere school en zal de inschrijving in OLVI-middenschool voor 1-jul-2014 bevestigen of annuleren.</td>
     </tr>
     <tr>
         <td valign="top"><div style="width: 10px;height:10px;border: solid thin #000;"></div></td>    
-        <td>Ik zal mijn zoon/dochter ook nog in een andere school inschrijven en zal de inschrijving in OLVI-middenschool voor 01-jul-2013 bevestigen of annuleren.</td>
+        <td>Ik zal mijn zoon/dochter ook nog in een andere school inschrijven en zal de inschrijving in OLVI-middenschool voor 01-jul-2014 bevestigen of annuleren.</td>
     </tr>
 </table>
 

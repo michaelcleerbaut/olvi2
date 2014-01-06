@@ -1,9 +1,9 @@
 <div class="subtitelCenter">VIP Informatie</div>
 
 
-<table class="formulier">
+<table class="formulier" style="width:700px;">
     <tr>
-        <th colspan="2">Ouders verklaren hierbij dat hun zoon / dochter tijdens de middagpauze</th>        
+        <th colspan="3">Ouders verklaren hierbij dat hun zoon / dochter tijdens de middagpauze</th>        
     </tr>
     <tr>
         <td><label><input type="radio" id="middag_school" name="middag" style="width:20px;" value="op school blijft en zijn / haar lunch gebruikt in de leerlingenrefter" [MIDDAGSCHOOL]> intern</label></td>

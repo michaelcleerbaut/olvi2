@@ -62,13 +62,13 @@
         <td>Varia (schoolagenda, map, taken-en tekenblok)</td>
         <td style="text-align:right;">14.76</td>
         <td>Excursies (aardrijkskunde, geschiedenis, ...)</td>
-        <td style="text-align:right;">46.12</td>
+        <td style="text-align:right;">28.57</td>
     </tr>
     <tr>
         <td>Fotokopie&euml;n per stuk</td>
         <td style="text-align:right;">0.03</td>
         <td>Toneel & voordrachten</td>
-        <td style="text-align:right;">4.00</td>
+        <td style="text-align:right;">13.07</td>
     </tr>
     <tr>
         <td>Administratiekosten</td>

@@ -49,7 +49,7 @@
             "tpl" => "inschrijving/blanco.tpl",
             "validate" => "save_vipinformatie",
             "preload" => "load_vipinformatie_1"
-        ),
+        ),        
         "9" => array(
             "titel" => "VIP Informatie",
             "tpl" => "inschrijving/blanco.tpl",

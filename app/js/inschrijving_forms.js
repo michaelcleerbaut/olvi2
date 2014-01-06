@@ -264,7 +264,7 @@ function search_school_herneemteerstejaar_functions(){
 
 
 
-            $.post("/ajax.php",{action: "search_lagere_scholen", postcode : pc}, function(result){
+            $.post("/ajax.php",{action: "search_secundaire_scholen", postcode : pc}, function(result){
 
                 result += "<div class=\"btnSmall\" style=\"margin-top: 20px;font-weight: normal;padding: 10px;\" id=\"trigger_manual_lagere_school\">De school die ik zoek staat hier niet tussen</div>";
                 
@@ -394,19 +394,29 @@ function vipinformatie_functions(){
             $('#opvoeding_ouders').removeClass('disabled');
             $('#opvoeding_ouders input').removeAttr('readonly');                          
             $('#opvoeding_ouders input').removeAttr('disabled');                          
-        } else {
+            $('input[type=checkbox][name=stiefouders]').removeAttr('disabled');                          
+        } else {            
             $('#opvoeding_ouders').addClass('disabled');
             $('#opvoeding_ouders input').attr('readonly','readonly');
-            $('#opvoeding_ouders input[type=radio]').attr('disabled','disabled').removeAttr('checked');                          
+            $('#opvoeding_ouders input[type=radio]').attr('disabled','disabled').removeAttr('checked');            
+            $('input[type=checkbox][name=stiefouders]').removeAttr('checked').attr('disabled','disabled');
+            $('#gegevens_stiefouders input').val('');
+            $('#gegevens_stiefouders').hide();                          
         }
     });
     
     $('input[type=radio][name=opgevoed_door_andere]').click(function(){
-       if($(this).val() == "stiefouders"){
+        $('#checkbox_stiefouders').show();
+    });
+    
+    
+    $('input[type=checkbox][name=stiefouders]').click(function(){
+       if($(this).is(':checked')){
            $('#gegevens_stiefouders').show();
            auto_adapt_current_vak_height();
        } else {
            $('#gegevens_stiefouders').hide();
+           $('#gegevens_stiefouders input').val('');
        } 
     });
     
@@ -703,7 +713,7 @@ function focus_click_functions(index){
 
     currentvak = $('.vakken .vak:nth-child('+index+')');      
 
-    $('input[tabindex]', currentvak).click(function(){        
+    $('input[tabindex], select[tabindex]', currentvak).click(function(){        
         $('.focus',currentvak).removeClass('focus');
         $(this).addClass('focus').focus();
         tab = $(this).attr('tabindex');                
@@ -719,25 +729,41 @@ function focus_functions(){
             index = $('.stappen .active').index() +1;
             currentvak = $('.vakken div:nth-child('+index+')');        
 
+            // get last tab
             tabEnd = 0;
-            $('input[tabindex]',currentvak).each(function(){
+            $('input[tabindex], select[tabindex], textarea[tabindex]',currentvak).each(function(){                
                 if($(this).attr('tabindex') > tabEnd){
                     tabEnd = $(this).attr('tabindex');
                 }
             });
+            console.log("aantal tabs: " + tabEnd);
 
-            if($('.focus', currentvak).size() == 0){                                        
-                $('input[tabindex=1]', currentvak).addClass('focus').focus();             
+            // check if field is focused (jquery), if not: set tab to 1 + remove .focused field (class)
+            if($('input, select, textarea', currentvak).is(":focus")){
+                
+            } else {
+                $('.focus', currentvak).removeClass('focus');
                 tab = 1;
-            } else {            
-                tab += 1;                 
-                if(tab > tabEnd){                                                        
+            }
+            
+            // check if current vak has a field focused, if not, focus on first tabindex field
+            console.log("focus field gevonden: " + $('.focus', currentvak).size());
+            console.log("focus tabindex: " + $('.focus', currentvak).attr("tabindex"));
+            if($('.focus', currentvak).size() == 0){
+                console.log("geen focus class gevonden, gaat naar tab1");                                        
+                $('input[tabindex=1], select[tabindex=1], textarea[tabindex=1]', currentvak).addClass('focus').focus();             
+                tab = 1;
+            } else {                            
+                tab += 1;
+                if(tab > tabEnd){                               
+                    console.log("gaat naar tab 1, tab: " + tab + ", tabEnd: " + tabEnd);                          
                     $('.focus', currentvak).removeClass('focus');
-                    $('input[tabindex=1]',currentvak).addClass('focus').focus();            
+                    $('input[tabindex=1], select[tabindex=1], textarea[tabindex=1]',currentvak).addClass('focus').focus();            
                     tab = 1;
-                } else {                    
+                } else {
+                    console.log("gaat naar tab:" + tab);                    
                     $('.focus', currentvak).removeClass('focus');
-                    $('input[tabindex='+tab+']',currentvak).addClass('focus').focus();            
+                    $('input[tabindex='+tab+'], select[tabindex='+tab+'], textarea[tabindex='+tab+']',currentvak).addClass('focus').focus();            
                 }                
             }
 

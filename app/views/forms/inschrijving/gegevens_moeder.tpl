@@ -7,21 +7,21 @@
         <td><input type="text" id="moeder_naam" value="[NAAM]" tabindex="1"></td>
         
         <th>GSM</th>
-        <td><input type="text" id="moeder_gsm" value="[GSM]" tabindex="4"></td>        
+        <td><input type="text" id="moeder_gsm" value="[GSM]" tabindex="3"></td>        
     </tr>
     <tr>
         <th>Voornaam</th>
         <td><input type="text" id="moeder_voornaam" value="[VOORNAAM]" tabindex="2"></td>        
             
         <th>Email</th>
-        <td><input type="text" id="moeder_email" value="[EMAIL]" tabindex="5"></td>
+        <td><input type="text" id="moeder_email" value="[EMAIL]" tabindex="4"></td>
     </tr>
     <tr>
         <td colspan="4" class="spacer"></td>
     </tr>    
     <tr>
         <th>Zelfde als leerling</th>
-        <td colspan="3"><input type="checkbox" id="moeder_zelfde_als_lln" style="width: 20px;"></td>
+        <td colspan="3"><input type="checkbox" id="moeder_zelfde_als_lln" style="width: 20px;" tabindex="5"></td>
     </tr>
     <tr>
         <th>Straat + nr</th>

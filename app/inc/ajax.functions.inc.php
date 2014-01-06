@@ -1204,10 +1204,8 @@ HTML;
                 $radio2overleden = $row['opgevoed_door_andere'] == "2 ouders overleden" ? " checked=\"checked\"" : "";
                 $radio2overleden = $row['door_beide_ouders_opgevoed'] != "Nee" ? " disabled" : $radio2overleden;
 
-                $radiostief = $row['opgevoed_door_andere'] == "stiefouders" ? " checked=\"checked\"" : "";                
-                $radiostief = $row['door_beide_ouders_opgevoed'] != "Nee" ? " disabled" : $radiostief ;
-                
-                
+                $chkstief = $row['stiefouders'] == "Ja" ? " checked=\"checked\"" : "";
+                $chkstief = $row['door_beide_ouders_opgevoed'] != "Nee" ? " disabled" : $chkstief;                                
                   
                                                       
                 $replacements = array(
@@ -1221,14 +1219,16 @@ HTML;
                   "[RADIOGESCHEIDEN]" => $radiogescheiden,
                   "[RADIO1OVERLEDEN]" => $radio1overleden,
                   "[RADIO2OVERLEDEN]" => $radio2overleden,
-                  "[RADIOSTIEF]" => $radiostief,
-                  "[HIDEGEGEVENSSTIEFOUDERS]" => $row['opgevoed_door_andere'] == "stiefouders" ? "" : " hide",
-                  "[PARTNERMAMANAAM]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnermama_naam'] : "",
-                  "[PARTNERMAMAGSM]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnermama_gsm'] : "",
-                  "[PARTNERMAMAEMAIL]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnermama_email'] : "",
-                  "[PARTNERPAPANAAM]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnerpapa_naam'] : "",
-                  "[PARTNERPAPAGSM]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnerpapa_gsm'] : "",
-                  "[PARTNERPAPAEMAIL]" => $row['opgevoed_door_andere'] == "stiefouders" ? $row['partnerpapa_email'] : "",
+                  "[CHKSTIEF]" => $chkstief,                  
+                  "[HIDEGEGEVENSSTIEFOUDERS]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? "" : " hide",
+                  "[PARTNERMAMANAAM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnermama_naam'] : "",
+                  "[PARTNERMAMAVOORNAAM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnermama_voornaam'] : "",
+                  "[PARTNERMAMAGSM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnermama_gsm'] : "",
+                  "[PARTNERMAMAEMAIL]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnermama_email'] : "",
+                  "[PARTNERPAPANAAM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnerpapa_naam'] : "",
+                  "[PARTNERPAPAVOORNAAM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnerpapa_voornaam'] : "",
+                  "[PARTNERPAPAGSM]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnerpapa_gsm'] : "",
+                  "[PARTNERPAPAEMAIL]" => $row['stiefouders'] == "Ja" && $row['opgevoed_door_andere'] != "" ? $row['partnerpapa_email'] : "",
                   "[OPGEVOEDANDERE]" => $row['opgevoed_door_naam'],
                   "[INFO]" => $row['andere_info']
                 ); 
@@ -2069,7 +2069,28 @@ HTML;
     
     function search_lagere_scholen($postcode){
 
-        $query = "SELECT * FROM scholen WHERE postcode = '{$postcode}'";
+        $query = "SELECT * FROM scholen WHERE postcode = '{$postcode}' AND soort = 'lager'";
+        $result = query($query);
+    
+        $return = "<div style=\"margin-top: 20px;\">";
+        $return .= "<p>Volgende scholen zijn gevonden met postcode <strong> $postcode </strong></p>";
+        
+        $return .= "<div style=\"overflow-y:scroll;height:200px;\">";
+        $return .= "<table class=\"opties\">";    
+        while($row = mysql_fetch_assoc($result)){
+            
+            $return .= "<tr style=\"cursor: pointer;\" class=\"school_suggestie\" pc=\"{$postcode}\" gemeente=\"{$row['gemeente']}\" naam=\"{$row['naam']}\" id=\"{$row['id']}\"><td>{$row['naam']}</td><td>{$row['straat']}</td></tr>";            
+        }
+        $return .= "</table>";
+        $return .= "</div>";
+        $return .= "</div>";
+    
+        return $return;    
+    }
+        
+    function search_secundaire_scholen($postcode){
+
+        $query = "SELECT * FROM scholen WHERE postcode = '{$postcode}' AND soort = 'secundair'";        
         $result = query($query);
     
         $return = "<div style=\"margin-top: 20px;\">";

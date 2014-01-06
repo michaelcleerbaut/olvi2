@@ -68,7 +68,7 @@
         <td>Fotokopie&euml;n per stuk</td>
         <td style="text-align:right;">0.03</td>
         <td>Toneel & voordrachten</td>
-        <td style="text-align:right;">4.00</td>
+        <td style="text-align:right;">13.07</td>
     </tr>
     <tr>
         <td>Administratiekosten</td>

@@ -28,7 +28,9 @@
             <label><input type="radio" name="opgevoed_door_andere" style="width:20px;margin-left: 10px;" value="1 ouder overleden" [RADIO1OVERLEDEN]> 1 ouder overleden</label>
             <label><input type="radio" name="opgevoed_door_andere" style="width:20px;margin-left: 10px;" value="2 ouders overleden" [RADIO2OVERLEDEN]> 2 ouders overleden</label>
             <label><input type="radio" name="opgevoed_door_andere" style="width:20px;margin-left: 10px;" value="co-ouderschap" [RADIOCO]> co-ouderschap</label>
-            <label><input type="radio" name="opgevoed_door_andere" style="width:20px;margin-left: 10px;" value="stiefouders" [RADIOSTIEF]> Stiefouder(s)</label>
+            <br><br>
+            &nbsp;<strong>Heeft de leerling stiefouder(s)?</strong> <label><input type="checkbox" name="stiefouders" style="width:20px;margin-left: 10px;" value="Ja" [CHKSTIEF]> Ja</label>
+            
         </td>
     </tr>
 </table>
@@ -41,29 +43,34 @@
     </tr>
     <tr>
         <th style="width: 50px;">Naam</th>
-        <th><input type="text" id="partnermama_naam" value="[PARTNERMAMANAAM]" style="width: 200px;"></th>
-        <th><input type="text" id="partnerpapa_naam" value="[PARTNERPAPANAAM]" style="width: 200px;"></th>        
+        <th><input type="text" id="partnermama_naam" value="[PARTNERMAMANAAM]" style="width: 200px;" tabindex="1"></th>
+        <th><input type="text" id="partnerpapa_naam" value="[PARTNERPAPANAAM]" style="width: 200px;" tabindex="2"></th>        
+    </tr>
+    <tr>
+        <th style="width: 50px;">Voornaam</th>
+        <th><input type="text" id="partnermama_voornaam" value="[PARTNERMAMAVOORNAAM]" style="width: 200px;" tabindex="3"></th>
+        <th><input type="text" id="partnerpapa_voornaam" value="[PARTNERPAPAVOORNAAM]" style="width: 200px;" tabindex="4"></th>        
     </tr>
     <tr>
         <th style="width: 50px;">GSM</th>
-        <th><input type="text" id="partnermama_gsm" value="[PARTNERMAMAGSM]" style="width: 200px;"></th>
-        <th><input type="text" id="partnerpapa_gsm" value="[PARTNERPAPAGSM]" style="width: 200px;"></th>        
+        <th><input type="text" id="partnermama_gsm" value="[PARTNERMAMAGSM]" style="width: 200px;" tabindex="5"></th>
+        <th><input type="text" id="partnerpapa_gsm" value="[PARTNERPAPAGSM]" style="width: 200px;" tabindex="6"></th>        
     </tr>
     <tr>
         <th style="width: 50px;">Email</th>
-        <th><input type="text" id="partnermama_email" value="[PARTNERMAMAEMAIL]" style="width: 200px;"></th>
-        <th><input type="text" id="partnerpapa_email" value="[PARTNERPAPAEMAIL]" style="width: 200px;"></th>        
+        <th><input type="text" id="partnermama_email" value="[PARTNERMAMAEMAIL]" style="width: 200px;" tabindex="7"></th>
+        <th><input type="text" id="partnerpapa_email" value="[PARTNERPAPAEMAIL]" style="width: 200px;" tabindex="8"></th>        
     </tr>
 </table>
 
 <table class="formulier">
     <tr>
-        <th style="width: 350px;">Opgevoed door vader / moeder / voogd (naam)</th><td><input type="text" id="opgevoed_door_naam" value="[OPGEVOEDANDERE]" style="width: 410px;" tabindex="6"></td>
+        <th style="width: 350px;">Opgevoed door vader / moeder / voogd (naam)</th><td><input type="text" id="opgevoed_door_naam" value="[OPGEVOEDANDERE]" style="width: 410px;" tabindex="9"></td>
     </tr>
     <tr>
         <th colspan="2">Andere nuttige info betreffende de gezinssituatie</th>
     </tr>
     <tr>
-        <td colspan="2"><textarea id="andere_info" style="width: 765px;height:50px;min-width:765px;max-width:765px;min-height:50px;max-height:50px;">[INFO]</textarea></td>
+        <td colspan="2"><textarea id="andere_info" style="width: 765px;height:50px;min-width:765px;max-width:765px;min-height:50px;max-height:50px;" tabindex="10">[INFO]</textarea></td>
     </tr> 
 </table>
