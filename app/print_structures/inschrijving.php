@@ -125,7 +125,9 @@
     $keuzevakkenprint = "";  
     if(is_array($keuzevakken) && count($keuzevakken) > 0){
         foreach($keuzevakken as $afkorting => $order){
-            $keuzevakkenprint .= $order . ": " . $vakken[$afkorting] . "<br>";
+            if($order != "studiekeuze"){
+                $keuzevakkenprint .= $order . ": " . $vakken[$afkorting] . "<br>";
+            }
         }
     }
 
