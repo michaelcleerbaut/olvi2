@@ -3,10 +3,18 @@
     require_once('config.inc.php');
     require_once('global.functions.inc.php');    
     require_once('mysql.functions.inc.php');    
-    require_once('login.functions.inc.php');    
+    require_once('login.functions.inc.php');
+        
 
     session_start();
 
+    $nologin_needed = array("/index.php","/oops.php","/scripts/test.php");
+    
+    if(!$_SESSION['gebruiker']){
+        if(!in_array($_SERVER['PHP_SELF'],$nologin_needed)){            
+            header("location: /oops.php");
+        }
+    }
     
     function __autoload($ClassName){
         if((@include "lib/$ClassName.php") === false){
