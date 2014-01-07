@@ -790,29 +790,29 @@ function get_fields(){
     index = $('.stappen .active').index() + 1;
     vak = $('.vakken div:nth-child('+index+')');
     $('input[type=hidden]',vak).each(function(){    
-        fields += $(this).attr('id') + "###" + $(this).val() + "@@@"; 
+        fields += $(this).attr('id') + "###=>###" + $(this).val() + "@@@=>@@@"; 
     });    
 
-    $('input[type=text]',vak).each(function(){    
-        fields += $(this).attr('id') + "###" + $(this).val() + "@@@"; 
+    $('input[type=text]',vak).each(function(){            
+        fields += $(this).attr('id') + "###=>###" + $(this).val() + "@@@=>@@@"; 
     });    
 
-    $('select',vak).each(function(){    
-        fields += $(this).attr('id') + "###" + $(this).val() + "@@@"; 
+    $('select',vak).each(function(){            
+        fields += $(this).attr('id') + "###=>###" + $(this).val() + "@@@=>@@@"; 
     });    
 
     $('input[type=radio]',vak).each(function(){            
-        if($(this).attr('checked') == "checked"){
-            fields += $(this).attr('name') + "###" + $(this).val() + "@@@"; 
+        if($(this).attr('checked') == "checked"){            
+            fields += $(this).attr('name') + "###=>###" + $(this).val() + "@@@=>@@@"; 
         }
     });    
     $('input[type=checkbox]',vak).each(function(){            
-        if($(this).attr('checked') == "checked"){
-            fields += $(this).attr('name') + "###" + $(this).val() + "@@@"; 
+        if($(this).attr('checked') == "checked"){            
+            fields += $(this).attr('name') + "###=>###" + $(this).val() + "@@@=>@@@"; 
         }
     });    
-    $('textarea', vak).each(function(){
-        fields += $(this).attr('id') + "###" + $(this).val() + "@@@";         
+    $('textarea', vak).each(function(){        
+        fields += $(this).attr('id') + "###=>###" + $(this).val() + "@@@=>@@@";         
     });
     return fields;
 }

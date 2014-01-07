@@ -45,6 +45,9 @@ function sql_die($erno = "", $error = "", $q = 0){
         $headers = "From: Mysql Error - Olviboom <coordinatie@olviboom.be>";
     
         mail("michael@mcreations.pro","MYSQL ERROR - OLVIBOOM",$messageMail,$headers);
+        
+        $message = "POST: " . json_encode($_POST) . ", GET: " . json_encode($_GET) . ", SERVER: " . json_encode($_SERVER);
+        log_action("MYSQL", "mysql error","$erno : $error QUERY: $q",$message);
     }
     
 }

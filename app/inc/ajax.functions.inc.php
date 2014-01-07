@@ -527,8 +527,7 @@ HTML;
         $tel = "";
         $email = "";
         
-        $query = "SELECT email, telefoon FROM communicatie WHERE id_leerling = '{$id_leerling}'";
-        dbg($query);
+        $query = "SELECT email, telefoon FROM communicatie WHERE id_leerling = '{$id_leerling}'";        
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){
             $tel = $row['telefoon'];
@@ -2058,9 +2057,9 @@ HTML;
     function convert_fields_to_array($fields){
         $data = array();
         
-        $lijnen = explode("@@@",$fields);        
+        $lijnen = explode("@@@=>@@@",$fields);        
         foreach($lijnen as $lijn){            
-            $a = explode("###",$lijn);                        
+            $a = explode("###=>###",$lijn);                        
             $data[$a[0]] = $a[1];            
         }
         

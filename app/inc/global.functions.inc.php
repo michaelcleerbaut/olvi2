@@ -46,10 +46,6 @@
         echo "</pre>";
     }
 
-    function dbg($txt){
-        file_put_contents("log/debug.txt",$txt."\n",FILE_APPEND);    
-    }
-    
     function list_nationaliteiten($nationaliteit = ""){
         
         $dbh = MyPDO::getConnection();
@@ -70,13 +66,11 @@
     
 function log_action($sort, $func, $message, $data){
 
-        $filename = LOG_FOLDER.$sort."/".date("Y-m-d").".txt";
-        $output = date("H:i:s") . " - {User: " . $_SESSION['gebruiker']['id'] . "}  $func -> [$message] || $data \n";
+        $filename = LOG_FOLDER.date("Y-m-d").".txt";
+        $output = date("H:i:s") . "[$sort] - {User: " . $_SESSION['gebruiker']['id'] . "}  $func -> [$message] , Data: $data \n";
 
         if(!is_dir(LOG_FOLDER)){
             mkdir(LOG_FOLDER, 0777);
-            mkdir(LOG_FOLDER."validate",0777);            
-            mkdir(LOG_FOLDER."preload",0777);            
         }
          
         file_put_contents($filename,$output,FILE_APPEND);        
