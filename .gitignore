@@ -1,8 +1,6 @@
 .htaccess
 config.inc.php
-log/*.txt
-log/validate/*
-log/preload/*
+log/*
 data/pdfs/*
 
 

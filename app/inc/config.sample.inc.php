@@ -19,3 +19,6 @@
     define('APP_PATH',''); //with trailing slash pls
     define('WEB_FOLDER',''); //with trailing slash pls
     
+
+    // directories
+    define('LOG_FOLDER','');
