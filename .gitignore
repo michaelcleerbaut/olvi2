@@ -1,6 +1,7 @@
 .htaccess
 config.inc.php
 log/*
+!log/.htaccess.sample.txt
 data/pdfs/*
 
 
