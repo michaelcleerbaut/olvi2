@@ -50,7 +50,7 @@ $(document).ready(function(){
     $('.queryselect').change(function(){
       var div = $(this);
       
-      $.get('/ajax.php', { action: 'get_query_operators', select: $(this).val(), table : $(':selected',this).attr('table') }, function(data){          
+      $.get('/ajax.php', { action: 'get_query_operators', select: $(this).val(), table : $(':selected',this).attr('table') }, function(data){
         div.parent().children('.queryoperator').html(data);
         autosave_actions_new();
       });

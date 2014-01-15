@@ -43,7 +43,7 @@ HTML;
             $result = query($query);
 
 
-            $html .= "<table class=\"opties\" cellpadding=\"0\"><tr><th class=\"top\">Naam</th></th><th class=\"top\">V Nr $stroom</th><th class=\"top\">V Nr $anderestroom</th><th class=\"top\">Ingeschreven door</th></tr>";
+            $html .= "<table class=\"opties\" cellpadding=\"2\"><tr><th class=\"top\">Naam</th></th><th class=\"top\">V Nr $stroom</th><th class=\"top\">V Nr $anderestroom</th><th class=\"top\">Ingeschreven door</th><th class=\"top\">op</th></tr>";
 
             while($row = mysql_fetch_assoc($result)){
 
@@ -62,6 +62,7 @@ HTML;
                 $html .= "<td class=\"center\">{$row['volgnummer']} </td>";
                 $html .= "<td class=\"center\">$volgnummerandere</td>";
                 $html .= "<td class=\"center\">{$row['gebruiker_naam']}</td>";
+                $html .= "<td class=\"center\">&nbsp;&nbsp;{$row['datum']}&nbsp;&nbsp;</td>";
                 $html .= "<td class=\"center\"><a href=\"/prt/inschrijving/{$row['i_id']}/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['invullen'] == "YES" ? "<td class=\"center\"><a href=\"/panel/inschrijvingen/edit/{$_GET['param1']}/{$row['i_id']}\">Edit</a></td>" : "";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/inschrijvingen/delete/{$_GET['param1']}/{$row['i_id']}\" class=\"confirm\">Verwijder</a></td>" : "";

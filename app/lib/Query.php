@@ -123,7 +123,7 @@
                 'type' => 'TEXT',
                 'opt'  => array("CONTAIN" => "Bevat")
             );   
-
+            
 
             $queryarray['loopbaan']['dubbele_afdruk'] = array(
                 'name' => 'Dubbele afdruk',
@@ -131,6 +131,7 @@
                 'type' => 'BOOL',
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );
+            
 
             $queryarray['loopbaan']['toestemming_baso_werking'] = array(
                 'name' => 'Toestemming BASO werking',
@@ -139,6 +140,21 @@
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );
 
+            $queryarray['loopbaan']['digitale_communicatie_moeder'] = array(
+                'name' => 'Digitale communicatie moeder',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("" => "Leeg", "post" => "Post", "email" => "Email")
+            );
+            
+            $queryarray['loopbaan']['digitale_communicatie_vader'] = array(
+                'name' => 'Digitale communicatie vader',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("" => "Leeg", "post" => "Post", "email" => "Email")
+            );            
+            
+            
             $queryarray['vip']['middag'] = array(
                 'name' => 'Middageten',
                 'req'  => 0,
@@ -159,7 +175,8 @@
                 'type' => 'TEXT',
                 'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat", ">=" => "Is groter of gelijk aan ", "<=" => "Is kleiner of gelijk aan")
             );
-
+            
+            
             $queryarray['vip']['door_beide_ouders_opgevoed'] = array(
                 'name' => 'Opgevoed door beide ouders',
                 'req'  => 0,
@@ -173,6 +190,14 @@
                 'type' => 'BOOL',
                 'opt'  => array("Niet van toepassing" => "Niet van toepassing", "Gescheiden" => "Gescheiden", "1 ouder overleden" => "1 ouder overleden", "2 ouders overleden", "co-ouderschap" => "CO-Ouderschap")
             );
+            
+            $queryarray['vip']['stiefouders'] = array(
+                'name' => 'Heeft stiefouders',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Ja" => "Ja", "Nee" => "Nee")
+            );
+            
 
             $queryarray['vip']['thuistaal'] = array(
                 'name' => 'Thuistaal',
@@ -188,6 +213,21 @@
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );
 
+            $queryarray['vip']['herneemt_eerste_jaar'] = array(
+                'name' => 'Herneemt eerste jaar',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );               
+
+            $queryarray['vip']['maakt_gebruik_van_pc'] = array(
+                'name' => 'Maakt van gebruik van pc in de klas',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );               
+            
+            
 
             $queryarray['vip']['leerproblemen'] = array(
                 'name' => 'Heeft leerproblemen',
@@ -262,7 +302,9 @@
                 "gok_broer_zus_edison_spreektaal" => "Spreektaal broer of zus",
                 "gok_vrienden_edison_spreektaal" => "Spreektaal vrienden",
                 "gok_edison_opleidingsniveau_moeder" => "Opleidingsniveau moeder",
-                "toestemming_baso_werking" => "Toestemming BASO werking"
+                "toestemming_baso_werking" => "Toestemming BASO werking",
+                "digitale_communicatie_moeder" => "Digitale communicatie moeder",
+                "digitale_communicatie_vader" => "Digitale communicatie vader"
             );
 
             $columnsarray['moeder'] = array(
@@ -306,16 +348,34 @@
                 "opgevoed_plaats" => "Opgevoed plaats",
                 "door_beide_ouders_opgevoed" => "Door beide ouders opgevoed",
                 "opgevoed_door_andere" => "Opgevoed door andere",
+                "stiefouders" => "Heeft stiefouders?",
+                "partnermama_naam" => "Partner mama naam",
+                "partnermama_voornaam" => "Partner mama voornaam",
+                "partnermama_gsm" => "Partner mama gsm",
+                "partnermama_email" => "Partner mama email",
+                "partnerpapa_naam" => "Partner papa naam",
+                "partnerpapa_voornaam" => "Partner papa voornaam",
+                "partnerpapa_gsm" => "Partner papa gsm",
+                "partnerpapa_email" => "Partner papa email",
                 "andere_info" => "Andere info",
                 "thuistaal" => "Thuistaal",
                 "heeft_jaar_moeten_overdoen" => "Heef jaar moeten overdoen",
                 "jaar_overdoen_welke" => "Jaar overdoen welke",
+                "herneemt_eerste_jaar" => "Herneemt eerste jaar",
+                "herneemt_eerste_jaar_school_naam" => "Herneemt eerste jaar school naam",
+                "herneemt_eerste_jaar_school_postcode" => "Herneemt eerste jaar school postcode",
+                "herneemt_eerste_jaar_school_gemeente" => "Herneemt eerste jaar school gemeente",                
                 "leerproblemen" => "Leerproblemen",
                 "leerproblemen_extra" => "Leerproblemen extra",
                 "gezondheidsproblemen" => "Gezondheidsproblemen",
                 "gezondheidsproblemen_extra" => "Gezondheidsproblemen extra",
                 "gedragsproblemen" => "Gedragsproblemen",
                 "gedragsproblemen_extra" => "Gedragsprolemen extra"
+            );
+            
+            $columnsarray['vip_leerproblemen'] = array(
+                "maakt_gebruik_van_pc" => "Maakt gebruik van pc in de klas",                
+                "maakt_gebruik_van_pc_programmas" => "Welke programmas gebruikt de leerling"            
             );
 
             return $columnsarray;
@@ -508,7 +568,7 @@ CONTENT;
 
                 if($showdiv == 1){
                     $html .= $s == 0 ? "</div>" : "";
-                    $html .= "<div class=\"toggle_table\" table=\"$table\"><span class=\"icon_toggle\" id=\"icon_$table\">[+]</span> " . ucfirst($table) . "</div><div style=\"display: none;\" class=\"column_table\" id=\"$table\">";
+                    $html .= "<div class=\"toggle_table\" table=\"$table\"><span class=\"icon_toggle\" id=\"icon_$table\">[+]</span> " . ucfirst(str_replace("_"," ",$table)) . "</div><div style=\"display: none;\" class=\"column_table\" id=\"$table\">";
                 }
 
                 $html .= $checkbox;

@@ -133,7 +133,7 @@ CONTENT;
   
   
   function build_columns_form($columnsform = array()){
-      global $columnsarray;
+      $queryarray = Query::get_columnsarray();
       
       if(!array_key_exists('columns',$columnsform)){
           $columnsform['columns'] = array();
@@ -197,7 +197,7 @@ CONTENT;
   }                                                          
                                                         
   function query_select($selected = ''){
-    global $queryarray;
+    $queryarray = Query::get_queryarray();
 
     $html = "
              <select name=\"query[]\" class=\"queryselect\">
@@ -243,13 +243,13 @@ CONTENT;
 
   function get_query_operators($select, $table = '', $operator = '', $inputvalue = ''){
       
-    global $queryarray;
+    $queryarray = Query::get_queryarray();
 
     $n = $operator == "" && $inputvalue == "" ? "N" : "";
 
     if($table != ""){
     
-      $html .= "<select name=\"operator[]\" class=\"operatorselect$n\">";
+      $html .= "<select name=\"operator[]\" class=\"operatorselect$n\">";      
         foreach($queryarray[$table][$select]['opt'] as $value => $name){
             $isselected = $value == $operator ? " selected" : "";
             $html .= "<option value=\"$value\"$isselected>$name</option>"; 
