@@ -157,11 +157,9 @@ HTML;
                     }        
                 }
 
-
-                $adres_opgevoed = $leerling['thuis_opgevoed'] == "Nee" ? ", Adres: " . $leerling['opgevoed_straat'] . " " . $leerling['opgevoed_huisnummer'] . " " . $leerling['opgevoed_busnummer'] . ", " . $leerling['opgevoed_postcode'] . " " . $leerling['opgevoed_plaats'] : "";
-                $adres_middag = $leerling['straat'] != "" ? $leerling['straat'] . " " . $leerling['huisnummer'] . " " . $leerling['busnummer'] . ", " . $leerling['postcode'] . " " . $leerling['plaats'] : $leerling['middag_straat'] . " " . $leerling['middag_huisnummer'] . " " . $leerling['middag_busnummer'] . ", " . $leerling['middag_postcode'] . " " . $leerling['middag_plaats'];
-                $middag = substr($leerling['middag'],0,4) == "naar" ? "komt leerling naar huis. Adres: " . $adres_middag : "blijft leerling op school om zijn/haar lunch te gebruiken in de leerlingenrefter";
-                $thuistaal = $leerling['thuistaal'] == "Ja" ? "Nederlands" : $leerling['thuistaal'];
+                
+                $adres_middag = $leerling['straat'] != "" ? $leerling['straat'] . " " . $leerling['huisnummer'] . " " . $leerling['busnummer'] . ", " . $leerling['postcode'] . " " . $leerling['plaats'] : $leerling['middag_straat'] . " " . $leerling['middag_huisnummer'] . " " . $leerling['middag_busnummer'] . ", " . $leerling['middag_postcode'] . " " . $leerling['middag_plaats'];                
+                $thuistaal = $leerling['thuistaal'] == "Ja" ? "Ja" : "Nee: " . $leerling['thuistaal'];
                 $toestemming_baso = $leerling['toestemming_baso_werking'] == "YES" ? "Ja" : "Nee";
 
                 $studiekeuze = is_array(unserialize($leerling['studiekeuze'])) ? unserialize($leerling['studiekeuze']) : array();        
@@ -186,6 +184,21 @@ HTML;
                     $trs_studiekeuze_stroomB = "";
                 }
 
+                if($leerling['stiefouders'] == "Ja"){
+                    $stiefouders = "<div style=\"float:left;\">";
+                        $stiefouders .= "<u>Partner mama</u><br>";
+                        $stiefouders .= $leerling['partnermama_naam'] != "" || $leerling['partnermama_voornaam'] != "" ? $leerling['partnermama_naam'] . " " . $leerling['partnermama_voornaam'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnermama_gsm'] != "" ? $leerling['partnermama_gsm'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnermama_email'] != "" ? $leerling['partnermama_email'] : "";
+                    $stiefouders .= "</div>";
+                    $stiefouders .= "<div style=\"margin-left: 50px;float:left;\">";
+                        $stiefouders .= "<u>Partner papa</u><br>";
+                        $stiefouders .= $leerling['partnerpapa_naam'] != "" || $leerling['partnerpapa_voornaam'] != "" ? $leerling['partnerpapa_naam'] . " " . $leerling['partnerpapa_voornaam'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnerpapa_gsm'] != "" ? $leerling['partnerpapa_gsm'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnerpapa_email'] != "" ? $leerling['partnerpapa_email'] . "<br>" : "";
+                    $stiefouders .= "</div>";
+                    
+                }
 
 
                 $html = <<<HTML
@@ -202,7 +215,7 @@ HTML;
             <li><div class="pointer"></div><a href="#vader">Pesoonlijke gegevens vader</a></li>
             <li><div class="pointer"></div><a href="#studiekeuze">Studiekeuze</a></li>
             <li><div class="pointer"></div><a href="#vip">VIP</a></li>
-            <li><div class="pointer"></div><a href="#gok">GOK</a></li>
+            <!--<li><div class="pointer"></div><a href="#gok">GOK</a></li>-->
           </ul>
           
            
@@ -218,8 +231,11 @@ HTML;
             <tr><th class="left">Adres</th><td class="right">{$leerling['straat']} {$leerling['huisnummer']} {$leerling['busnummer']}, {$leerling['postcode']} {$leerling['plaats']}</td></tr>            
             <tr><th class="left">Telefoon</th><td class="right">{$leerling['tel']}</td></tr>
             <tr><th class="left">Email</th><td class="right">{$leerling['email']}</td></tr>
+            <tr><th class="left">Noodnummer</th><td class="right">{$leerling['tel_noodnummer']}</td></tr>            
             <tr><th class="left">Lagere school</th><td class="right">{$leerling['school_vorig_schooljaar']}</td></tr>
             <tr><th class="left">Dubbele post</th><td class="right">{$leerling['dubbele_afdruk']}</td></tr>
+            <tr><th class="left">Digitale communicatie moeder</th><td class="right">{$leerling['digitale_communicatie_moeder']}</td></tr>
+            <tr><th class="left">Digitale communicatie vader</th><td class="right">{$leerling['digitale_communicatie_vader']}</td></tr>            
             <tr><th class="left">Deelt neem aan BaSO-werking</th><td class="right">{$toestemming_baso}</td></tr>
           </table>
           
@@ -234,8 +250,7 @@ HTML;
           <h3 id="vader">Persoonlijke gegevens vader</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
             <tr><th class="left">Naam</th><td class="right">{$leerling['vader_naam']} {$leerling['vader_voornaam']}</td></tr>
-            <tr><th class="left">Adres</th><td class="right">{$leerling['vader_straat']} {$leerling['vader_huisnummer']} {$leerling['vader_busnummer']}, {$leerling['vader_postcode']} {$leerling['vader_plaats']}</td></tr>
-            <tr><th class="left">Telefoon</th><td class="right">{$leerling['vader_tel']}</td></tr>            
+            <tr><th class="left">Adres</th><td class="right">{$leerling['vader_straat']} {$leerling['vader_huisnummer']} {$leerling['vader_busnummer']}, {$leerling['vader_postcode']} {$leerling['vader_plaats']}</td></tr>            
             <tr><th class="left">GSM</th><td class="right">{$leerling['vader_gsm']}</td></tr>            
             <tr><th class="left">Email</th><td class="right">{$leerling['vader_email']}</td></tr>            
           </table>
@@ -250,20 +265,24 @@ HTML;
 
           <h3 id="vip">VIP</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
-            <tr><th class="left">Tijdens middag pauze</th><td class="right">{$middag}</td></tr>
-            <tr><th class="left">Wordt de leerling thuis opgevoed?</th><td class="right">{$leerling['thuis_opgevoed']} $adres_opgevoed</td></tr>
+            <tr><th class="left">Tijdens middag pauze</th><td class="right">{$leerling['middag']}</td></tr>            
             <tr><th class="left">Wordt de leerling door beide ouders opgevoed?</th><td class="right">{$leerling['door_beide_ouders_opgevoed']}</td></tr>
             <tr><th class="left">Zo nee: </th><td class="right">{$leerling['opgevoed_door_andere']}</td></tr>
+            <tr><th class="left">Heeft stiefouders:</th><td class="right">{$leerling['stiefouders']}</td></tr>            
+            <tr><th class="left">Zoja:</th><td class="right">$stiefouders</td></tr>            
             <tr><th class="left">Zo nee: Opgevoed door</th><td class="right">{$leerling['opgevoed_door_naam']}</td></tr>
             <tr><th class="left">Zo nee: Andere nuttige info</th><td class="right">{$leerling['andere_info']}</td></tr>
-            <tr><th class="left">Thuistaal</th><td class="right">$thuistaal</td></tr>
+            <tr><th class="left">Thuistaal uitsluitend nederlands?</th><td class="right">$thuistaal</td></tr>
             <tr><th class="left">Jaren gedubbeld?</th><td class="right">{$leerling['heeft_jaar_moeten_overdoen']} {$leerling['jaar_overdoen_welke']}</td></tr>
+            <tr><th class="left">Herneemt leerling het eerste jaar?</th><td class="right">{$leerling['herneemt_eerste_jaar']}</td></tr>
+            <tr><th class="left">Zoja, welke school?</th><td class="right">{$leerling['herneemt_eerste_jaar_school_naam']}<br>{$leerling['herneemt_eerste_jaar_school_postcode']} {$leerling['herneemt_eerste_jaar_school_gemeente']}</td></tr>
             <tr><th class="left">Heeft de leerling leerproblemen?</th><td class="right">{$leerling['leerproblemen']} {$leerling['leerproblemen_extra']}</td></tr>
             <tr><th class="left">Heeft de leerling gezondheidsproblemen?</th><td class="right">{$leerling['gezondheidsproblemen']} {$leerling['gezondheidsproblemen_extra']}</td></tr>
             <tr><th class="left">Heeft de leerling gedragsproblemen?</th><td class="right">{$leerling['gedragsproblemen']} {$leerling['gedragsproblemen_extra']}</td></tr>
           </table>
 
-
+          
+          <!--
           <h3 id="gok">GOK</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
             <tr><th class="left">Spreekt met moeder meestal</th><td class="right">{$leerling['gok_moeder_edison_spreektaal']}</td></tr>
@@ -272,6 +291,7 @@ HTML;
             <tr><th class="left">Spreekt met vrienden meestal</th><td class="right">{$leerling['gok_vrienden_edison_spreektaal']}</td></tr>          
             <tr><th class="left">Hoogst behaalde onderwijsdiploma of -getuigschrift moeder</th><td class="right">{$leerling['gok_edison_opleidingsniveau_moeder']}</td></tr>
           </table>
+          -->
           
           
           
@@ -375,11 +395,10 @@ HTML;
                     }        
                 }
 
-
-                $adres_opgevoed = $leerling['thuis_opgevoed'] == "Nee" ? ", Adres: " . $leerling['opgevoed_straat'] . " " . $leerling['opgevoed_huisnummer'] . " " . $leerling['opgevoed_busnummer'] . ", " . $leerling['opgevoed_postcode'] . " " . $leerling['opgevoed_plaats'] : "";
+                
                 $adres_middag = $leerling['straat'] != "" ? $leerling['straat'] . " " . $leerling['huisnummer'] . " " . $leerling['busnummer'] . ", " . $leerling['postcode'] . " " . $leerling['plaats'] : $leerling['middag_straat'] . " " . $leerling['middag_huisnummer'] . " " . $leerling['middag_busnummer'] . ", " . $leerling['middag_postcode'] . " " . $leerling['middag_plaats'];
                 $middag = substr($leerling['middag'],0,4) == "naar" ? "komt leerling naar huis. Adres: " . $adres_middag : "blijft leerling op school om zijn/haar lunch te gebruiken in de leerlingenrefter";
-                $thuistaal = $leerling['thuistaal'] == "Ja" ? "Nederlands" : $leerling['thuistaal'];
+                $thuistaal = $leerling['thuistaal'] == "Ja" ? "Ja" : "Nee: " . $leerling['thuistaal'];
 
 
 
@@ -393,7 +412,32 @@ HTML;
                 $toestemmingbasoNee_selected = $leerling['toestemming_baso_werking'] == "NO" ? "selected=\"selected\"" : "";    
 
 
-
+                $digitale_communicatie_moeder_post_selected = $leerling['digitale_communicatie_moeder'] == "post" ? " selected" : ""; 
+                $digitale_communicatie_moeder_email_selected = $leerling['digitale_communicatie_moeder'] == "email" ? " selected" : ""; 
+                
+                $digitale_communicatie_vader_post_selected = $leerling['digitale_communicatie_vader'] == "post" ? " selected" : ""; 
+                $digitale_communicatie_vader_email_selected = $leerling['digitale_communicatie_vader'] == "email" ? " selected" : ""; 
+                
+                
+                $stiefouders = "";
+                if($leerling['stiefouders'] == "Ja"){
+                    $stiefouders = "<div style=\"float:left;\">";
+                        $stiefouders .= "<u>Partner mama</u><br>";
+                        $stiefouders .= $leerling['partnermama_naam'] != "" || $leerling['partnermama_voornaam'] != "" ? $leerling['partnermama_naam'] . " " . $leerling['partnermama_voornaam'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnermama_gsm'] != "" ? $leerling['partnermama_gsm'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnermama_email'] != "" ? $leerling['partnermama_email'] : "";
+                    $stiefouders .= "</div>";
+                    $stiefouders .= "<div style=\"margin-left: 50px;float:left;\">";
+                        $stiefouders .= "<u>Partner papa</u><br>";
+                        $stiefouders .= $leerling['partnerpapa_naam'] != "" || $leerling['partnerpapa_voornaam'] != "" ? $leerling['partnerpapa_naam'] . " " . $leerling['partnerpapa_voornaam'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnerpapa_gsm'] != "" ? $leerling['partnerpapa_gsm'] . "<br>" : "";
+                        $stiefouders .= $leerling['partnerpapa_email'] != "" ? $leerling['partnerpapa_email'] . "<br>" : "";
+                    $stiefouders .= "</div>";
+                    
+                }
+                
+                
+                
                 $stroom_andere = $leerling['stroom'] == "A" ? "B" : "A";
                 $queryS = "SELECT stroom FROM inschrijving WHERE id_leerling = '{$leerling['id_leerling']}' AND stroom = '$stroom_andere'";
                 $resultS = query($queryS);
@@ -481,7 +525,7 @@ HTML;
             <li><div class="pointer"></div><a href="#vader">Pesoonlijke gegevens vader</a></li>
             <li><div class="pointer"></div><a href="#studiekeuze">Studiekeuze</a></li>
             <li><div class="pointer"></div><a href="#vip">VIP</a></li>
-            <li><div class="pointer"></div><a href="#gok">GOK</a></li>
+            <!--<li><div class="pointer"></div><a href="#gok">GOK</a></li>-->
           </ul>
                     
           <form action="/panel/inschrijvingen/show/{$_GET['param1']}/{$_GET['param2']}" method="post"> 
@@ -503,14 +547,15 @@ HTML;
             <tr><th class="left">Tel Noodnummer</th><td class="right"><input type="text" name="tel" value="{$leerling['tel_noodnummer']}"></td></tr>
             <tr><th class="left">Lagere school</th><td class="right"><div style="float:left;" id="kind_vorige_school">{$leerling['school_vorig_schooljaar']}</div><input type="hidden" id="kind_vorige_school_input" name="school_vorig_schooljaar" value="{$leerling['school_vorig_schooljaar']}"><input type="hidden" id="vorige_school_id" name="school_id" value="{$leerling['school_id']}"><div style="float:left;text-decoration:underline;color:#b3df79;cursor:pointer;margin-left: 10px;" id="edit_inschr_search_lagere_school">Wijzig</div></td></tr>
             <tr><th class="left">Dubbele post</th><td class="right"><select name="dubbele_afdruk"><option value="Ja" $dubbele_afdrukJa_selected>Ja</option><option value="Nee" $dubbele_afdrukNee_selected>Nee</option></select></td></tr>
+            <tr><th class="left">Digitale communicatie moeder</th><td class="right"><select name="digitale_communicatie_moeder"><option value=""></option><option value="email" $digitale_communicatie_moeder_email_selected>Email</option><option value="post" $digitale_communicatie_moeder_post_selected>Post</option></select></td></tr>
+            <tr><th class="left">Digitale communicatie vader</th><td class="right"><select name="digitale_communicatie_vader"><option value=""></option><option value="email" $digitale_communicatie_vader_email_selected>Email</option><option value="post" $digitale_communicatie_vader_post_selected>Post</option></select></td></tr>
             <tr><th class="left">Deelt neem aan BaSO-werking</th><td class="right"><select name="toestemming_baso_werking"><option value="YES" $toestemmingbasoJa_selected">Ja</option><option value="NO" $toestemmingbasoNee_selected>Nee</option></select> </td></tr>
           </table>
           
           <h3 id="moeder">Persoonlijke gegevens moeder</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
             <tr><th class="left">Naam <div class="small">(naam, voornaam)</div></th><td class="right"><input type="text" name="moeder_naam" value="{$leerling['moeder_naam']}" style="width:277px;"> <input type="text" name="moeder_voornaam" value="{$leerling['moeder_voornaam']}" style="width:278px;"></td></tr>
-            <tr><th class="left">Adres <div class="small">(straat, huisnr, busnr) <br> (postcode, gemeente)</div></th><td class="right"><input type="text" name="moeder_straat" value="{$leerling['moeder_straat']}" style="width: 478px;"> <input type="text" name="moeder_huisnummer" value="{$leerling['moeder_huisnummer']}" style="width:30px;"> <input type="text" name="moeder_busnummer" value="{$leerling['moeder_busnummer']}" style="width:30px;"><br><br> <input type="text" name="moeder_postcode" id="edit_inschr_moeder_postcode" value="{$leerling['moeder_postcode']}" style="width: 100px;">  <input type="text" name="moeder_plaats" id="edit_inschr_moeder_plaats" value="{$leerling['moeder_plaats']}" style="width: 455px;"></td></tr>
-            <tr><th class="left">Telefoon</th><td class="right"><input type="text" name="moeder_tel" value="{$leerling['moeder_tel']}"></td></tr>                        
+            <tr><th class="left">Adres <div class="small">(straat, huisnr, busnr) <br> (postcode, gemeente)</div></th><td class="right"><input type="text" name="moeder_straat" value="{$leerling['moeder_straat']}" style="width: 478px;"> <input type="text" name="moeder_huisnummer" value="{$leerling['moeder_huisnummer']}" style="width:30px;"> <input type="text" name="moeder_busnummer" value="{$leerling['moeder_busnummer']}" style="width:30px;"><br><br> <input type="text" name="moeder_postcode" id="edit_inschr_moeder_postcode" value="{$leerling['moeder_postcode']}" style="width: 100px;">  <input type="text" name="moeder_plaats" id="edit_inschr_moeder_plaats" value="{$leerling['moeder_plaats']}" style="width: 455px;"></td></tr>            
             <tr><th class="left">GSM</th><td class="right"><input type="text" name="moeder_gsm" value="{$leerling['moeder_gsm']}"></td></tr>            
             <tr><th class="left">Email</th><td class="right"><input type="text" name="moeder_email" value="{$leerling['moeder_email']}"></td></tr>
           </table>
@@ -519,7 +564,6 @@ HTML;
           <table class="formulier" cellspacing="2" cellpadding="0">
             <tr><th class="left">Naam <div class="small">(naam, voornaam)</div></th><td class="right"><input type="text" name="vader_naam" value="{$leerling['vader_naam']}" style="width:277px;"> <input type="text" name="vader_voornaam" value="{$leerling['vader_voornaam']}" style="width: 278px;"></td></tr>
             <tr><th class="left">Adres <div class="small">(straat, huisnr, busnr) <br> (postcode, gemeente)</div></th><td class="right"><input type="text" name="vader_straat" value="{$leerling['vader_straat']}" style="width: 478px;"> <input type="text" name="vader_huisnummer" value="{$leerling['vader_huisnummer']}" style="width:30px;"> <input type="text" name="vader_busnummer" value="{$leerling['vader_busnummer']}" style="width:30px;"><br><br> <input type="text" name="vader_postcode" id="edit_inschr_vader_postcode" value="{$leerling['vader_postcode']}" style="width: 100px;">  <input type="text" name="vader_plaats" id="edit_inschr_vader_plaats" value="{$leerling['vader_plaats']}" style="width: 455px;"></td></tr>
-            <tr><th class="left">Telefoon</th><td class="right"><input type="text" name="vader_tel" value="{$leerling['vader_tel']}"></td></tr>            
             <tr><th class="left">GSM</th><td class="right"><input type="text" name="vader_gsm" value="{$leerling['vader_gsm']}"></td></tr>            
             <tr><th class="left">Email</th><td class="right"><input type="text" name="vader_email" value="{$leerling['vader_email']}"></td></tr>            
           </table>
@@ -534,20 +578,24 @@ HTML;
 
           <h3 id="vip">VIP</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
-            <tr><th class="left">Tijdens middag pauze</th><td class="right">{$middag}</td></tr>
-            <tr><th class="left">Wordt de leerling thuis opgevoed?</th><td class="right">{$leerling['thuis_opgevoed']} $adres_opgevoed</td></tr>
-            <tr><th class="left">Wordt de leerling door beide ouders opgevoed?</th><td class="right">{$leerling['door_beide_ouders_opgevoed']}</td></tr>
+            <tr><th class="left">Tijdens middag pauze</th><td class="right">{$leerling['middag']}</td></tr>            
+            <tr><th class="left">Wordt de leerling door beide ouders opgevoed?</th><td class="right">{$leerling['door_beide_ouders_opgevoed']}</td></tr>            
             <tr><th class="left">Zo nee: </th><td class="right">{$leerling['opgevoed_door_andere']}</td></tr>
+            <tr><th class="left">Heeft stiefouders?</th><td class="right">{$leerling['stiefouders']}</td></tr>
+            <tr><th class="left">Zoja:</th><td class="right">{$stiefouders}</td></tr>
             <tr><th class="left">Zo nee: Opgevoed door</th><td class="right">{$leerling['opgevoed_door_naam']}</td></tr>
             <tr><th class="left">Zo nee: Andere nuttige info</th><td class="right">{$leerling['andere_info']}</td></tr>
-            <tr><th class="left">Thuistaal</th><td class="right">$thuistaal</td></tr>
+            <tr><th class="left">Thuistaal uitsluitend nederlands?</th><td class="right">$thuistaal</td></tr>
             <tr><th class="left">Jaren gedubbeld?</th><td class="right">{$leerling['heeft_jaar_moeten_overdoen']} {$leerling['jaar_overdoen_welke']}</td></tr>
+            <tr><th class="left">Herneemt leerling het eerste jaar?</th><td class="right">{$leerling['herneemt_eerste_jaar']}</td></tr>
+            <tr><th class="left">Zoja, welke school?</th><td class="right">{$leerling['herneemt_eerste_jaar_school_naam']}<br>{$leerling['herneemt_eerste_jaar_school_postcode']} {$leerling['herneemt_eerste_jaar_school_gemeente']}</td></tr>            
             <tr><th class="left">Heeft de leerling leerproblemen?</th><td class="right">{$leerling['leerproblemen']} {$leerling['leerproblemen_extra']}</td></tr>
             <tr><th class="left">Heeft de leerling gezondheidsproblemen?</th><td class="right">{$leerling['gezondheidsproblemen']} {$leerling['gezondheidsproblemen_extra']}</td></tr>
             <tr><th class="left">Heeft de leerling gedragsproblemen?</th><td class="right">{$leerling['gedragsproblemen']} {$leerling['gedragsproblemen_extra']}</td></tr>
           </table>
 
 
+          <!--
           <h3 id="gok">GOK</h3>
           <table class="formulier" cellspacing="2" cellpadding="0">
             <tr><th class="left">Spreekt met moeder meestal</th><td class="right">{$leerling['gok_moeder_edison_spreektaal']}</td></tr>
@@ -556,7 +604,7 @@ HTML;
             <tr><th class="left">Spreekt met vrienden meestal</th><td class="right">{$leerling['gok_vrienden_edison_spreektaal']}</td></tr>          
             <tr><th class="left">Hoogst behaalde onderwijsdiploma of -getuigschrift moeder</th><td class="right">{$leerling['gok_edison_opleidingsniveau_moeder']}</td></tr>
           </table>
-          
+          -->          
           
           
           <div class="btnBig btnBigActive submit">Opslaan</div>
@@ -595,7 +643,7 @@ HTML;
             $niet_automatisch = array("action","id_leerling");
 
             $leerlingen = array("naam","voornaam","geslacht","belgisch_rijksregisternummer_of_bisnummer","nationaliteit","geboortedatum","geboorteplaats","straat","huisnummer","busnummer","postcode","plaats","tel","email","school_vorig_schooljaar","school_id");
-            $loopbaan = array("dubbele_afdruk","toestemming_baso_werking");
+            $loopbaan = array("dubbele_afdruk","toestemming_baso_werking","digitale_communicatie_moeder","digitale_communicatie_vader");
             $moeder = array("moeder_naam","moeder_voornaam","moeder_straat","moeder_huisnummer","moeder_busnummer","moeder_postcode","moeder_plaats","moeder_gsm","moeder_tel","moeder_email");
             $vader = array("vader_naam","vader_voornaam","vader_straat","vader_huisnummer","vader_busnummer","vader_postcode","vader_plaats","vader_gsm","vader_tel","vader_email");
 

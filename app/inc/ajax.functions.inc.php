@@ -1310,7 +1310,7 @@ HTML;
                   "[CHECKTHUISTAALJA]" => $checkthuistaalja,
                   "[CHECKTHUISTAALNEE]" => $checkthuistaalnee,
                   "[DISABLETHUISTAAL]" => $row['thuistaal'] == "Ja" || $row['thuistaal'] == ""  ? " disabled" : "",
-                  "[THUISTAALANDERE]" => $row['thuistaal'],
+                  "[THUISTAALANDERE]" => $row['thuistaal'] == "Ja" ? "" : $row['thuistaal'],
                   "[CHECKJAAROVERDOENJA]" => $checkjaaroverdoenja,
                   "[CHECKJAAROVERDOENNEE]" => $checkjaaroverdoennee,
                   "[DISABLEJAAROVERDOEN]" => $row['heeft_jaar_moeten_overdoen'] != "Ja" ? " disabled" : "",
