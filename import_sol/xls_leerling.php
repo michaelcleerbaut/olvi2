@@ -1,6 +1,5 @@
-<?
-    $debug = "NO";
-    $show_table = 0;
+<?    
+    $show_table = 1;
 
     ini_set('memory_limit', '512M');
 
@@ -10,6 +9,9 @@
         exit;
     }
 
+    // INCLUDE IMPORT FUNCTIONS
+    require_once('importfunctions.inc.php');
+    
     /** Error reporting */
     error_reporting(E_ALL);
     ini_set('display_errors', TRUE);
@@ -40,149 +42,37 @@
     ->setCategory("SOL");
 
 
-
-    include('importarrays/leerlingen.php'); // $kols_leerlingen
-
-
-
-    $sth = $dbh->query("SELECT * FROM settings WHERE name = 'huidigschooljaar'");
-
-    while($r = $sth->fetch(PDO::FETCH_ASSOC)){
-        $settings[$r['name']]['value'] = $r['value'];    
-        $settings[$r['name']]['value2'] = $r['value2'];    
-    }
+    // INCLUDE IMPORT ARRAY $kols:
+    // KEY:  db hoofding in SOL
+    // VALUE: 
+    //      - [SKIP] -> overslaan
+    //      - [ADAPT] -> nog aan te passen ([ADAPT] gevolgd met onze db hoofding)
+    //      - anders gewoon onze db hoofding 
+    include('importarrays/leerlingen.php');
 
 
+    // GET DATA
+    $leerlingen = get_leerlingen_data();
 
-    $sth = $dbh->query("
-        SELECT l.*, b.*, m.*, v.*, p.* FROM leerlingen l 
-        LEFT JOIN loopbaan b ON l.id_leerling = b.leerling_id
-        LEFT JOIN moeder m ON l.id_leerling = m.id_leerling
-        LEFT JOIN vader v ON l.id_leerling = v.id_leerling
-        LEFT JOIN vip p ON l.id_leerling = p.id_leerling            
-        WHERE l.deleted != '1'
-    ");
-    $leerlingen = array();
-    while($row = $sth->fetch(PDO::FETCH_ASSOC)){
-        $row['schooljaar'] = $settings['huidigschooljaar']['value'];
-        $leerlingen[$row['id_leerling']] = $row;
-    }
-
-
-    function get_adaption_value($leerling,$key){
-
-        $value = "";
-        
-        switch($key){
-            case "inschrijving_opmerking":
-                $r = is_array(unserialize($leerling['inschrijving_opmerking'])) ? unserialize($leerling['inschrijving_opmerking']) : array();
-                $value = "";
-                if(array_key_exists("A",$r)){
-                    $value .= $r['A'];
-                }
-                if(array_key_exists("B",$r)){
-                    $value .= $r['B'];
-                }                        
-                break;
-                
-                
-            case "maaltijdtype":
-                switch(substr($leerling['middag'],0,4)){
-                    case "op sc":
-                        $value = "Intern";
-                        break;
-                    case "naar":
-                        $value = "Extern";
-                        break;
-                    case "soms":
-                        $value ="Half intern";
-                        break;
-                }                           
-            break;
-            
-            case "middag":
-                switch(substr($leerling['middag'],0,4)){
-                    case "op sc":
-                        $value = "Intern";
-                        break;
-                    case "naar":
-                        $value = "Extern";
-                        break;
-                    case "soms":
-                        $value ="Half intern, dagen thuis: " . trim(substr($leerling['middag'],21));
-                        break;
-                }                           
-            break; 
-        }    
-
-
-        return $value;
-    }
-
-    $table = "<table border=\"1\"><tr><th>KOL SOL</th><th>ONS</th><th>VALUE</th></tr>";
-
-    foreach($leerlingen as $id_leerling => $leerling){
-
-        foreach($kols_leerlingen as $sol => $ons){
-            $ons = trim($ons);
-
-            if($ons != "[SKIP]"){
-
-
-                if(substr($ons,0,7) != "[ADAPT]"){                
-                    $value = array_key_exists($ons,$leerling) ? $leerling[$ons] : "KOLOM NIET GEVONDEN";
-                } else {                
-                    $adapt_key = trim(substr($ons,7));                                        
-                    $value = $adapt_key != "" ? get_adaption_value($leerling,$adapt_key) : "";
-                }
-
-
-
-                if($show_table == 1){
-                    $value = strlen($value) == "0" ? "" : $value;    
-                }
-
-                $rows[$id_leerling][$sol] = $value;
-
-                $table .= "
-                <tr>
-                <td>$sol</td>
-                <td>$ons</td>
-                <td>$value</td>
-                </tr>";
-
-            }
-        }
-
-    }
-    $table .= "</table>";
-
-
-    if($show_table == 1){
-        echo "<pre>";
-        //print_r($leerlingen);    
-        //print_r($rows);
-        echo "</pre>";
+    
+    // PARSE DATA TO XLS ARRAY
+    $results = parse_results($leerlingen,$import_kols,$show_table);
+    $rows = $results['rows'];
+    $table = $results['table'];
+    
+    
+    // SHOW RESULT DATA IN TABLE
+    if($show_table == 1){        
         echo $table;
         exit;
     }
 
-
-    // kolom nummers voorbereiden
-    $count = 1;
-    $letters = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
-    for($i = 0;$i <= 25; $i++){
-        $kols[$count] = $letters[$i];
-        $count++;
-    }
-    for($a = 0; $a <= 3; $a++){
-        for($i = 0;$i <= 25; $i++){
-            $kols[$count] = $letters[$a].$letters[$i];
-            $count++;
-        }
-    }
+    // INITIALIZE KOLS
+    $kols = initialize_kols();
 
 
+    
+    // PARSE DATA INTO EXCEL
     $row_nr = 1;
     $kol_nr = 0;
     foreach($rows as $id_leerling => $row){

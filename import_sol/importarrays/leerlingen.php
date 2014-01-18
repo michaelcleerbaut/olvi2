@@ -17,7 +17,7 @@
 * 
 */
 
-$kols_leerlingen = array(
+$import_kols = array(
 'naam' => 'naam',
 'voornaam' => 'voornaam',
 'voornaam andere' => '[SKIP]',
