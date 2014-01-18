@@ -257,7 +257,7 @@ function validate_vak(){
   
         case "idleerling_vip_leerproblemen":
                        
-            if($('#volgnummer').val() == "" && $('#naam_kind').val() == ""){
+            if(($('#volgnummer').val() == "" && $('#naam_kind').val() == "") || ($('#volgnummer').val() == "" && $('#id_leerling').val() == "")){
                 message = "Gelieve een keuze te maken.";
             } else {
             
@@ -280,7 +280,12 @@ function validate_vak(){
                     });
                     return false;                
                 } else {                    
-                    $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    if($('#id_leerling').val() != ""){                    
+                        $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    } else {                        
+                        check_validation("Gelieve een geldige leerling te gebruiken","validate","idleerling_vip_andereproblemen","");
+                    }
+                    
                 }
                 
             }
@@ -291,7 +296,7 @@ function validate_vak(){
 
         case "idleerling_vip_gedragsproblemen":
                        
-            if($('#volgnummer').val() == "" && $('#naam_kind').val() == ""){
+            if(($('#volgnummer').val() == "" && $('#naam_kind').val() == "") || ($('#volgnummer').val() == "" && $('#id_leerling').val() == "")){
                 message = "Gelieve een keuze te maken.";
             } else {
             
@@ -313,8 +318,13 @@ function validate_vak(){
                         check_validation(message,"validate","idleerling_vip_gedragsproblemen",result);
                     });
                     return false;                
-                } else {                    
-                    $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                } else {                                            
+                    if($('#id_leerling').val() != ""){                    
+                        $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    } else {                        
+                        check_validation("Gelieve een geldige leerling te gebruiken","validate","idleerling_vip_andereproblemen","");
+                    }
+                    
                 }
                 
             }
@@ -325,13 +335,13 @@ function validate_vak(){
 
         case "idleerling_vip_andereproblemen":
                        
-            if($('#volgnummer').val() == "" && $('#naam_kind').val() == ""){
+            if(($('#volgnummer').val() == "" && $('#naam_kind').val() == "") || ($('#volgnummer').val() == "" && $('#id_leerling').val() == "")){
                 message = "Gelieve een keuze te maken.";
             } else {
-            
+                
                 if($('#volgnummer').val() != ""){    // controleren op volgnummer
                     show_loading("Even geduld");
-                    $.post("/ajax.php",{action : "get_kind_via_volgnummer_andereproblemen", volgnummer : $('#volgnummer').val(), stroom : $('#stroom_select').val()},function(result){                        
+                    $.post("/ajax.php",{action : "get_kind_via_volgnummer_andereproblemen", volgnummer : $('#volgnummer').val(), stroom : $('#stroom_select').val()},function(result){
                         hide_loading();           
                         message = "";                    
                         if(result == 0){
@@ -347,10 +357,12 @@ function validate_vak(){
                         check_validation(message,"validate","idleerling_vip_andereproblemen",result);
                     });
                     return false;                
-                } else {                    
-                    $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()},function(result){
-                                            
-                    });
+                } else {
+                    if($('#id_leerling').val() != ""){                    
+                        $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    } else {                        
+                        check_validation("Gelieve een geldige leerling te gebruiken","validate","idleerling_vip_andereproblemen","");
+                    }
                 }
                 
             }
@@ -362,7 +374,7 @@ function validate_vak(){
 
         case "idleerling_vip_gezondheidsproblemen":
                        
-            if($('#volgnummer').val() == "" && $('#naam_kind').val() == ""){
+            if(($('#volgnummer').val() == "" && $('#naam_kind').val() == "") || ($('#volgnummer').val() == "" && $('#id_leerling').val() == "")){
                 message = "Gelieve een keuze te maken.";
             } else {
             
@@ -385,7 +397,12 @@ function validate_vak(){
                     });
                     return false;                
                 } else {                    
-                    $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    if($('#id_leerling').val() != ""){                    
+                        $.post("/ajax.php",{action : "save_idleerling_session", id_leerling : $('#id_leerling').val()});
+                    } else {                        
+                        check_validation("Gelieve een geldige leerling te gebruiken","validate","idleerling_vip_andereproblemen","");
+                    }
+                    
                 }
                 
             }

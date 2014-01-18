@@ -2234,7 +2234,7 @@ HTML;
                      WHERE id_leerling = '{$_SESSION['id_leerling']}'   
             ";        
         } else {
-            $query = "INSERT INTO vip_andereproblemen (`id_leerling`,`soort`,`omschrijving`) VALUES ('{$_SESSION['id_leerling']}','{$fields['soort']}','{$fields['omschrijving']}')";            
+            $query = "INSERT INTO vip_andereproblemen (`id_leerling`,`soort`,`omschrijving`,`opgemaakt_door`) VALUES ('{$_SESSION['id_leerling']}','{$fields['soort']}','{$fields['omschrijving']}','{$_SESSION['gebruiker']['naam']}')";            
         }
         $result = query($query);
         

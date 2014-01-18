@@ -5,7 +5,7 @@
 
             $html = "<div class=\"subtitel\">VIP Gedragsproblemen inschrijvingen</div>";
 
-            $query = "SELECT v.*, v.id as v_id, l.naam, l.voornaam FROM vip_gedragsproblemen v                
+            $query = "SELECT v.*, v.id as v_id, l.id_leerling, l.naam, l.voornaam FROM vip_gedragsproblemen v                
             INNER JOIN leerlingen l ON v.id_leerling = l.id_leerling
             LEFT JOIN inschrijving i ON v.id_leerling = i.id_leerling            
             WHERE l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
@@ -14,14 +14,22 @@
             $result = query($query);
 
 
-            $html .= "<table class=\"opties\" cellpadding=\"0\"><tr><th class=\"top\">Naam</th></th><th class=\"top\">Opgemaakt door</th></tr>";
+            $html .= "<table class=\"opties\" cellpadding=\"0\"><tr><th class=\"top\">Naam</th><th class=\"top\">Stroom</th><th class=\"top\">Opgemaakt door</th></tr>";
 
             while($row = mysql_fetch_assoc($result)){
-
+                
+                $query2 = "SELECT stroom FROM inschrijving WHERE id_leerling = '{$row['id_leerling']}'";
+                $result2 = query($query2);
+                $stroom = "";
+                while($row2 = mysql_fetch_assoc($result2)){
+                    $stroom .= $row2['stroom'] . " ";
+                }
+                
                 $naam = $row['voornaam'] != "" || $row['naam'] != "" ? $row['voornaam'] . " " . $row['naam'] : "<i>geen naam</i>";
 
                 $html .= "<tr>";
-                $html .= "<th class=\"left\"><a href=\"/panel/vip_gedragsproblemen/show/{$row['v_id']}\">$naam</a></th>";                        
+                $html .= "<th class=\"left\"><a href=\"/panel/vip_gedragsproblemen/show/{$row['v_id']}\">$naam</a></th>";
+                $html .= "<td class=\"center\">$stroom</td>";                        
                 $html .= "<td class=\"center\">{$row['opgemaakt_door']}</td>";
                 $html .= "<td class=\"center\"><a href=\"/prt/vip/vip_gedragsproblemen/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['vip_gedragsproblemen']['bewerken'] == "YES" ? "<td class=\"center\"><a href=\"/panel/vip_gedragsproblemen/edit/{$row['v_id']}\">Edit</a></td>" : "";
