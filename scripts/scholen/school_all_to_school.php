@@ -1,5 +1,14 @@
 <?php
 
+    /**
+    * 
+    * THIS SCRIPT WILL IMPORT SCHOOLS FROM TABLE SCHOOLS_ALL INTO SCHOOLS
+    * THIS SCRIPT WILL IGNORE DOUBLE ENTRIES --> NOT AT THIS MOMENT
+    * IF MORE THEN ONE SCHOOL EXISTS WITH THE SAME SCHOOLNR, IT WILL ONLY INSERT THE ONE WITH 'VESTIGING' --> NOT AT THIS MOMENT
+    * 
+    */
+
+
     $execute = 0;
 
     ini_set('max_execution_time', 300);
@@ -7,18 +16,30 @@
     $dbh = MyPDO::getConnection();
 
 
-    $sth = $dbh->query("SELECT * FROM scholen_all");        
-
-    while($school = $sth->fetch(PDO::FETCH_ASSOC)){
-        $scholen[$school['instellingsnummer']][] = $school;        
+    if($execute == 1){
+        $sth = $dbh->query("TRUNCATE scholen");
     }
     
-    $scholen_new = remove_dubbles($scholen);
-    echo count($scholen_new);
     
+    $sth = $dbh->query("SELECT * FROM scholen_all");        
+    while($school = $sth->fetch(PDO::FETCH_ASSOC)){
+        $scholen[$school['code']][] = $school;        
+    }
+    
+    
+    $scholen_new = remove_dubbles($scholen);
+    
+    echo count($scholen_new);
     print_r2($scholen_new);
     
+    
+    
     if($execute == 1) save_scholen($scholen_new);
+    
+    
+    ///-----------------
+    // FUNCTIONS
+    ///-----------------
     
     
     function remove_dubbles($scholen){
@@ -30,10 +51,10 @@
 
                 foreach($potential_dubbles as $key => $school){                    
                 
-                    if($school['type'] == "(vestiging)"){
+                    //if($school['type'] == "(vestiging)"){
                         $school['gemeente'] = clean_gemeente($school['gemeente']);
                         $return_schools[] = $school;                        
-                    }                    
+                    //}                    
                 }                
             } else {
                 $potential_dubbles[0]['gemeente'] = clean_gemeente($potential_dubbles[0]['gemeente']);
@@ -65,8 +86,6 @@
         }
 
     }
-
-
 
     function clean_gemeente($gemeente){
         $gemeenteS = explode("-",$gemeente);
