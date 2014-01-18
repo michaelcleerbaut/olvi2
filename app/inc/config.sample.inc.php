@@ -22,3 +22,4 @@
 
     // directories
     define('LOG_FOLDER','');
+    define('BACKUP_FOLDER','');    
