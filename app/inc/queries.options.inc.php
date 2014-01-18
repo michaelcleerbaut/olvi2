@@ -1,5 +1,5 @@
 <? 
-
+/*
 $query = "SELECT id, naam FROM gebruikers";
 $result = query($query);
 while($row = mysql_fetch_assoc($result)){
@@ -7,9 +7,12 @@ while($row = mysql_fetch_assoc($result)){
 }
 
 
-/**
-* ==================== ZOEK VELDEN OM QUERY SAMEN TE STELLEN
-**/
+ $queryarray['algemeen']['schooljaar'] = array(
+    'name' => 'Schooljaar',
+    'req'  => 0,
+    'type' => 'BOOL',
+    'opt'  => get_schooljaren()
+ );
 
   $queryarray['afspraken']['dag'] = array(    
     'name' => "Dag",
@@ -210,130 +213,8 @@ while($row = mysql_fetch_assoc($result)){
  
  
 
- 
- 
- 
- 
- 
- 
- 
-    /*    
-    
-    
-  $queryarray['customers']['store_id']['req']     = 1;
-  $queryarray['customers']['store_id']['type']    = 'SET';
-  $queryarray['customers']['store_id']['opt']     = array("=" => "is", "!=" => "is niet");
-  $queryarray['customers']['store_id']['values']  = array("0" => "Geen store_id","1" => "Zumbashop", "3" => "Sportordersshop", "4" => "Firstclass Shop", "5" => "MP3 Shop");
-
-  $queryarray['customers']['country']['req']  = 0;
-  $queryarray['customers']['country']['type'] = 'TEXT';
-  $queryarray['customers']['country']['opt']  = array("=" => "is", "!=" => "is niet");
-
-  $queryarray['customers']['postal_code'] = array('req'  => 0,
-                                                  'type' => 'TEXT',
-                                                  'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "!BEG" => "begint niet met", "END" => "eindigt met", "CONTAIN" => "Bevat", ">=" => "Is groter of gelijk aan ", "<=" => "Is kleiner of gelijk aan"));
-
-  $queryarray['customers']['city'] = array('req'  => 0,
-                                                  'type' => 'TEXT',
-                                                  'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat", ">=" => "Is groter of gelijk aan ", "<=" => "Is kleiner of gelijk aan"));
 
 
-
-  $queryarray['customers']['name'] = array('req'  => 0,
-                                           'type' => 'TEXT',
-                                           'opt'  => array("CONTAIN" => "Bevat", "BEG" => "begint met", "END" => "eindigt met"));
-
-  $queryarray['customers']['company_name'] = array('req'  => 0,
-                                                   'type' => 'TEXT',
-                                                   'opt'  => array("CONTAIN" => "Bevat", "BEG" => "begint met", "END" => "eindigt met"));
-
-  $queryarray['customers']['email']        = array('req'  => 0,
-                                                   'type' => 'TEXT',
-                                                   'opt'  => array("CONTAIN" => "Bevat", "!CONTAIN" => "bevat niet", "BEG" => "begint met", "END" => "eindigt met"));
-  
-  $queryarray['customers']['dealer']       = array('req'  => 0,
-                                                   'type' => 'SET',
-                                                   'opt'  => array("CONTAIN" => "is waar", "!CONTAIN" => "is niet waar"),
-                                                   'values' => array("i:3;s:3" => "Heeft Sportoders Handelaarsprijzen",
-                                                                     "i:1;s:3" => "Heeft Zumbashop Handelaarsprijzen"));
-  $queryarray['customers']['distributor']  = array('req'  => 0,
-                                                   'type' => 'SET',
-                                                   'opt'  => array("CONTAIN" => "is waar", "!CONTAIN" => "is niet waar"),
-                                                   'values' => array("i:3;s:3" => "kan Sportoders bestellen zonder betalen",
-                                                                     "i:1;s:3" => "kan Zumbashop bestellen zonder betalen"));
-  
-  $queryarray['customers']['CTS_Code']    = array('req'  => 0,
-                                                  'type' => 'TEXT',
-                                                  'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat"));
-
-  $queryarray['customers']['vat_code']     = array('req'  => 0,
-                                                   'type' => 'SET',
-                                                   'opt'  => array("=" => "is", "!=" => "is niet"),
-                                                   'values' => array('1' => 'Geldig BTW Nummer'));
-                                                   
-  $queryarray['customers']['vat_nr']       = array('req'  => 0,
-                                                   'type' => 'TEXT',
-                                                  'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat"));
-
-  $queryarray['customers']['zumba_status'] = array('req'  => 0,
-                                                   'type' => 'SET',
-                                                   'opt'  => array("=" => "is", "!=" => "is niet"),
-                                                   'values' => array('4' => 'ZIN MEMBER'));
-                                                   
- $queryarray['customers']['emailing']      = array('req'  => 0,
-                                                   'type' => 'BOOL',
-                                                   'opt'  => array("true" => "JA", "false" => "NEE"));
-                                                   
- $queryarray['customers']['papermailing']  = array('req'  => 0,
-                                                   'type' => 'BOOL',
-                                                   'opt'  => array("true" => "JA", "false" => "NEE"));
-                                                   
- $queryarray['customers']['invoicebymail'] = array('req'  => 0,
-                                                   'type' => 'BOOL',
-                                                   'opt'  => array("true" => "JA", "false" => "NEE"));
-                                                   
- $queryarray['customers']['birth_date']    = array('req'  => 0,
-                                                  'type' => 'TEXT',
-                                                  'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat"));
-
-                                                   
-  $queryarray['customers']['rating']       = array('req'  => 0,
-                                                   'type' => 'TEXT',
-                                                   'opt'  => array("=" => "Is", "<" => "< kleiner dan", ">" => "> groter dan", "!=" => "Is niet"));
-                                                   
-
-  $queryarray['customers']['branche']['type']    = 'SET';
-  $queryarray['customers']['branche']['opt']     = array("CONTAIN" => "BEVAT", "!CONTAIN" => "bevat niet", "!=" => "is niet", "=" => "is", "!=N;" => "is niet N;");
-  $queryarray['customers']['branche']['values']  = $branches;
-
-  $queryarray['customers']['account_status']['type']    = 'SET';
-  $queryarray['customers']['account_status']['opt']     = array("=" => "is", "!=" => "is niet");
-  $queryarray['customers']['account_status']['values']  = $accountstatusses;
-
-  $queryarray['customers']['discount_code']['req']     = 0;
-  $queryarray['customers']['discount_code']['type']    = 'TEXT';
-  $queryarray['customers']['discount_code']['opt']     = array("=" => "is", "!=" => "is niet", "CONTAIN" => "Bevat", "!CONTAIN" => "Bevat niet");
-
-  $queryarray['customers']['representative']['type']    = 'SET';
-  $queryarray['customers']['representative']['opt']     = array("=" => "is", "!=" => "is niet", "!=" => "is niet");
-  $queryarray['customers']['representative']['values']  = $representatives;
-
-  $queryarray['customers']['language'] = array('req'  => 0,
-                                                   'type' => 'SET',
-                                                   'opt'  => array("=" => "is", "!=" => "is niet"),
-                                                   'values' => array('nl' => 'Nederlands','fr' => 'Frans', 'en' => 'Engels', 'it' => 'Italiaans', 'de' => 'Duits', 'es' => 'Spaans', 'cz' => 'Tsjechisch'));  
-                                                   
-  
-  $queryarray['customers']['lyoness_cart_nr']   = array('req'  => 0,
-                                                        'type' => 'TEXT',
-                                                        'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat"));                                                   
-
-*/    
-
-
-/**
-* ==================== SELECTIE VELDEN VOOR IN RESULTATEN LIJST
-**/
     
  $columnsarray['afspraken'] = array(
     "dag" => "Afspraakdag",
@@ -433,5 +314,5 @@ while($row = mysql_fetch_assoc($result)){
  );
     
 
-    
+  */  
 ?>

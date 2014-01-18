@@ -20,7 +20,7 @@ HTML;
 
         static function get_aantal_inschrijvingen($stroom){
 
-            $query = "SELECT id_leerling FROM inschrijving WHERE stroom = '$stroom' AND definschrijving = '1'";
+            $query = "SELECT id_leerling FROM inschrijving WHERE stroom = '$stroom' AND definschrijving = '1' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $result = query($query);
             $aantal = mysql_num_rows($result);
 
@@ -37,7 +37,7 @@ HTML;
             $query = "SELECT i.*, i.id_inschrijving as i_id, l.*, g.id, g.naam as gebruiker_naam FROM inschrijving i
             LEFT JOIN leerlingen l ON i.id_leerling = l.id_leerling
             LEFT JOIN gebruikers g ON i.def_ingeschreven_door = g.id
-            WHERE i.stroom = '{$stroom}' AND i.definschrijving = '1'
+            WHERE i.stroom = '{$stroom}' AND i.definschrijving = '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
             ORDER BY volgnummer
             ";    
             $result = query($query);

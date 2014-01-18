@@ -1,5 +1,5 @@
 <?php
-
+                            /*
   require_once('queries.options.inc.php');
   
   function menu(){
@@ -521,7 +521,7 @@ CONTENT;
   }       
        
        
-       
+*/       
        
 
 

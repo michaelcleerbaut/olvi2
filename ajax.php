@@ -353,7 +353,7 @@
     if(isset($_GET['action'])){    
         switch($_GET['action']){
             case "get_query_operators":
-                echo get_query_operators($_GET['select'],$_GET['table']);
+                echo Query::get_query_operators($_GET['select'],$_GET['table']);
             break;        
         }
     }

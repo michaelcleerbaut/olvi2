@@ -19,7 +19,7 @@ HTML;
 
         static function get_aantal_inschrijvingen($stroom){
 
-            $query = "SELECT id_inschrijving, definschrijving FROM inschrijving WHERE stroom = '$stroom' AND voorinschrijving = '1'";
+            $query = "SELECT id_inschrijving, definschrijving FROM inschrijving WHERE stroom = '$stroom' AND voorinschrijving = '1' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";            
             $result = query($query);
             
             $def = 0;
@@ -46,9 +46,9 @@ HTML;
 
             $query = "SELECT i.*, i.id_inschrijving as i_id, l.* FROM inschrijving i
             INNER JOIN leerlingen l ON i.id_leerling = l.id_leerling
-            WHERE i.stroom = '{$stroom}' AND i.voorinschrijving = '1' AND i.definschrijving = '0'
+            WHERE i.stroom = '{$stroom}' AND i.voorinschrijving = '1' AND i.definschrijving = '0' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
             ORDER BY volgnummer
-            ";    
+            ";                
             $result = query($query);
 
 

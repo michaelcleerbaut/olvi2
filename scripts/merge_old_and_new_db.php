@@ -10,6 +10,8 @@
     
     //fix_vip_leerproblemen($execute);
     
+    //fix_afspraken($execute);
+    
     
     
     
@@ -285,6 +287,49 @@
         }
     
     }    
+    
+    function fix_afspraken($execute = 0){
+        global $dbh;
+        
+        // clean afspraken
+        $sth = $dbh->prepare("SELECT a.id_leerling, i.id_inschrijving FROM afspraken a LEFT JOIN inschrijving i ON a.id_leerling = i.id_leerling");
+        $sth->execute();
+        while($r = $sth->fetch(PDO::FETCH_ASSOC)){            
+            $results[$r['id_leerling']] = $r;            
+        }
+        foreach($results as $id_leerling => $data){
+            if($data['id_inschrijving'] == "" && $execute == 1){                
+                $sth = $dbh->prepare("DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'");
+                $sth->execute();
+            }
+        }
+        
+        
+        $sth = $dbh->prepare("SELECT * FROM afspraken a INNER JOIN inschrijving i ON a.id_leerling = i.id_leerling");
+        $sth->execute();
+        
+        echo $sth->rowCount();
+        
+        while($r = $sth->fetch(PDO::FETCH_ASSOC)){
+            
+            $queries[$r['id_leerling']] = array(
+                "query" => "UPDATE afspraken SET schooljaar = :SCHOOLJAAR WHERE id_leerling = :LID",
+                "values" => array(":SCHOOLJAAR" => $r['schooljaar'], ":LID" => $r['id_leerling'])
+            );
+            
+        }
+        
+        if($execute == 1){
+            foreach($queries as $q){                
+                $sth = $dbh->prepare($q['query']);
+                $sth->execute($q['values']);                
+            }
+        }
+        
+        print_r2($queries);
+        
+        
+    }
     
 
     // -------------------------------------------

@@ -95,6 +95,7 @@
 
 
 
+    /*
     $query = "SELECT * FROM settings WHERE name = 'huidigschooljaar'";
     $result = query($query);
     if(mysql_num_rows($result) == 0){
@@ -107,7 +108,9 @@
                 $huidigschooljaar = $row['value'];
             }
         }
-    }  
+    }
+    */
+    $huidigschooljaar = $_SESSION['schooljaar'];  
 
     $query = "SELECT * FROM studiekeuzes";
     $result = query($query);

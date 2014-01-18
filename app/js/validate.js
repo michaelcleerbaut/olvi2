@@ -267,7 +267,7 @@ function validate_vak(){
                         hide_loading();           
                         message = "";                    
                         if(result == 0){
-                            message = "Gelieve het volgnummer te controleren";
+                            message = "Gelieve het volgnummer te controleren, dit kind staat niet gekend voor een leerprobleem";
                         } else {
                             if(result == $('#id_leerling').val()){
                                 $('#kind_gegevens_laden').val("NO");
@@ -301,7 +301,7 @@ function validate_vak(){
                         hide_loading();           
                         message = "";                    
                         if(result == 0){
-                            message = "Gelieve het volgnummer te controleren";
+                            message = "Gelieve het volgnummer te controleren, dit kind staat niet gekend voor een gedragsprobleem";
                         } else {
                             if(result == $('#id_leerling').val()){
                                 $('#kind_gegevens_laden').val("NO");
@@ -331,8 +331,7 @@ function validate_vak(){
             
                 if($('#volgnummer').val() != ""){    // controleren op volgnummer
                     show_loading("Even geduld");
-                    $.post("/ajax.php",{action : "get_kind_via_volgnummer_andereproblemen", volgnummer : $('#volgnummer').val(), stroom : $('#stroom_select').val()},function(result){
-                        alert(result);
+                    $.post("/ajax.php",{action : "get_kind_via_volgnummer_andereproblemen", volgnummer : $('#volgnummer').val(), stroom : $('#stroom_select').val()},function(result){                        
                         hide_loading();           
                         message = "";                    
                         if(result == 0){
@@ -373,7 +372,7 @@ function validate_vak(){
                         hide_loading();           
                         message = "";                    
                         if(result == 0){
-                            message = "Gelieve het volgnummer te controleren";
+                            message = "Gelieve het volgnummer te controleren, dit kind staat niet gekend voor een gezondheidsprobleem";
                         } else {
                             if(result == $('#id_leerling').val()){
                                 $('#kind_gegevens_laden').val("NO");

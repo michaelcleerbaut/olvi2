@@ -68,7 +68,8 @@
     }
 
     if(!$_SESSION['schooljaar']){
-        $_SESSION['schooljaar'] = date("Y") . " - " . date("Y", strtotime("+1 year",strtotime(date("Y-m-d"))));
+        $_SESSION['schooljaar'] = date("m") > 7 ? date("Y") . " - " . (date("Y") + 1) : (date("Y") - 1) . " - " . date("Y");
+        //$_SESSION['schooljaar'] = date("Y") . " - " . date("Y", strtotime("+1 year",strtotime(date("Y-m-d"))));
     }            
             
     if(isset($_POST['schooljaar'])){

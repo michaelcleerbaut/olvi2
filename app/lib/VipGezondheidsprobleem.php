@@ -7,8 +7,9 @@
             $html = "<div class=\"subtitel\">VIP Gezondheidsproblemen inschrijvingen</div>";
 
             $query = "SELECT v.*, v.id as v_id, l.naam, l.voornaam FROM vip_gezondheidsproblemen v                
-            INNER JOIN leerlingen l ON v.id_leerling = l.id_leerling                
-            WHERE l.deleted != 1
+            INNER JOIN leerlingen l ON v.id_leerling = l.id_leerling
+            LEFT JOIN inschrijving i ON v.id_leerling = i.id_leerling                
+            WHERE l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
             ORDER BY l.naam 
             ";    
             $result = query($query);

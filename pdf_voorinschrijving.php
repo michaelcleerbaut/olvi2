@@ -16,8 +16,10 @@ require_once('app/inc/mysql.functions.inc.php');
   ";
   $result = query($query);
   $leerling = mysql_fetch_assoc($result);
-  
 
+  $huidigschooljaar = $leerling['schooljaar'];
+  
+/*
     $query = "SELECT * FROM settings WHERE name = 'huidigschooljaar'";
     $result = query($query);
     if(mysql_num_rows($result) == 0){
@@ -30,7 +32,8 @@ require_once('app/inc/mysql.functions.inc.php');
                 $huidigschooljaar = $row['value'];
             }
         }
-    }  
+    }
+*/
            
     $busnummer = $leerling['busnummer'] != "" ? " bus {$leerling['busnummer']}" : "";
     

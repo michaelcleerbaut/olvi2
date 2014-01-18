@@ -77,12 +77,19 @@
 
     }
 
-    function get_schooljaren(){
+    function get_schooljaren($value_as_key = 0){
         
         $start_year = "2013";
         
         for($year = $start_year ; $year <= date("Y"); $year++){
-            $years[] = $year . " - " . ($year+1);
+            
+            $year_value = $year . " - " . ($year+1);
+             
+            if($value_as_key == 1){
+                $years[$year_value] = $year_value;
+            } else {
+                $years[] = $year_value;
+            }
         }
         
         return $years;

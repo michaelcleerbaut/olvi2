@@ -35,6 +35,7 @@
     $leerling = mysql_fetch_assoc($result);
 
     
+    /*
     $query = "SELECT * FROM settings WHERE name = 'huidigschooljaar'";
     $result = query($query);
     if(mysql_num_rows($result) == 0){
@@ -47,7 +48,9 @@
                 $huidigschooljaar = $row['value'];
             }
         }
-    }  
+    }
+    */
+    $huidigschooljaar = $_SESSION['schooljaar'];  
 
     $busnummer = $leerling['busnummer'] != "" ? " bus {$leerling['busnummer']}" : "";
     $stroom_andere = $leerling['stroom'] == "A" ? "B" : "A";

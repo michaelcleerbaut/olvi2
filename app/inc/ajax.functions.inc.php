@@ -33,7 +33,7 @@
         
         $query  = "SELECT l.id_leerling, l.naam, l.voornaam, i.* FROM leerlingen l
                     LEFT JOIN inschrijving i ON i.id_leerling = l.id_leerling 
-                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') $stroomQuery ORDER BY l.naam";
+                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND i.schooljaar LIKE '{$_SESSION['schooljaar']}' $stroomQuery ORDER BY l.naam";
         
         $result = query($query);
         $query = $naamsuggest;
@@ -59,7 +59,7 @@
         $query  = "SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.leerproblemen FROM leerlingen l
                     INNER JOIN inschrijving i ON i.id_leerling = l.id_leerling 
                     INNER JOIN vip v ON i.id_leerling = v.id_leerling
-                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.leerproblemen = 'Ja' AND l.deleted != 1 ORDER BY l.naam";
+                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.leerproblemen = 'Ja' AND l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY l.naam";
         $result = query($query);
         $query = $naamsuggest;
                     
@@ -85,7 +85,7 @@
         $query  = "SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.gedragsproblemen FROM leerlingen l
                     INNER JOIN inschrijving i ON i.id_leerling = l.id_leerling 
                     INNER JOIN vip v ON i.id_leerling = v.id_leerling
-                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.gedragsproblemen = 'Ja' AND l.deleted != 1 ORDER BY l.naam";
+                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.gedragsproblemen = 'Ja' AND l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY l.naam";
         $result = query($query);
         $query = $naamsuggest;
                     
@@ -110,7 +110,7 @@
         
         $query  = "SELECT l.id_leerling, l.naam, l.voornaam, i.* FROM leerlingen l
                     INNER JOIN inschrijving i ON i.id_leerling = l.id_leerling                     
-                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND l.deleted != 1 ORDER BY l.naam";
+                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY l.naam";
         $result = query($query);
         $query = $naamsuggest;
                     
@@ -136,7 +136,7 @@
         $query  = "SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.leerproblemen FROM leerlingen l
                     INNER JOIN inschrijving i ON i.id_leerling = l.id_leerling 
                     INNER JOIN vip v ON i.id_leerling = v.id_leerling
-                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.gezondheidsproblemen = 'Ja' AND l.deleted != 1 ORDER BY l.naam";
+                     WHERE (l.naam LIKE '%{$naamsuggest}%' OR l.voornaam LIKE '%{$naamsuggest}%') AND v.gezondheidsproblemen = 'Ja' AND l.deleted != 1 AND i.schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY l.naam";
         $result = query($query);
         $query = $naamsuggest;
                     
@@ -160,7 +160,7 @@
     
     function get_kind_via_volgnummer($volgnummer, $stroom){
         
-        $query = "SELECT id_leerling, id_inschrijving FROM inschrijving WHERE volgnummer = '{$volgnummer}' AND stroom = '{$stroom}'";
+        $query = "SELECT id_leerling, id_inschrijving FROM inschrijving WHERE volgnummer = '{$volgnummer}' AND stroom = '{$stroom}' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
             return "0";
@@ -208,7 +208,7 @@
     
     function get_kind_via_volgnummer_leerproblemen($volgnummer,$stroom){
         
-        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.leerproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}'";
+        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.leerproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
             return "0";
@@ -223,7 +223,7 @@
 
     function get_kind_via_volgnummer_gedragsproblemen($volgnummer,$stroom){
         
-        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.gedragsproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}'";
+        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.gedragsproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
             return "0";
@@ -238,7 +238,7 @@
     
     function get_kind_via_volgnummer_andereproblemen($volgnummer, $stroom){
         
-        $query = "SELECT id_leerling FROM inschrijving WHERE volgnummer = '{$volgnummer}' AND stroom = '{$stroom}'";
+        $query = "SELECT id_leerling FROM inschrijving WHERE volgnummer = '{$volgnummer}' AND stroom = '{$stroom}' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
             return "0";
@@ -253,7 +253,7 @@
 
     function get_kind_via_volgnummer_gezondheidsproblemen($volgnummer,$stroom){
         
-        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.gezondheidsproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}'";
+        $query = "SELECT i.id_leerling FROM inschrijving i INNER JOIN vip v ON i.id_leerling = v.id_leerling WHERE v.gezondheidsproblemen = 'Ja' AND i.volgnummer = '{$volgnummer}' AND i.stroom = '{$stroom}' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
             return "0";
@@ -277,7 +277,7 @@
         }
         
         $return = 0;
-        $query = "SELECT id_leerling FROM inschrijving WHERE volgnummer = '$volgnummer' AND stroom = 'B'";
+        $query = "SELECT id_leerling FROM inschrijving WHERE volgnummer = '$volgnummer' AND stroom = 'B' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){
             $return = 1;
@@ -293,7 +293,7 @@
             
             $date = date("Y-m-d H:i");
             
-            $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','B','1','{$_SESSION['gebruiker']['id']}','{$date}')";
+            $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','B','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
             query($query);
             
             $_SESSION['id_inschrijving'] = mysql_insert_id();
@@ -389,6 +389,7 @@
         $studiekeuze = is_array(unserialize($row['studiekeuze'])) ? unserialize($row['studiekeuze']) : array();
         $keuzevakken = is_array(unserialize($row['keuzevakken'])) ? unserialize($row['keuzevakken']) : array();
                 
+        /*                
         $query = "SELECT * FROM settings WHERE name = 'huidigschooljaar'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
@@ -401,7 +402,9 @@
                     $huidigschooljaar = $row['value'];
                 }
             }
-        }            
+        }
+        */
+        $huidigschooljaar = $_SESSION['schooljaar'];           
         
     
         $query = "SELECT * FROM studiekeuzes ORDER BY studiekeuze";
@@ -555,13 +558,13 @@ HTML;
             return 0;
         }
         
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer ASC";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer ASC";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $volgnummers[$row['volgnummer']] = "YES";            
         }
         
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer DESC LIMIT 0,1";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer DESC LIMIT 0,1";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $maxNummer = $row['volgnummer'];
@@ -581,7 +584,7 @@ HTML;
         
         $date = date("Y-m-d H:i");
         
-        $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         $return = query($query);
         
 
@@ -627,7 +630,7 @@ HTML;
                 "5" => array("start" => "9:00", "eind" => "12:00")
             );
                 
-            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel'";
+            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){            
                 $bezet[$row['dag']][$row['uur']] += 1;                
@@ -684,7 +687,7 @@ HTML;
                 
             $return = file_get_contents("app/views/forms/voorinschrijving/afspraak_maken.tpl");
             
-            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel'";
+            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){            
                 $bezet[$row['dag']][$row['uur']] += 1;                
@@ -730,7 +733,7 @@ HTML;
         $query = "SELECT * FROM afspraken WHERE id_leerling = '{$_SESSION['id_leerling']}'";
         $result = query($query);
         if(mysql_num_rows($result) == 0){
-            $query = "INSERT INTO afspraken (`id_leerling`,`dag`,`uur`) VALUES ('{$_SESSION['id_leerling']}','{$dag}','{$uur}')";
+            $query = "INSERT INTO afspraken (`id_leerling`,`dag`,`uur`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$dag}','{$uur}','{$_SESSION['schooljaar']}')";
             query($query);
         } else {
             $query = "UPDATE afspraken SET dag = '{$dag}', uur = '{$uur}' WHERE id_leerling = '{$_SESSION['id_leerling']}'";
@@ -1961,13 +1964,13 @@ HTML;
         query($query);
         $_SESSION['id_leerling'] = mysql_insert_id();
                                     
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer ASC";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer ASC";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $volgnummers[$row['volgnummer']] = "YES";            
         }
         
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer DESC LIMIT 0,1";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer DESC LIMIT 0,1";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $maxNummer = $row['volgnummer'];
@@ -1986,7 +1989,7 @@ HTML;
         $volgnummer = $volgnummer == 0 ? $maxNummer + 1 : $volgnummer; 
 
         $date = date("Y-m-d H:i");
-        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','A','1','{$_SESSION['gebruiker']['id']}','{$date}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','A','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         query($query);
         
         $_SESSION['id_inschrijving'] = mysql_insert_id();
@@ -2015,13 +2018,13 @@ HTML;
         query($query);
         $_SESSION['id_leerling'] = mysql_insert_id();
                          
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = '{$stroom}' ORDER BY volgnummer ASC";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = '{$stroom}' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer ASC";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $volgnummers[$row['volgnummer']] = "YES";            
         }
         
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = '{$stroom}' ORDER BY volgnummer DESC LIMIT 0,1";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = '{$stroom}' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer DESC LIMIT 0,1";
         $result = query($query);
         while($row = mysql_fetch_assoc($result)){            
             $maxNummer = $row['volgnummer'];
@@ -2042,7 +2045,7 @@ HTML;
                 
         $date = date("Y-m-d H:i");
         
-        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`definschrijving`,`def_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','{$stroom}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`definschrijving`,`def_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','{$stroom}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         query($query);
         
         $_SESSION['id_inschrijving'] = mysql_insert_id();

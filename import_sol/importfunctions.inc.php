@@ -4,12 +4,14 @@
     
         $dbh = MyPDO::getConnection();
         
-        // GET SCHOOLJAAR
+        // GET SCHOOLJAAR        
+        /*
         $sth = $dbh->query("SELECT * FROM settings WHERE name = 'huidigschooljaar'");
         while($r = $sth->fetch(PDO::FETCH_ASSOC)){
             $settings[$r['name']]['value'] = $r['value'];    
             $settings[$r['name']]['value2'] = $r['value2'];    
         }
+        */
 
         // GET DATA
         $sth = $dbh->query("
@@ -22,7 +24,8 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
-            $row['schooljaar'] = $settings['huidigschooljaar']['value'];
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            //$row['schooljaar'] = $settings['huidigschooljaar']['value'];
             $leerlingen[$row['id_leerling']] = $row;
         }
 

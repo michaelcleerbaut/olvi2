@@ -29,6 +29,13 @@
                 'type' => 'TEXT',
                 'opt'  => array("<" => "Vroeger dan", "<=" => "Vroeger of gelijk aan", "=" => "om", ">=" => "Later of gelijk aan" , ">" => "Later dan")
             );      
+            
+            $queryarray['inschrijving']['schooljaar'] = array(    
+                'name' => "Schooljaar",
+                'req' => 0,
+                'type' => 'BOOL',    
+                'opt' => get_schooljaren(1)
+            );      
 
             $queryarray['inschrijving']['stroom'] = array(    
                 'name' => 'Stroom',
@@ -261,6 +268,11 @@
             * ==================== SELECTIE VELDEN VOOR IN RESULTATEN LIJST
             **/
 
+            $columnsarray['inschrijving'] = array(
+                "schooljaar" => "Schooljaar"                
+            );
+            
+            
             $columnsarray['afspraken'] = array(
                 "dag" => "Afspraakdag",
                 "uur" => "Afspraakuur"
@@ -690,8 +702,7 @@ CONTENT;
 
 
         static function build_query($data,$return = "default"){
-
-
+        
             foreach($data['table'] as $key => $table){
                 $tables[$table] = $table;
             }
