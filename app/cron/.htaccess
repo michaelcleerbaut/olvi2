@@ -1,0 +1,4 @@
+php_value auto_prepend_file "cronpreload.inc.php"
+
+#php_value include_path  "../inc"
+php_value include_path  "../inc" 

@@ -145,7 +145,7 @@
         */ 
         private function connect(){ 
             try { 
-                $this->handler = new PDO($this->dsn, $this->user, $this->password); 
+                $this->handler = new MyPDO($this->dsn, $this->user, $this->password); 
             } catch (PDOException $e) { 
                 $this->handler = null; 
                 $this->error[] = $e->getMessage(); 

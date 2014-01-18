@@ -2,6 +2,7 @@
 config.inc.php
 log/*
 !log/.htaccess.sample.txt
+!app/cron/.htaccess
 data/pdfs/*
 data/backups/*
 
