@@ -7,14 +7,8 @@ if(!isset($isForm)){
         $schooljaar_options .= "<option value=\"$schooljaar\" $selected>Schooljaar: $schooljaar</option>";
     }
     
-    $uitloglink = $_SESSION['gebruiker'] ? "<a href=\"/logout.php\">Uitloggen</a>" : "";
-    $titel = "
     
-        <div style=\"text-align:right;margin-right: 0px;\">
-            Welkom {$_SESSION['gebruiker']['naam']}
-        </div>        
-        
-        <div style=\"font-size:12px;line-height:25px;float:right;\">$uitloglink</div>
+    $schoolyear_form = $_SESSION['gebruiker'] ? "
         <div style=\"font-size:12px;text-align:right;float:right;margin-right: 10px;\">
             <form method=\"post\">
                 <select name=\"schooljaar\" id=\"change_schooljaar\">
@@ -22,6 +16,17 @@ if(!isset($isForm)){
                 </select>
             </form>
         </div>
+        " : "";
+    
+    $uitloglink = $_SESSION['gebruiker'] ? "<a href=\"/logout.php\">Uitloggen</a>" : "";
+    
+    $titel = "    
+        <div style=\"text-align:right;margin-right: 0px;\">
+            Welkom {$_SESSION['gebruiker']['naam']}
+        </div>        
+        
+        <div style=\"font-size:12px;line-height:25px;float:right;\">$uitloglink</div>
+        $schoolyear_form
         <div style=\"clear:both;\"></div>        
     ";                
 }
