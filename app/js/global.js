@@ -1,6 +1,11 @@
 $(document).ready(function(){
 
-
+    if($('#change_schooljaar').length > 0){
+        $('#change_schooljaar').change(function(){
+           $(this).parents('form').submit(); 
+        });
+    }
+    
     // initializes datepicker
     $('.datepicker').datepicker({
         changeMonth: true,

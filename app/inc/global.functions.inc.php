@@ -1,19 +1,19 @@
 <?php
 
     function build_crums($crums = array()){
-        
+
         $html .= "<div class=\"nav\">
-                    <div class=\"btn\"><a href=\"/\">Home</a></div>";
-    
+        <div class=\"btn\"><a href=\"/\">Home</a></div>";
+
         if(is_array($crums) && count($crums) > 0){
             foreach($crums as $key => $data){
                 $html .= "<div class=\"btn\"><a href=\"{$data['url']}\">{$data['title']}</a></div>";
             }
         }
         $html .= "</div>";
-        
+
         return $html;        
-        
+
     }
 
     function get_lagere_scholen(){
@@ -47,24 +47,24 @@
     }
 
     function list_nationaliteiten($nationaliteit = ""){
-        
+
         $dbh = MyPDO::getConnection();
-        
+
         $sth = $dbh->prepare("SELECT * FROM nationaliteiten");
         $sth->execute();
         $html = "<option value=\"\"></option>";
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
-            
+
             $selected = strtoupper($row['nationaliteit']) == $nationaliteit ? " selected" : "";
             $html .= "<option value=\"{$row['nationaliteit']}\" $selected>{$row['nationaliteit']}</option>";
-            
+
         } 
-        
+
         return $html;
-        
+
     }
-    
-function log_action($sort, $func, $message, $data){
+
+    function log_action($sort, $func, $message, $data){
 
         $filename = LOG_FOLDER.date("Y-m-d").".txt";
         $output = date("H:i:s") . "[$sort] - {User: " . $_SESSION['gebruiker']['id'] . "}  $func -> [$message] , Data: $data \n";
@@ -72,12 +72,22 @@ function log_action($sort, $func, $message, $data){
         if(!is_dir(LOG_FOLDER)){
             mkdir(LOG_FOLDER, 0777);
         }
-         
+
         file_put_contents($filename,$output,FILE_APPEND);        
-            
+
     }
-    
-          
+
+    function get_schooljaren(){
         
+        $start_year = "2013";
+        
+        for($year = $start_year ; $year <= date("Y"); $year++){
+            $years[] = $year . " - " . ($year+1);
+        }
+        
+        return $years;
+        
+    }
+
 
 ?>

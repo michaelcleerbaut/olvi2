@@ -67,5 +67,14 @@
         $login_vars['username'] = $_POST['gebruiker'];        
     }
 
+    if(!$_SESSION['schooljaar']){
+        $_SESSION['schooljaar'] = date("Y") . " - " . date("Y", strtotime("+1 year",strtotime(date("Y-m-d"))));
+    }            
+            
+    if(isset($_POST['schooljaar'])){
+        if($_POST['schooljaar'] != ""){
+            $_SESSION['schooljaar'] = $_POST['schooljaar'];
+        }
+    }
 
 ?>
