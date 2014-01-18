@@ -1,5 +1,5 @@
 <?    
-    $show_table = 1;
+    $show_table = 0;
 
     ini_set('memory_limit', '512M');
 
