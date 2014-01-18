@@ -30,13 +30,6 @@
                 'opt'  => array("<" => "Vroeger dan", "<=" => "Vroeger of gelijk aan", "=" => "om", ">=" => "Later of gelijk aan" , ">" => "Later dan")
             );      
             
-            $queryarray['inschrijving']['schooljaar'] = array(    
-                'name' => "Schooljaar",
-                'req' => 0,
-                'type' => 'BOOL',    
-                'opt' => get_schooljaren(1)
-            );      
-
             $queryarray['inschrijving']['stroom'] = array(    
                 'name' => 'Stroom',
                 'req' => 0,
@@ -268,11 +261,6 @@
             * ==================== SELECTIE VELDEN VOOR IN RESULTATEN LIJST
             **/
 
-            $columnsarray['inschrijving'] = array(
-                "schooljaar" => "Schooljaar"                
-            );
-            
-            
             $columnsarray['afspraken'] = array(
                 "dag" => "Afspraakdag",
                 "uur" => "Afspraakuur"
@@ -727,7 +715,7 @@ CONTENT;
                 }
             }
             $query .= " LEFT JOIN inschrijving ON leerlingen.id_leerling = inschrijving.id_leerling";
-            $query .= " WHERE leerlingen.id_leerling != '' AND leerlingen.deleted != '1' ";      
+            $query .= " WHERE leerlingen.id_leerling != '' AND leerlingen.deleted != '1' AND inschrijving.schooljaar = '{$_SESSION['schooljaar']}'";      
 
             if(is_array($data['query'])){
                 foreach($data['query'] as $id => $queryname){
