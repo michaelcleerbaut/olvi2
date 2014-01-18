@@ -19,8 +19,9 @@
             LEFT JOIN loopbaan b ON l.id_leerling = b.leerling_id
             LEFT JOIN moeder m ON l.id_leerling = m.id_leerling
             LEFT JOIN vader v ON l.id_leerling = v.id_leerling
-            LEFT JOIN vip p ON l.id_leerling = p.id_leerling            
-            WHERE l.deleted != '1'
+            LEFT JOIN vip p ON l.id_leerling = p.id_leerling
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){
