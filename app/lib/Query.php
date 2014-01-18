@@ -29,7 +29,7 @@
                 'type' => 'TEXT',
                 'opt'  => array("<" => "Vroeger dan", "<=" => "Vroeger of gelijk aan", "=" => "om", ">=" => "Later of gelijk aan" , ">" => "Later dan")
             );      
-            
+
             $queryarray['inschrijving']['stroom'] = array(    
                 'name' => 'Stroom',
                 'req' => 0,
@@ -123,7 +123,7 @@
                 'type' => 'TEXT',
                 'opt'  => array("CONTAIN" => "Bevat")
             );   
-            
+
 
             $queryarray['loopbaan']['dubbele_afdruk'] = array(
                 'name' => 'Dubbele afdruk',
@@ -131,7 +131,7 @@
                 'type' => 'BOOL',
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );
-            
+
 
             $queryarray['loopbaan']['toestemming_baso_werking'] = array(
                 'name' => 'Toestemming BASO werking',
@@ -146,15 +146,15 @@
                 'type' => 'BOOL',
                 'opt'  => array("" => "Leeg", "post" => "Post", "email" => "Email")
             );
-            
+
             $queryarray['loopbaan']['digitale_communicatie_vader'] = array(
                 'name' => 'Digitale communicatie vader',
                 'req'  => 0,
                 'type' => 'BOOL',
                 'opt'  => array("" => "Leeg", "post" => "Post", "email" => "Email")
             );            
-            
-            
+
+
             $queryarray['vip']['middag'] = array(
                 'name' => 'Middageten',
                 'req'  => 0,
@@ -175,8 +175,8 @@
                 'type' => 'TEXT',
                 'opt'  => array("=" => "is", "!=" => "is niet", "BEG" => "begint met", "END" => "eindigt met", "CONTAIN" => "Bevat", ">=" => "Is groter of gelijk aan ", "<=" => "Is kleiner of gelijk aan")
             );
-            
-            
+
+
             $queryarray['vip']['door_beide_ouders_opgevoed'] = array(
                 'name' => 'Opgevoed door beide ouders',
                 'req'  => 0,
@@ -190,14 +190,14 @@
                 'type' => 'BOOL',
                 'opt'  => array("Niet van toepassing" => "Niet van toepassing", "Gescheiden" => "Gescheiden", "1 ouder overleden" => "1 ouder overleden", "2 ouders overleden", "co-ouderschap" => "CO-Ouderschap")
             );
-            
+
             $queryarray['vip']['stiefouders'] = array(
                 'name' => 'Heeft stiefouders',
                 'req'  => 0,
                 'type' => 'BOOL',
                 'opt'  => array("Ja" => "Ja", "Nee" => "Nee")
             );
-            
+
 
             $queryarray['vip']['thuistaal'] = array(
                 'name' => 'Thuistaal',
@@ -221,13 +221,13 @@
             );               
 
             $queryarray['vip']['maakt_gebruik_van_pc'] = array(
-                'name' => 'Maakt van gebruik van pc in de klas',
+                'name' => 'Maakt van gebruik van pc',
                 'req'  => 0,
                 'type' => 'BOOL',
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );               
-            
-            
+
+
 
             $queryarray['vip']['leerproblemen'] = array(
                 'name' => 'Heeft leerproblemen',
@@ -251,6 +251,90 @@
                 'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
             );
 
+
+
+            $queryarray['vip_leerproblemen']['gesprek_clb'] = array(
+                'name' => 'VIP Leer: gesprek CLB',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );  
+            $queryarray['vip_leerproblemen']['gesprek_titularis'] = array(
+                'name' => 'VIP Leer: gesprek titularis',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );  
+            $queryarray['vip_leerproblemen']['klassenraad'] = array(
+                'name' => 'VIP Leer: klassenraad',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );  
+
+
+
+            $queryarray['vip_gedragsproblemen']['gesprek_clb'] = array(
+                'name' => 'VIP Gedrag: gesprek CLB',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );                        
+            $queryarray['vip_gedragsproblemen']['gesprek_titularis'] = array(
+                'name' => 'VIP Gedrag: gesprek titularis',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );                        
+            $queryarray['vip_gedragsproblemen']['klassenraad'] = array(
+                'name' => 'VIP Gedrag: klassenraad',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );                        
+
+
+
+            $queryarray['vip_gezondheidsproblemen']['gesprek_clb'] = array(
+                'name' => 'VIP Gezondheid: gesprek CLB',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+            $queryarray['vip_gezondheidsproblemen']['gesprek_titularis'] = array(
+                'name' => 'VIP Gezondheid: gesprek titularis',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+            $queryarray['vip_gezondheidsproblemen']['klassenraad'] = array(
+                'name' => 'VIP Gezondheid: klassenraad',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+
+
+
+            $queryarray['vip_andereproblemen']['gesprek_clb'] = array(
+                'name' => 'VIP Andere: gesprek CLB',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+            $queryarray['vip_andereproblemen']['gesprek_titularis'] = array(
+                'name' => 'VIP Andere: gesprek titularis',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+            $queryarray['vip_andereproblemen']['klassenraad'] = array(
+                'name' => 'VIP Andere: klassenraad',
+                'req'  => 0,
+                'type' => 'BOOL',
+                'opt'  => array("Nee" => "Nee", "Ja" => "Ja")
+            );              
+
             return $queryarray;
 
         }
@@ -260,6 +344,10 @@
             /**
             * ==================== SELECTIE VELDEN VOOR IN RESULTATEN LIJST
             **/
+
+            $columnsarray['inschrijving'] = array(
+                "datum" => "Inschrijvingsdatum"
+            );
 
             $columnsarray['afspraken'] = array(
                 "dag" => "Afspraakdag",
@@ -370,17 +458,43 @@
                 "gezondheidsproblemen" => "Gezondheidsproblemen",
                 "gezondheidsproblemen_extra" => "Gezondheidsproblemen extra",
                 "gedragsproblemen" => "Gedragsproblemen",
-                "gedragsproblemen_extra" => "Gedragsprolemen extra"
+                "gedragsproblemen_extra" => "Gedragsproblemen extra"
             );
-            
+
             $columnsarray['vip_leerproblemen'] = array(
+                "vip_leerproblemen@@@soorten_problemen" => "Soorten problemen",                
                 "maakt_gebruik_van_pc" => "Maakt gebruik van pc in de klas",                
                 "maakt_gebruik_van_pc_programmas" => "Welke programmas gebruikt de leerling"            
             );
 
+            $columnsarray['vip_gezondheidsproblemen'] = array(
+                "vip_gezondheidsproblemen@@@soorten_problemen" => "Soorten problemen"                
+            );
+
+            $columnsarray['vip_andereproblemen'] = array(
+                "soort" => "Soorten problemen"                
+            );
+
+            $columnsarray['vip_gedragsproblemen'] = array(
+                "vip_gedragsproblemen@@@soorten_problemen" => "Soorten problemen"                
+            );
+            
+            
             return $columnsarray;
 
         }
+
+        static function column_exceptions(){
+
+
+            $exceptions = array(
+                "soorten_problemen" => "SERIALIZE"            
+            );
+
+            return $exceptions;
+
+        }
+
 
         static function menu(){
 
@@ -558,7 +672,8 @@ CONTENT;
                 $checkbox = "";
                 $i = 0;
                 $checkbox = "<label><input type=\"checkbox\"  onclick=\"toggleChecked(this.checked,'$table')\" table=\"$table\" style=\"width: 20px;\"> Selecteer alles / Deselecteer alles</label><br>";
-                foreach($values as $key => $value){                
+                foreach($values as $key => $value){
+
                     $i++;
                     $tablekey = $i."__".$key;
                     $checked = in_array($tablekey,$columnsform['columns']) ? " checked=\"checked\"" : "";
@@ -613,6 +728,7 @@ CONTENT;
                 foreach($values as $name => $options){
                     $isselected = $name == $selected ? " selected" : "";
                     if($tableS != $table){
+                        $table = str_replace("_"," ",$table);
                         $html .= "<option value=\"\" style=\"font-weight: bold;\">=== $table ===</option>"; 
                         $tableS = $table;
                     }
@@ -690,7 +806,9 @@ CONTENT;
 
 
         static function build_query($data,$return = "default"){
-        
+
+            $exceptions = self::column_exceptions();
+
             foreach($data['table'] as $key => $table){
                 $tables[$table] = $table;
             }
@@ -700,17 +818,26 @@ CONTENT;
 
 
             $query = "SELECT leerlingen.id_leerling, inschrijving.id_inschrijving, inschrijving.stroom, .inschrijving.volgnummer, ";
-            foreach($data['columns'] as $key => $column){ 
-                $column_ex = explode("__",$column);                             
-                if($column != "" && $column_ex[1] != ""){              
+
+            foreach($data['columns'] as $key => $column){
+
+                $column_ex = self::get_column_ex($column);
+                
+                if($column != "" && $column_ex[1] != ""){                      
                     $query .= " {$data['tablecolumn'][$column]}.{$column_ex[1]} AS {$data['tablecolumn'][$key]}{$data['tablecolumn'][$column]}_{$column_ex[1]}, ";
-                }          
+                }
+
+
+
             }
             $query = substr($query,0,-2) . " FROM leerlingen";
+
             foreach($tables as $table){
                 if($table != ""){
                     if($table == "leerlingen" || $table == "inschrijving") continue;
                     $idkey = $table == "loopbaan" ? "leerling_id": "id_leerling";
+
+
                     $query .= " LEFT JOIN $table ON leerlingen.id_leerling = $table.$idkey ";
                 }
             }
@@ -804,10 +931,14 @@ CONTENT;
                         if($data['showresults'] != ''){                                                            
 
                             $thead = "<thead><tr><th width=\"100\">id leerling</th><th width=\"100\">Volgnummer A Stroom</th><th width=\"100\">Volgnummer B Stroom</th>";
-                            foreach($data['columns'] as $key => $column){                        
-                                $column_ex = explode("__",$column);                                 
+                            foreach($data['columns'] as $key => $column){
+
+                                $column_ex = self::get_column_ex($column);
+
                                 $column = $data['tablecolumn'][$column]."_".$column_ex[1];
                                 $thead .= "<th width=\"100\">$column</th>";
+
+
                             }                    
                             $thead .= "</tr></thead>";
 
@@ -815,8 +946,16 @@ CONTENT;
                             foreach($leerlingen as $id_leerling => $row){
                                 $tbody .= "<tr><td width=\"100\">{$row['id_leerling']}</td><td width=\"100\">{$row['volgnummer_a']}</td><td width=\"100\">{$row['volgnummer_b']}</td>";
                                 foreach($data['columns'] as $key => $column){
-                                    $column_ex = explode("__",$column);                                
-                                    $tbody .= "<td width=\"100\">{$row[$data['tablecolumn'][$column]."_".$column_ex[1]]}</td>";
+                                    
+                                    $column_ex = self::get_column_ex($column);
+
+                                    $value = $row[$data['tablecolumn'][$column]."_".$column_ex[1]];
+
+                                    if(array_key_exists($column_ex[1],$exceptions)){
+                                        $value = self::parse_exception($value,$exceptions[$column_ex[1]]);
+                                    }
+
+                                    $tbody .= "<td width=\"100\">$value</td>";
                                 }
                                 $tbody .= "</tr>";
                             }                    
@@ -902,7 +1041,51 @@ CONTENT;
         }       
 
 
+        static function parse_exception($value,$ex){
 
+            switch($ex){
+                case "SERIALIZE":
+
+                    $value = unserialize($value);
+
+                    foreach($value as $key => $val){
+                        if($val != ""){
+                            $value_new .= "$key: $val, ";
+                        }
+                    }
+
+                    $value_new = substr($value_new,0,-2);
+
+                    break;
+                default:
+            }
+
+
+            return $value_new;
+
+
+        }
+
+        static function get_column_ex($column){
+
+            if(strpos($column,"@@@")){
+
+                preg_match("/[A-Za-z0-9_]+/",$column,$matches);
+                $table = str_replace('@@@','',str_replace($matches[0],"",$column));                                        
+                $nr = explode("__",$matches[0]);
+
+                $column_ex[0] = $nr;
+                $column_ex[1] = $table;                                    
+
+            } else {
+
+                $column_ex = explode("__",$column);                             
+
+            }
+
+            return $column_ex;      
+                  
+        }
 
     }  
 ?>
