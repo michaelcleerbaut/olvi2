@@ -72,9 +72,9 @@
         $login_vars['login_error'] = "<div class=\"error_form\">Gebruiker en/of wachtwoord is foutief</div>";        
         $login_vars['username'] = $_POST['gebruiker'];        
     }
-
-    if(!$_SESSION['schooljaar']){
-        $_SESSION['schooljaar'] = date("m") > 7 ? date("Y") . " - " . (date("Y") + 1) : (date("Y") - 1) . " - " . date("Y");
+    
+    if(!$_SESSION['schooljaar']){                                                                                                
+        $_SESSION['schooljaar'] = date("Y") . " - " . (date("Y") + 1);
         //$_SESSION['schooljaar'] = date("Y") . " - " . date("Y", strtotime("+1 year",strtotime(date("Y-m-d"))));
     }            
             
