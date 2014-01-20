@@ -8,11 +8,6 @@
         var $root_path = ROOT_PATH;
         var $crons_location = CRONS_LOCATION; 
 
-
-
-
-
-
         public function __construct($cronname = ""){
 
             if($cronname != ""){
@@ -23,11 +18,6 @@
             }
 
         }
-
-        public function __destruct(){
-
-        }
-
 
         public function get_cron_values(){
 
@@ -46,7 +36,6 @@
 
         }     
 
-
         public function execute(){
 
             if($this->system == "WINDOWS"){            
@@ -63,8 +52,7 @@
 
         } 
 
-
-        static public function find_possible_cron(){
+        static public function find_and_execute_next_possible_cron(){
 
 
             $cur_minute = date("i");
@@ -111,10 +99,7 @@
 
 
         }
-
-
-
-
+        
 
     }
 ?>

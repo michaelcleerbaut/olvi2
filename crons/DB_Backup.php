@@ -18,11 +18,9 @@ $db = new Backup_DB(array(
 
 $backup = $db->backup();
  
-if(!$backup['error']){ 
-    //echo nl2br($backup['msg']);
+if(!$backup['error']){     
     file_put_contents($prefix.BACKUP_FOLDER.date("Ymd_Hi").".sql",$backup['msg']);
-     
 } else { 
-    echo 'An error has ocurred.'; 
+    mail("michael@mcreations.pro","Olvi: Error backup",$backup['error']); 
 } 
 ?>

@@ -3,6 +3,6 @@
         $cron = new Cronjob($_GET['c']);
         $cron->execute();
     } else {
-        Cronjob::find_possible_cron();
+        Cronjob::find_and_execute_next_possible_cron();
     }
 ?>
