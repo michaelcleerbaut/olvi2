@@ -38,6 +38,7 @@
 
         public function execute(){
 
+            /*
             if($this->system == "WINDOWS"){            
                 $php_location = $this->php_windows_location;
                 $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
@@ -48,6 +49,14 @@
                         
             $result = shell_exec($command);
             echo $result;
+            */
+            
+            $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
+            
+            $cron_code = str_replace(array("<?php","?>"),"",file_get_contents($cron_file));
+            
+            $prefix = "NONE";                        
+            eval($cron_code);
 
 
         } 

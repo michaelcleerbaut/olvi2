@@ -1,12 +1,12 @@
 <?php
  
+$prefix = $prefix != "" ? $prefix : "../";
+$prefix = $prefix == "NONE" ? "" : $prefix;
  
-require_once('/app/inc/config.inc.php');
-require_once('/app/inc/mysql.functions.inc.php');
-require_once('/lib/MyPDO.php');
-require_once('/app/lib/Backup_DB.php');
-
-$prefix = $_GET['nocron'] == 1 ? "../" : ""; 
+require_once($prefix.'app/inc/config.inc.php');
+require_once($prefix.'app/inc/mysql.functions.inc.php');
+require_once($prefix.'lib/MyPDO.php');
+require_once($prefix.'app/lib/Backup_DB.php');
 
 $db = new Backup_DB(array( 
     'driver' => DB_DRIVER, 
