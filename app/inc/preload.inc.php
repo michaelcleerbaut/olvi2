@@ -11,7 +11,8 @@
     $nologin_needed = array("/index.php","/oops.php","/scripts/test.php","/cronjobs.php");
     
     if(!$_SESSION['gebruiker']){
-        if(!in_array($_SERVER['PHP_SELF'],$nologin_needed)){            
+        preg_match("/^\/crons\//",$_SERVER['PHP_SELF'],$dirs);
+        if(!in_array($_SERVER['PHP_SELF'],$nologin_needed) && !count($dirs) == 0){            
             header("location: /oops.php");
         }
     }

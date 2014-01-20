@@ -57,7 +57,7 @@
                 $command = "/usr/local/bin/php " . $this->root_path.$this->crons_location.$this->name.".php";
             }
                         
-            $result = shell_exec($comment);
+            $result = shell_exec($command);
             echo $result;
 
 
