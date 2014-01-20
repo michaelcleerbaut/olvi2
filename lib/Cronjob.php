@@ -39,6 +39,7 @@
         public function execute(){
 
             /*
+            // IN CASE SHELL_EXEC IS ENABLED
             if($this->system == "WINDOWS"){            
                 $php_location = $this->php_windows_location;
                 $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
@@ -50,8 +51,9 @@
             $result = shell_exec($command);
             echo $result;
             */
-            
-            $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
+
+            // IN CASE SHELL EXEC IS DISABLED            
+            $cron_file = $this->crons_location.$this->name.".php";
             
             $cron_code = str_replace(array("<?php","?>"),"",file_get_contents($cron_file));
             
