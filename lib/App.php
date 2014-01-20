@@ -40,14 +40,16 @@
                 $right = explode("@@@",$data['right']);                                
                 $menu .= $_SESSION['gebruiker']['rights'][$right[0]][$right[1]] == "YES" ? "<li><a href=\"frm/$page\">{$data['title']}</a></li>" : "";               
             }
-                        
-            
-            $html = "            
-                <div class=\"subtitel\">Wat wil u doen?</div>
-                <ul class=\"opties\">
-                    $menu
-                </ul>                
-            ";
+             
+            $html = "";           
+            if($menu != ""){        
+                $html = "            
+                    <div class=\"subtitel\">Wat wil u doen?</div>
+                    <ul class=\"opties\">
+                        $menu
+                    </ul>                
+                ";
+            }
             
             return $html;
 
@@ -113,12 +115,16 @@
             }
             
             
-            $html = "
-                <div class=\"subtitel\" style=\"margin-top: 30px;\">Of waar wil u naartoe?</div>
-                <ul class=\"opties\">
-                    $menu
-                </ul>                
-            ";
+            $html = "";
+
+            if($menu != ""){
+                $html = "
+                    <div class=\"subtitel\" style=\"margin-top: 30px;\">Of waar wil u naartoe?</div>
+                    <ul class=\"opties\">
+                        $menu
+                    </ul>                
+                ";
+            }
             
             return $html;
 
@@ -140,12 +146,16 @@
             }
             
             
-            $html = "
-                <div class=\"subtitel\" style=\"margin-top: 30px;\">Systeem</div>
-                <ul class=\"opties\">
-                    $menu
-                </ul>                
-            ";
+            $html = "";
+            
+            if($menu != ""){
+                $html = "
+                    <div class=\"subtitel\" style=\"margin-top: 30px;\">Systeem</div>
+                    <ul class=\"opties\">
+                        $menu
+                    </ul>                
+                ";
+            }
             
             return $html;
 
