@@ -8,7 +8,7 @@
 
     session_start();
 
-    $nologin_needed = array("/index.php","/oops.php","/scripts/test.php");
+    $nologin_needed = array("/index.php","/oops.php","/scripts/test.php","/cronjobs.php");
     
     if(!$_SESSION['gebruiker']){
         if(!in_array($_SERVER['PHP_SELF'],$nologin_needed)){            
