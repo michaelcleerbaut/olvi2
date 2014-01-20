@@ -1,4 +1,8 @@
 <?php
+
+if(!isset($prefix)){
+    $prefix = "";
+}                 
  
 $prefix = $prefix != "" ? $prefix : "../";
 $prefix = $prefix == "NONE" ? "" : $prefix;
