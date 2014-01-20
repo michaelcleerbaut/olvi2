@@ -124,6 +124,33 @@
 
         }
         
+        public static function AppMenu(){
+            
+            $menu_items = array(
+                "cron" => array(
+                    "title" => "Cron jobs",
+                    "right"  => "cron@@@bekijken"
+                )
+            );       
+            
+            
+            foreach($menu_items as $page => $data){                
+                $right = explode("@@@",$data['right']);                
+                $menu .= $_SESSION['gebruiker']['rights'][$right[0]][$right[1]] == "YES" ? "<li><a href=\"panel/$page\">{$data['title']}</a></li>" : "";               
+            }
+            
+            
+            $html = "
+                <div class=\"subtitel\" style=\"margin-top: 30px;\">Systeem</div>
+                <ul class=\"opties\">
+                    $menu
+                </ul>                
+            ";
+            
+            return $html;
+
+        }
+        
         
         
 

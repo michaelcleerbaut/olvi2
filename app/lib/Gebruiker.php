@@ -140,6 +140,16 @@
                         "maken" => 0,
                         "delete" => 0
                     )
+                ),
+                "cron" => array(
+                    "name" => "Cron jobs",
+                    "default" => 0,
+                    "options" => array(
+                        "bekijken" => 0,
+                        "bewerken" => 0,
+                        "delete" => 0,
+                        "uitvoeren" => 0
+                    )
                 )
             );
 

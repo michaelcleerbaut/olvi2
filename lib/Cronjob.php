@@ -1,22 +1,25 @@
 <?php
     Class Cronjob{
 
-        var $name = "";
-
         var $system = SYSTEM;
         var $php_windows_location = PHP_WINDOWS_LOCATION;
         var $root_path = ROOT_PATH;
-        var $crons_location = CRONS_LOCATION;        
+        var $crons_location = CRONS_LOCATION;
+        
+        var $minute = "*";
+        var $hour = "*";
+        var $day_of_month = "*";
+        var $month = "*";
+        var $day_of_week = "*";
 
-        public function __construct($cronname = ""){
+        // CORE FUNCTIONS FOR CRON
+        public function __construct($CID = ""){
 
-            if($cronname != ""){
-
-                $this->name = $cronname;
+            if($CID != ""){
+                $this->id = $CID;
                 $this->load_cron();
-
             }
-            
+
 
         }
 
@@ -24,8 +27,8 @@
 
             $dbh = MyPDO::getConnection();
 
-            $sth = $dbh->prepare("SELECT * FROM cronjobs WHERE name = :NAME");
-            $sth->bindValue(':NAME',$this->name,PDO::PARAM_STR);
+            $sth = $dbh->prepare("SELECT * FROM cronjobs WHERE id = :CID");
+            $sth->bindValue(':CID',$this->id,PDO::PARAM_STR);
             $sth->execute();
 
             $c = $sth->fetch(PDO::FETCH_ASSOC);
@@ -42,13 +45,13 @@
             /*
             // IN CASE SHELL_EXEC IS ENABLED
             if($this->system == "WINDOWS"){            
-                $php_location = $this->php_windows_location;
-                $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
-                $command = "$php_location -f \"$cron_file\"";             
+            $php_location = $this->php_windows_location;
+            $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
+            $command = "$php_location -f \"$cron_file\"";             
             } else if($this->system = "LINUX"){                
-                $command = "/usr/local/bin/php " . $this->root_path.$this->crons_location.$this->name.".php";
+            $command = "/usr/local/bin/php " . $this->root_path.$this->crons_location.$this->name.".php";
             }
-                        
+
             $result = shell_exec($command);
             echo $result;
             */
@@ -57,7 +60,7 @@
             $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
             $cron_code = str_replace(array("<?php","?>"),"",file_get_contents($cron_file));
             $cron_code = str_replace("ROOT_PATH.'","'".$this->root_path,$cron_code);
-                        
+
             eval($cron_code);
 
 
@@ -110,7 +113,78 @@
 
 
         }
+
+
+        // FUNCTION TO VIEW/EDIT/ADD
+        public static function get_jobs(){
+
+            $dbh = MyPDO::getConnection();
+
+            $sth = $dbh->query("SELECT * FROM cronjobs");
+
+            $jobs = array();
+            if($sth->rowCount() > 0){
+                while($job = $sth->fetch(PDO::FETCH_ASSOC)){
+                    $jobs[$job['id']] = $job;
+                }                    
+            } 
+
+            return $jobs;            
+
+        }
+
+
+        public function update(){
+
+
+            $dbh = MyPDO::getConnection();
+
+            
+            $sth = $dbh->prepare("UPDATE cronjobs SET name = :NAME, description = :DESCRIPTION, command = :COMMAND, minute = :MINUTE, hour = :HOUR, day_of_month = :DAY_OF_MONTH, month = :MONTH, day_of_week = :DAY_OF_WEEK WHERE id = :CID");            
+            $sth->bindValue(":NAME",$this->name);        
+            $sth->bindValue(":DESCRIPTION",$this->description);        
+            $sth->bindValue(":COMMAND",$this->command);        
+            $sth->bindValue(":MINUTE",$this->minute);        
+            $sth->bindValue(":HOUR",$this->hour);        
+            $sth->bindValue(":DAY_OF_MONTH",$this->day_of_month);        
+            $sth->bindValue(":MONTH",$this->month);        
+            $sth->bindValue(":DAY_OF_WEEK",$this->day_of_week);
+            $sth->bindValue(":CID",$this->id);
+            $sth->execute();
+                        
+
+        }
         
+        public function insert(){
+            
+            $dbh = MyPDO::getConnection();
+
+            $sth = $dbh->prepare("INSERT INTO cronjobs (`name`,`description`,`command`,`minute`,`hour`,`day_of_month`,`month`,`day_of_week`) VALUES (:NAME, :DESCRIPTION, :COMMAND, :MINUTE, :HOUR, :DAY_OF_MONTH, :MONTH, :DAY_OF_WEEK)");            
+            $sth->bindValue(":NAME",$this->name);        
+            $sth->bindValue(":DESCRIPTION",$this->description);        
+            $sth->bindValue(":COMMAND",$this->command);        
+            $sth->bindValue(":MINUTE",$this->minute);        
+            $sth->bindValue(":HOUR",$this->hour);        
+            $sth->bindValue(":DAY_OF_MONTH",$this->day_of_month);        
+            $sth->bindValue(":MONTH",$this->month);        
+            $sth->bindValue(":DAY_OF_WEEK",$this->day_of_week);            
+            $sth->execute();
+                                    
+            
+                    
+        }
+        
+        public function delete(){
+            
+            $dbh = MyPDO::getConnection();
+            
+            $sth = $dbh->prepare("DELETE FROM cronjobs WHERE id = :CID");
+            $sth->bindValue(":CID",$this->id);
+            $sth->execute();
+            
+        }
+
+
 
     }
 ?>
