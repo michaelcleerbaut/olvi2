@@ -1,8 +1,9 @@
 <?php
-    if($_GET['c'] != ""){
-        $cron = new Cronjob($_GET['c']);
-        $cron->execute();
-    } else {
-        Cronjob::find_and_execute_next_possible_cron();
-    }
+    
+    require_once('app/inc/preload.inc.php');
+    
+    $cron = new Cronjob();
+    $cron->root_path = ROOT_PATH;
+    $cron->find_and_execute_next_possible_cron();
+    
 ?>

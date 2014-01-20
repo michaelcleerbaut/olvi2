@@ -1,5 +1,6 @@
 .htaccess
 config.inc.php
+crons/root_path.inc.php
 log/*
 !log/.htaccess.sample.txt
 data/pdfs/*

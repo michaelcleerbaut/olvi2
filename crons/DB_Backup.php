@@ -1,16 +1,7 @@
 <?php
 
-if(!isset($prefix)){
-    $prefix = "";
-}                 
- 
-$prefix = $prefix != "" ? $prefix : "../";
-$prefix = $prefix == "NONE" ? "" : $prefix;
- 
-require_once($prefix.'app/inc/config.inc.php');
-require_once($prefix.'app/inc/mysql.functions.inc.php');
-require_once($prefix.'lib/MyPDO.php');
-require_once($prefix.'app/lib/Backup_DB.php');
+require_once(ROOT_PATH.'app/inc/config.inc.php');
+
 
 $db = new Backup_DB(array( 
     'driver' => DB_DRIVER, 
@@ -23,7 +14,7 @@ $db = new Backup_DB(array(
 $backup = $db->backup();
  
 if(!$backup['error']){     
-    file_put_contents($prefix.BACKUP_FOLDER.date("Ymd_Hi").".sql",$backup['msg']);
+    file_put_contents(ROOT_PATH.BACKUP_FOLDER.date("Ymd_Hi").".sql",$backup['msg']);
 } else { 
     mail("michael@mcreations.pro","Olvi: Error backup",$backup['error']); 
 } 

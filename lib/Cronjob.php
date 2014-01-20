@@ -6,20 +6,21 @@
         var $system = SYSTEM;
         var $php_windows_location = PHP_WINDOWS_LOCATION;
         var $root_path = ROOT_PATH;
-        var $crons_location = CRONS_LOCATION; 
+        var $crons_location = CRONS_LOCATION;        
 
         public function __construct($cronname = ""){
 
             if($cronname != ""){
 
                 $this->name = $cronname;
-                $this->get_cron_values();
+                $this->load_cron();
 
             }
+            
 
         }
 
-        public function get_cron_values(){
+        public function load_cron(){
 
             $dbh = MyPDO::getConnection();
 
@@ -53,18 +54,16 @@
             */
 
             // IN CASE SHELL EXEC IS DISABLED            
-            $cron_file = $this->crons_location.$this->name.".php";
-            
+            $cron_file = $this->root_path.$this->crons_location.$this->name.".php";
             $cron_code = str_replace(array("<?php","?>"),"",file_get_contents($cron_file));
-            
-            $prefix = "NONE";                        
+            $cron_code = str_replace("ROOT_PATH.'","'".$this->root_path,$cron_code);
+                        
             eval($cron_code);
 
 
         } 
 
-        static public function find_and_execute_next_possible_cron(){
-
+        public function find_and_execute_next_possible_cron(){
 
             $cur_minute = date("i");
             $cur_hour = date("H");      
@@ -101,6 +100,7 @@
                 while($cron_row = $sth->fetch(PDO::FETCH_ASSOC)){
 
                     $cron = new Cronjob($cron_row['name']);
+                    $cron->root_path = $this->root_path;                    
                     $cron->execute();
 
                 }

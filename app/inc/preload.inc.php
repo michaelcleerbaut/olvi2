@@ -4,23 +4,28 @@
     require_once('global.functions.inc.php');    
     require_once('mysql.functions.inc.php');    
     require_once('login.functions.inc.php');
-        
+                
 
     session_start();
 
     $nologin_needed = array("/index.php","/oops.php","/scripts/test.php","/cronjobs.php");
     
+                                          
     if(!$_SESSION['gebruiker']){
         preg_match("/^\/crons\//",$_SERVER['PHP_SELF'],$dirs);
-        if(!in_array($_SERVER['PHP_SELF'],$nologin_needed) && !count($dirs) == 0){            
-            header("location: /oops.php");
+        if(count($dirs) == 0){    
+            if(!in_array($_SERVER['PHP_SELF'],$nologin_needed)){        
+                header("location: /oops.php");
+            }
         }
     }
     
+    
+    
     function __autoload($ClassName){
-        if((@include "lib/$ClassName.php") === false){
-            if((@include "app/lib/$ClassName.php") === false){
-                echo "Class $ClassName not found!";                
+        if((@include ROOT_PATH."lib/$ClassName.php") === false){
+            if((@include ROOT_PATH."app/lib/$ClassName.php") === false){
+                echo "Oops, Class $ClassName not found!";                
                 exit;
             }
         }
