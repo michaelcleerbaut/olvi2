@@ -14,9 +14,9 @@
                 <td class=\"center\">{$job['day_of_month']}</td>
                 <td class=\"center\">{$job['month']}</td>
                 <td class=\"center\">{$job['day_of_week']}</td>";
-                $job_rows .= $_SESSION['gebruiker']['rights']['cron']['uitvoeren'] == "YES" ? "<td class=\"center\"><a href=\"/panel/cron/uitvoeren/{$job['id']}\">Uitvoeren</a></td>" : "";
+                $job_rows .= $_SESSION['gebruiker']['rights']['cron']['uitvoeren'] == "YES" ? "<td class=\"center\"><a href=\"/panel/cron/uitvoeren/{$job['id']}\" class=\"confirm\">Uitvoeren</a></td>" : "";
                 $job_rows .= $_SESSION['gebruiker']['rights']['cron']['bewerken'] == "YES" ? "<td class=\"center\"><a href=\"/panel/cron/edit/{$job['id']}\">Edit</a></td>" : "";
-                $job_rows .= $_SESSION['gebruiker']['rights']['cron']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/cron/delete/{$job['id']}\">Delete</a></td>" : "";
+                $job_rows .= $_SESSION['gebruiker']['rights']['cron']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/cron/delete/{$job['id']}\" class=\"confirm\">Delete</a></td>" : "";
             $job_rows .= "</tr>
             ";
         }
