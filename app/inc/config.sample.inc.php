@@ -23,3 +23,10 @@
     // directories
     define('LOG_FOLDER','');
     define('BACKUP_FOLDER','');    
+
+    /// ENVIRONMENT
+    define("SYSTEM",""); // WINDOWS - LINUX    
+    define("PHP_WINDOWS_LOCATION","");
+    define("ROOT_PATH","");
+    define("CRONS_LOCATION","");
+    
