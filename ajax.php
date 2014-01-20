@@ -1,6 +1,6 @@
 <?php
     include('app/inc/ajax.functions.inc.php');
-    include('app/inc/queries.functions.inc.php');
+        
     switch($_GET['action']){
         case "get_cities":
             echo get_cities($_GET['query']);
