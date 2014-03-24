@@ -3656,7 +3656,7 @@ HTML;
                     
             $date = date("Y-m-d H:i");
             
-            $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`definschrijving`,`def_ingeschreven_door`,`datum`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}')";
+            $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`definschrijving`,`def_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
             $return = query($query);
             
             $_SESSION['volgnummer_a'] = $volgnummer_a;
