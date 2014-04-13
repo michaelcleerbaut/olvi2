@@ -15,9 +15,10 @@ HTML;
         }
 
         static function show_afspraken(){
-
+            require_once('/app/inc/settings_afspraken.inc.php');
+            
             $query = "SELECT a.*, l.naam, l.voornaam FROM afspraken a
-            INNER JOIN leerlingen l ON a.id_leerling = l.id_leerling ORDER BY dag, uur";
+            INNER JOIN leerlingen l ON a.id_leerling = l.id_leerling WHERE a.schooljaar = '{$_SESSION['schooljaar']}' ORDER BY dag, uur";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){
                 if($row['dag'] != "broerofzus" && $row['dag'] != "tel"){
@@ -29,52 +30,42 @@ HTML;
                 }
             }              
 
-            $blokken = array(
-                "1" => array("start" => "09:00", "eind" => "12:00"),
-                "2" => array("start" => "13:00", "eind" => "20:00"),        
-            );
-
-
+            foreach($afspr_settings[$_SESSION['schooljaar']]['full'] as $day => $date){
+                $th_days .= "<th class=\"top\">$date</th>";    
+            }
+            
             $html = "<div class=\"subtitel\">Afspraken overzicht</div>";
 
             $html .= "<table class=\"opties\">";
-            $html .= "<tr><th class=\"top\">Uur</th><th class=\"top\">3 Mei</th><th class=\"top\">4 Mei</th><th class=\"top\">5 Mei</th></tr>";
-            foreach($blokken as $blok => $arr){
+            $html .= "<tr><th class=\"top\">Uur</th>$th_days</tr>";
+            foreach($afspr_settings[$_SESSION['schooljaar']]['blocks'] as $blok => $arr){
                 $start = strtotime($arr['start']);
                 $eind = strtotime($arr['eind']);                
                 for($i = $start;$i < $eind; $i += 30 * 60){            
-                    $uur = date("H:i",$i);
-
-                    $dis3 = strtotime($uur) < strtotime("17:00") ? " style=\"background-color: #CCC;\" " : " style=\"background-color: #f2f2f2;\" ";
-                    $dis4 = strtotime($uur) < strtotime("13:00") || strtotime($uur) > strtotime("17:30") ? "style=\"background-color: #CCC;\" " : " style=\"background-color: #f2f2f2;\" ";
-                    $dis5 = strtotime($uur) > strtotime("11:30") ? " style=\"background-color: #CCC;\" " : " style=\"background-color: #f2f2f2;\" ";
-
-                    $html .= "<tr>
-                    <th class=\"top\">{$uur}</th>
-                    <td $dis3 valign=\"top\">";
-                    if(is_array($afspraken['3'][$uur]) && count($afspraken['3'][$uur]) > 0){
-                        foreach($afspraken['3'][$uur] as $id => $leerling){                                    
-                            $delete = $_SESSION['gebruiker']['rights']['afspraken']['delete'] == "YES" ? "<a href=\"/panel/inschrijvingsafspraken/delete/{$id}\" class=\"regular confirm\">[annuleer]</a>" : "";
-                            $html .= $leerling . " $delete<br>";                                    
-                        }
+                    
+                    $uur = date("H:i",$i);                                                                            
+                    
+                    $html .= "
+                    <tr>
+                        <th class=\"top\">{$uur}</th>";
+                    
+                    foreach($afspr_settings[$_SESSION['schooljaar']]['days'] as $day => $hours){
+                        
+                        $dis = strtotime($uur) >= strtotime($hours['start']) && strtotime($uur) <= strtotime($hours['eind']) ? " style=\"background-color: #f2f2f2;\" " : " style=\"background-color: #CCC;\" ";
+                        
+                        $html .= "
+                        <td $dis valign=\"top\">";
+                            if(is_array($afspraken[$day][$uur]) && count($afspraken[$day][$uur]) > 0){
+                                foreach($afspraken[$day][$uur] as $id => $leerling){                                    
+                                    $delete = $_SESSION['gebruiker']['rights']['afspraken']['delete'] == "YES" ? "<a href=\"/panel/inschrijvingsafspraken/delete/{$id}\" class=\"regular confirm\">[annuleer]</a>" : "";
+                                    $html .= $leerling . " $delete<br>";                                    
+                                }
+                            }
+                            $html .= "
+                        </td>";                    
                     }
-                    $html .= "  </td>
-                    <td $dis4 valign=\"top\">";
-                    if(is_array($afspraken['4'][$uur]) && count($afspraken['4'][$uur]) > 0){
-                        foreach($afspraken['4'][$uur] as $id => $leerling){                                    
-                            $delete = $_SESSION['gebruiker']['rights']['afspraken']['delete'] == "YES" ? "<a href=\"/panel/inschrijvingsafspraken/delete/{$id}\" class=\"regular confirm\">[annuleer]</a>" : "";
-                            $html .= $leerling . " $delete<br>";                                    
-                        }
-                    }
-                    $html .= "  </td>
-                    <td $dis5 valign=\"top\">";
-                    if(is_array($afspraken['5'][$uur]) && count($afspraken['5'][$uur]) > 0){
-                        foreach($afspraken['5'][$uur] as $id => $leerling){                                    
-                            $deletebtn = $_SESSION['gebruiker']['rights']['afspraken']['delete'] == "YES" ? "<a href=\"/panel/inschrijvingsafspraken/delete/{$id}\" class=\"regular confirm\">[annuleer]</a>" : "";
-                            $html .= $leerling  . " $deletebtn<br>";                                    
-                        }
-                    }
-                    $html .= "  </td>
+                    
+                    $html .="
                     </tr>";
                 }
             }
@@ -83,13 +74,15 @@ HTML;
             $html .= "</table>";
 
 
-            return $html;        
+            return $html;                                                                        
 
         }
 
 
         static function add_afspraak(){      
-
+            require_once('/app/inc/settings_afspraken.inc.php');
+            
+            
             $html = <<<HTML
       
         <div class="subtitel">Voeg een afspraak toe</div>
@@ -104,28 +97,22 @@ HTML;
                 
 HTML;
 
-            $max = array(
-                "3" => array("start" => "17:00", "eind" => "20:00"),
-                "4" => array("start" => "13:00", "eind" => "18:00"),
-                "5" => array("start" => "9:00", "eind" => "12:00")
-            );
-
-            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel'";
+            $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){            
                 $bezet[$row['dag']][$row['uur']] += 1;                
             }
 
             $tbl = "<div class=\"afspraak-container\">";            
-            foreach($max as $dag => $arr){            
+            foreach($afspr_settings[$_SESSION['schooljaar']]['days'] as $dag => $arr){            
                 $tbl .= "<div class=\"dag\">{$dag} Mei</div>";                
                 $start = strtotime($arr['start']);
                 $eind = strtotime($arr['eind']);                
                 for($i = $start;$i < $eind; $i += 30 * 60){            
                     $uur = date("H:i",$i);
                     $bezette = $bezet[$dag][$uur];                    
-                    $disabled = $bezette >= 10 ? "bezet" : "";                    
-                    $clickable = $bezette >= 10 ? "NO" : "YES";
+                    $disabled = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "bezet" : "";                    
+                    $clickable = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "NO" : "YES";
                     $select  = $_SESSION['afspraak_dag'] == $dag && $_SESSION['afspraak_uur'] == $uur ? "select" : "";
                     $tbl .= "<div class=\"uur $disabled $select\" clickable=\"$clickable\" dag=\"$dag\">" . $uur . "</div>";                    
                 }
@@ -176,6 +163,8 @@ HTML;
 
 
         static function insert_afspraak($data){
+            
+            require_once('/app/inc/settings_afspraken.inc.php');
 
             if($data['id_leerling'] != "" && $data['uur'] != "" && $data['dag'] != ""){
 
@@ -184,13 +173,13 @@ HTML;
                 }
 
                 $query = "INSERT INTO afspraken
-                (`id_leerling`,`dag`,`uur`)
+                (`id_leerling`,`dag`,`uur`,`schooljaar`)
                 VALUES
-                ('{$data['id_leerling']}','{$data['dag']}','{$data['uur']}')
+                ('{$data['id_leerling']}','{$data['dag']}','{$data['uur']}','{$_SESSION['schooljaar']}')
                 ";
                 query($query);
 
-                $dagen = array("3" => "Vrijdag 3 mei", "4" => "Zaterdag 4 mei", "Zondag 5 mei");
+                $dagen = $afspr_settings[$_SESSION['schooljaar']]['full'];
 
                 $mailsent = "";
 
@@ -241,29 +230,6 @@ MSG;
 
         }
 
-        static function update_afspraak($data){
-
-
-            $data['naam'] = ucfirst(strtolower($data['naam']));
-
-            foreach($data as $key => $value){
-                $data[$key] = mysql_real_escape_string($value);
-            }
-
-            $straat = $data['straat'] . " " . $data['nr'];
-
-            $query = "UPDATE scholen SET
-            `naam` = '{$data['naam']}',
-            `straat` = '{$straat}',
-            `postcode` = '{$data['postcode']}',
-            `gemeente` = '{$data['gemeente']}'
-            WHERE id = '{$data['school_id']}'                
-            ";
-            query($query);
-
-            return "<div class=\"succes\">School is succesvol aangepast</div>";
-
-        }
 
         static function delete_afspraak($id_leerling){
 

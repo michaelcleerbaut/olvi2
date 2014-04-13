@@ -608,6 +608,9 @@ HTML;
     }
     
     function controle_afspraak_maken($ooka){
+
+        require_once('/app/inc/settings_afspraken.inc.php');
+        
                
         if($_SESSION['volgnummer_b'] > 24 && $ooka == "YES"){
 
@@ -624,11 +627,6 @@ HTML;
             $return = str_replace("[TELEFOON]",$tel,$return);
             $return = str_replace("[EMAIL]",$email,$return);
             
-            $max = array(
-                "3" => array("start" => "17:00", "eind" => "20:00"),
-                "4" => array("start" => "13:00", "eind" => "18:00"),
-                "5" => array("start" => "9:00", "eind" => "12:00")
-            );
                 
             $query = "SELECT * FROM afspraken WHERE dag NOT LIKE 'tel' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $result = query($query);
@@ -637,15 +635,15 @@ HTML;
             }
                     
             $tbl = "<div class=\"afspraak-container\">";            
-            foreach($max as $dag => $arr){            
+            foreach($afspr_settings[$_SESSION['schooljaar']]['days'] as $dag => $arr){            
                 $tbl .= "<div class=\"dag\">{$dag} Mei</div>";                
                 $start = strtotime($arr['start']);
                 $eind = strtotime($arr['eind']);                
                 for($i = $start;$i < $eind; $i += 30 * 60){            
                     $uur = date("H:i",$i);
                     $bezette = $bezet[$dag][$uur];                    
-                    $disabled = $bezette >= 10 ? "bezet" : "";                    
-                    $clickable = $bezette >= 10 ? "NO" : "YES";
+                    $disabled = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "bezet" : "";                    
+                    $clickable = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "NO" : "YES";
                     $select  = $_SESSION['afspraak_dag'] == $dag && $_SESSION['afspraak_uur'] == $uur ? "select" : "";
                     $tbl .= "<div class=\"uur $disabled $select\" clickable=\"$clickable\" dag=\"$dag\">" . $uur . "</div>";                    
                 }
@@ -679,11 +677,7 @@ HTML;
             
             
         } else {
-            $max = array(
-                "3" => array("start" => "17:00", "eind" => "20:00"),
-                "4" => array("start" => "13:00", "eind" => "18:00"),
-                "5" => array("start" => "9:00", "eind" => "12:00")
-            );
+
                 
             $return = file_get_contents("app/views/forms/voorinschrijving/afspraak_maken.tpl");
             
@@ -693,17 +687,16 @@ HTML;
                 $bezet[$row['dag']][$row['uur']] += 1;                
             }
             
-            
             $tbl = "<div class=\"afspraak-container\">";            
-            foreach($max as $dag => $arr){            
+            foreach($afspr_settings[$_SESSION['schooljaar']]['days'] as $dag => $arr){            
                 $tbl .= "<div class=\"dag\">{$dag} Mei</div>";                
                 $start = strtotime($arr['start']);
                 $eind = strtotime($arr['eind']);                
                 for($i = $start;$i < $eind; $i += 30 * 60){            
                     $uur = date("H:i",$i);
                     $bezette = $bezet[$dag][$uur];                    
-                    $disabled = $bezette >= 10 ? "bezet" : "";                    
-                    $clickable = $bezette >= 10 ? "NO" : "YES";                    
+                    $disabled = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "bezet" : "";                    
+                    $clickable = $bezette >= $afspr_settings[$_SESSION['schooljaar']]['max_inschrijvingen_per_halfuur'] ? "NO" : "YES";                    
                     $select  = $_SESSION['afspraak_dag'] == $dag && $_SESSION['afspraak_uur'] == $uur ? "select" : "";
                     $tbl .= "<div class=\"uur $disabled $select\" clickable=\"$clickable\" dag=\"$dag\">" . $uur . "</div>";                    
                 }

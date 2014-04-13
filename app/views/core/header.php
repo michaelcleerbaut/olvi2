@@ -64,7 +64,12 @@ if(!isset($isForm)){
 
 <div class="header">    
     <a href="/" style="display:block-inline;width:100%;height:100%;"><div class="logo"></div></a>
-    <div class="titel"><?=$titel;?></div>
+    <div class="titel">
+        <?=$titel;?>
+        <?php if(isset($isForm)){
+            echo "<br><span style=\"font-size: 16px;\">".$_SESSION['schooljaar'] . "</span>";
+        } ?>    
+    </div>
 </div>
 
 
