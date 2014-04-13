@@ -609,7 +609,7 @@ HTML;
     
     function controle_afspraak_maken($ooka){
 
-        require_once('/app/inc/settings_afspraken.inc.php');
+        require_once('settings_afspraken.inc.php');
         
                
         if($_SESSION['volgnummer_b'] > 24 && $ooka == "YES"){

@@ -15,7 +15,7 @@ HTML;
         }
 
         static function show_afspraken(){
-            require_once('/app/inc/settings_afspraken.inc.php');
+            require_once(ROOT_PATH.'/app/inc/settings_afspraken.inc.php');
             
             $query = "SELECT a.*, l.naam, l.voornaam FROM afspraken a
             INNER JOIN leerlingen l ON a.id_leerling = l.id_leerling WHERE a.schooljaar = '{$_SESSION['schooljaar']}' ORDER BY dag, uur";
@@ -80,7 +80,7 @@ HTML;
 
 
         static function add_afspraak(){      
-            require_once('/app/inc/settings_afspraken.inc.php');
+            require_once(ROOT_PATH.'/app/inc/settings_afspraken.inc.php');
             
             
             $html = <<<HTML
@@ -164,7 +164,7 @@ HTML;
 
         static function insert_afspraak($data){
             
-            require_once('/app/inc/settings_afspraken.inc.php');
+            require_once(ROOT_PATH.'/app/inc/settings_afspraken.inc.php');
 
             if($data['id_leerling'] != "" && $data['uur'] != "" && $data['dag'] != ""){
 
