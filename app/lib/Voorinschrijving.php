@@ -380,6 +380,7 @@ HTML;
                         asort($keuzevakken);
 
                         foreach($keuzevakken as $vak => $prio){
+                            if($prio == "aalgemeen" || $prio == "aklassiek" || $prio == "nb") continue;
                             $studiekeuzevakken .= $prio . ": " . $vak . "<br>";
                         }
                     }

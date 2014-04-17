@@ -153,7 +153,8 @@ HTML;
 
                 $keuzevakkenprint = "";  
                 if(is_array($keuzevakken)){
-                    foreach($keuzevakken as $afkorting => $order){
+                    foreach($keuzevakken as $afkorting => $order){                        
+                        if($order == "aalgemeen" || $order == "aklassiek" || $order == "nb") continue;
                         $keuzevakkenprint .= $order . ": " . $vakken[$afkorting] . "<br>";
                     }        
                 }

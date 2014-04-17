@@ -411,7 +411,6 @@
         }
         */
         $huidigschooljaar = $_SESSION['schooljaar'];           
-        
     
         $query = "SELECT * FROM studiekeuzes ORDER BY studiekeuze";
         $result = query($query);
@@ -445,7 +444,12 @@
             $studiekeuzeopties = "";
             foreach($keuzes as $value => $omschr){
                 $selected = $omschr == $studiekeuze['A'] ? " selected=\"selected\"" : "";
-                $studiekeuzeopties .= "<option value=\"$value\" class=\"studie_strooma\" $selected>$omschr</option>";
+                switch($value){
+                    case "aklassiek": $omschr_extra = "(met latijn)"; break;       
+                    case "aalgemeen": $omschr_extra = "(zonder latijn)"; break;
+                    default: $omschr_extra = "";      
+                } 
+                $studiekeuzeopties .= "<option value=\"$value\" class=\"studie_strooma\" $selected>$omschr $omschr_extra</option>";
             }        
         } else if($_SESSION['stroom'] == "B" && array_key_exists("B",$studiekeuze)){
                 $eenbselected = $studiekeuze['B'] == "1B" ? " selected=\"selected\"" : "";
@@ -458,8 +462,8 @@ tt;
             $extrastudiekeuzesdisable = " disabled";
             if($_SESSION['stroom'] == "A"){
                 $studiekeuzeopties = <<<tt
-                    <option value="aklassiek" class="studie_strooma">A-Stroom: Klassieke vorming</option>
-                    <option value="aalgemeen" class="studie_strooma">A-Stroom: Algemene vorming</option>                    
+                    <option value="aklassiek" class="studie_strooma">A-Stroom: Klassieke vorming (met latijn)</option>
+                    <option value="aalgemeen" class="studie_strooma">A-Stroom: Algemene vorming (zonder latijn)</option>                    
                     <option value="nb">Nog niet bepaald</option>                
 tt;
             } else {
