@@ -317,8 +317,14 @@
         if($data['studiekeuze'] != ""){
             $studiekeuze_arr['A'] = "A-Stroom: " . $data['studiekeuze'];
             $studiekeuze_arr = serialize($studiekeuze_arr);
-            $query = "INSERT INTO loopbaan SET leerling_id = '{$_SESSION['id_leerling']}', studiekeuze = '{$studiekeuze_arr}'";
-            query($query);
+            $query = "SELECT studiekeuze FROM loopbaan WHERE leerling_id = '{$_SESSION['id_leerling']}'";
+            $result = query($query);
+            if(mysql_num_rows($result) > 0){
+                $query2 = "UPDATE loopbaan SET studiekeuze = '{$studiekeuze_arr}' WHERE leerling_id = '{$_SESSION['id_leerling']}'";
+            } else {
+                $query2 = "INSERT INTO loopbaan (`leerling_id`,`studiekeuze`) VALUES ('{$_SESSION['id_leerling']}','{$studiekeuze_arr}')";                
+            }
+            query($query2);
         }
         
         
