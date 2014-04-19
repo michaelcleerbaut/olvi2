@@ -76,7 +76,7 @@
         $afspraak = "<span style=\"font-size:16px;font-weight:bold;\">U heeft reeds een afspraak gemaakt (met een broer of zus)</span>";   
     } else {
         $uur = str_replace(":",".",$leerling['uur']);
-        $afspraak = "<p>U heeft een afspraak op</p><p><span style=\"font-size:16px;font-weight:bold;\">{$leerling['dag']} mei 2013 om $uur u</p>";   
+        $afspraak = "<p>U heeft een afspraak op</p><p><span style=\"font-size:16px;font-weight:bold;\">{$leerling['dag']} mei 2013 om $uur u.</p>";   
     }
 
 
