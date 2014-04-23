@@ -22,8 +22,8 @@ $afspr_settings = array(
             "1" => array("start" => "13:00", "eind" => "21:00")
         ),
         "days" => array(
-            "9" => array("start" => "17:00", "eind" => "20:30"),
-            "10" => array("start" => "13:00", "eind" => "16:30")
+            "9" => array("start" => "17:00", "eind" => "21:00"),
+            "10" => array("start" => "13:00", "eind" => "17:00")            
         ),
         "max_inschrijvingen_per_halfuur" => 7,
         "full" => array(

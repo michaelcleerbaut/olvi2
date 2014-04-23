@@ -51,7 +51,7 @@ HTML;
                     
                     foreach($afspr_settings[$_SESSION['schooljaar']]['days'] as $day => $hours){
                         
-                        $dis = strtotime($uur) >= strtotime($hours['start']) && strtotime($uur) <= strtotime($hours['eind']) ? " style=\"background-color: #f2f2f2;\" " : " style=\"background-color: #CCC;\" ";
+                        $dis = strtotime($uur) >= strtotime($hours['start']) && strtotime($uur) < strtotime($hours['eind']) ? " style=\"background-color: #f2f2f2;\" " : " style=\"background-color: #CCC;\" ";
                         
                         $html .= "
                         <td $dis valign=\"top\">";
