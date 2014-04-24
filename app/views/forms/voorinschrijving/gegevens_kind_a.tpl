@@ -61,8 +61,8 @@
     <tr>
         <th>Studiekeuze</th>
         <td colspan="3">
-            <div style="float:left;width:210px;"><label><input type="radio" name="studiekeuze" value="Algemene vorming" style="width:10px;">Algemene vorming (zonder latijn)</label></div>
-            <div style="float:left;width:210px;"><label><input type="radio" name="studiekeuze" value="Klassieke vorming" style="width:10px;">Klassieke vorming (met latijn)</label></div>
+            <div style="float:left;width:210px;"><label><input type="radio" name="studiekeuze" value="Algemene vorming" style="width:10px;">Algemene vorming (zonder Latijn)</label></div>
+            <div style="float:left;width:210px;"><label><input type="radio" name="studiekeuze" value="Klassieke vorming" style="width:10px;">Klassieke vorming (met Latijn)</label></div>
             <div style="float:left;width:160px;"><label><input type="radio" name="studiekeuze" value="Nog niet bepaald" style="width:10px;">Nog niet bepaald</label></div>
         </td>
     </tr>
