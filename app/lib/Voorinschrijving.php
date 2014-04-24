@@ -512,19 +512,24 @@ HTML;
 
         static function delete_inschrijving($inschrijving_id){
 
-            /*
+            
             $query = "SELECT id_leerling FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){
             $id_leerling = $row['id_leerling'];
             }
 
-            */
 
             $query = "DELETE FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
             query($query);
+            
+            $query = "UPDATE leerlingen SET deleted = '1' WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+            
 
-
+            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+            
             /*
             $query = "DELETE FROM inschrijving WHERE id_leerling = '{$id_leerling}'";
             query($query);
@@ -534,10 +539,9 @@ HTML;
 
             $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
             query($query);
-
-            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
-            query($query);
             */
+  
+            
 
             Notification::set("success","Inschrijving is succesvol verwijderd");       
 

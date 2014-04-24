@@ -730,6 +730,10 @@ HTML;
             $query = "UPDATE leerlingen SET deleted = '1' WHERE id_leerling = '{$id_leerling}'";
             query($query);
 
+            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+            
+            
             /*      
 
             $query = "DELETE FROM inschrijving WHERE id_leerling = '{$id_leerling}'";
@@ -739,9 +743,6 @@ HTML;
             query($query);
 
             $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
-            query($query);
-
-            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
             query($query);
 
             $query = "DELETE FROM loopbaan WHERE leerling_id = '{$id_leerling}'";
@@ -756,6 +757,8 @@ HTML;
             $query = "DELETE FROM moeder WHERE id_leerling = '{$id_leerling}'";
             query($query);
             */
+            
+
 
             Notification::set("success","Inschrijving is succesvol verwijderd");       
 
