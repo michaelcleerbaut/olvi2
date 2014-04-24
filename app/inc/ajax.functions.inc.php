@@ -660,7 +660,7 @@ HTML;
                 $tbl .= "<div style=\"clear:both;\"></div>";                                            
             }
             $selecttel = $_SESSION['afspraak_dag'] == "tel" && $_SESSION['afspraak_uur'] == "geen" ? "select" : "";
-            $tbl .= "<div class=\"telefonisch $selecttel\" id=\"telefonisch\" style=\"width: 400px;margin:auto;margin-top: 20px;\">Ik wil graag telefonisch een afspraak maken</div>";
+            $tbl .= "<div class=\"telefonisch $selecttel\" id=\"telefonisch\" style=\"width: 500px;margin:auto;margin-top: 20px;\">Ik zal zelf de school contacteren om een afspraak te maken</div>";
             $tbl .= "</div>";            
             
             
@@ -714,8 +714,8 @@ HTML;
             }
             $selecttel = $_SESSION['afspraak_dag'] == "tel" && $_SESSION['afspraak_uur'] == "geen" ? "select" : "";
             $selectgeen = $_SESSION['afspraak_dag'] == "broerofzus" && $_SESSION['afspraak_uur'] == "geen" ? "select" : "";
-            $tbl .= "<div class=\"telefonisch $selecttel\" id=\"telefonisch\" style=\"width: 400px;margin:auto;margin-top: 20px;\">Ik wil graag telefonisch een afspraak maken</div>";
-            $tbl .= "<div class=\"telefonisch $selectgeen\" id=\"reedsafspraak\" style=\"width: 400px;margin:auto;margin-top: 20px;\">Ik heb reeds een afspraak gemaakt (broer of zus)</div>";
+            $tbl .= "<div class=\"telefonisch $selecttel\" id=\"telefonisch\" style=\"width: 500px;margin:auto;margin-top: 20px;\">Ik zal zelf de school opbellen/contacteren om een afspraak te maken</div>";
+            $tbl .= "<div class=\"telefonisch $selectgeen\" id=\"reedsafspraak\" style=\"width: 500px;margin:auto;margin-top: 20px;\">Ik heb reeds een afspraak gemaakt (broer of zus)</div>";
             $tbl .= "</div>";            
             
             
