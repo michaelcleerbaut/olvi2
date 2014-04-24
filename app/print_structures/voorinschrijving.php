@@ -71,7 +71,7 @@
     $volgnummerB = $leerling['stroom'] == "A" ? "" : $volgnummerB;
 
     if($leerling['dag'] == "tel"){
-        $afspraak = "<span style=\"font-size:16px;font-weight:bold;\">U wil graag telefonisch een afspraak maken</span>";   
+        $afspraak = "<span style=\"font-size:16px;font-weight:bold;\">U zal zelf de school contacteren om een afspraak te maken</span>";   
     } else if ($leerling['dag'] == "broerofzus"){
         $afspraak = "<span style=\"font-size:16px;font-weight:bold;\">U heeft reeds een afspraak gemaakt (met een broer of zus)</span>";   
     } else {

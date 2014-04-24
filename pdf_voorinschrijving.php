@@ -4,7 +4,7 @@ require_once('lib/tcpdf/config/lang/eng.php');
 require_once('lib/tcpdf/tcpdf.php');
 
 require_once('app/inc/mysql.functions.inc.php');
-                                       
+            
                       
   $query = "
     SELECT l.*, i.*, c.*, o.studiekeuze, a.uur, a.dag FROM inschrijving i
@@ -56,7 +56,7 @@ require_once('app/inc/mysql.functions.inc.php');
   $volgnummerB = $leerling['stroom'] == "A" ? "" : $volgnummerB;
   
   if($leerling['dag'] == "tel"){
-      $afspraak = "U wil graag telefonisch een afspraak maken";   
+      $afspraak = "U zal zelf de school contacteren om een afspraak te maken<br><br> Datum: &nbsp;&nbsp; ....  / .... / ........ &nbsp;&nbsp;&nbsp;&nbsp;Uur: &nbsp;.... : ....";   
   } else if ($leerling['dag'] == "broerofzus"){
       $afspraak = "U heeft reeds een afspraak gemaakt (met een broer of zus)";   
   } else {
@@ -128,9 +128,12 @@ HEADER;
 
     //Page header
     public function Footer() {
+        
+        $date = date("d/m/Y H:i");
+        
         $footer = <<<FOOTER
         
-            <div style="border-top-style: solid thin #000000;height:2px;text-align:right;">12/12/2012</div>
+            <div style="border-top-style: solid thin #000000;height:2px;text-align:right;">$date</div>
         
         
 FOOTER;
@@ -211,7 +214,7 @@ $html = <<<EOF
             </tr>
         </table>
                   
-<h2 style="text-align:center;">Bewijs van voorinschrijving voor het schooljaar <?=$huidigschooljaar;?></h2>
+<h2 style="text-align:center;">Bewijs van voorinschrijving voor het schooljaar $huidigschooljaar</h2>
 
 
 <h4>Gegevens die u tijdens de voorinschrijvingsprocedure ingevuld heeft.</h4>
