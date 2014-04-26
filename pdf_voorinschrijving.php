@@ -61,7 +61,8 @@ require_once('app/inc/mysql.functions.inc.php');
       $afspraak = "U heeft reeds een afspraak gemaakt (met een broer of zus)";   
   } else {
       $uur = str_replace(":",".",$leerling['uur']);
-      $afspraak = "<table><tr><td>U heeft een afspraak op<br><br>{$leerling['dag']} mei 2013 om $uur u</td></tr></table>";   
+      $jaar = substr($leerling['schooljaar'], 0, 4);      
+      $afspraak = "<table><tr><td>U heeft een afspraak op<br><br>{$leerling['dag']} mei $jaar om $uur u</td></tr></table>";   
   }
   
   $tr_volgnummer_a = $volgnummerA != "" ? "<tr><td style=\"width:150px;\">Volgnummer A-Stroom:</td><td align=\"right\"><strong>$volgnummerA</strong></td></tr>" : "";

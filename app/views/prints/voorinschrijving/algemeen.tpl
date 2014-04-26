@@ -4,7 +4,8 @@
     <div style="float:left;">
         <span style="font-size:14px;">OLVI-MIDDENSCHOOL BOOM</span><br>
         Brandstraat 44<br>
-        2850 Boom    
+        2850 Boom <br>
+        info.middenschool@olviboom.be
     </div>
             
     <table style="float:right;">
