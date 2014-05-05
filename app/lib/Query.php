@@ -346,7 +346,8 @@
             **/
 
             $columnsarray['inschrijving'] = array(
-                "datum" => "Inschrijvingsdatum"
+                "datum_voorinschrijving" => "Datum voorinschrijvijng",
+                "datum_inschrijving" => "Datum inschrijving"
             );
 
             $columnsarray['afspraken'] = array(

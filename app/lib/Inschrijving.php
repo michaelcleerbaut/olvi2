@@ -62,7 +62,7 @@ HTML;
                 $html .= "<td class=\"center\">{$row['volgnummer']} </td>";
                 $html .= "<td class=\"center\">$volgnummerandere</td>";
                 $html .= "<td class=\"center\">{$row['gebruiker_naam']}</td>";
-                $html .= "<td class=\"center\">&nbsp;&nbsp;{$row['datum']}&nbsp;&nbsp;</td>";
+                $html .= "<td class=\"center\">&nbsp;&nbsp;{$row['datum_inschrijving']}&nbsp;&nbsp;</td>";
                 $html .= "<td class=\"center\"><a href=\"/prt/inschrijving/{$row['i_id']}/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['invullen'] == "YES" ? "<td class=\"center\"><a href=\"/panel/inschrijvingen/edit/{$_GET['param1']}/{$row['i_id']}\">Edit</a></td>" : "";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/inschrijvingen/delete/{$_GET['param1']}/{$row['i_id']}\" class=\"confirm\">Verwijder</a></td>" : "";

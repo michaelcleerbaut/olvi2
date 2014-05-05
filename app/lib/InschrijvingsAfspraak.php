@@ -92,7 +92,7 @@ HTML;
         <input type="hidden" id="dag" name="dag" value="">
         <input type="hidden" id="uur" name="uur" value="">
         <table class="formulier">
-            <tr><th>Naam leerling</th><td> <input type="text" name="naam" value="" id="search_leerling"></td></tr>
+            <tr><th>Naam leerling</th><td> <input type="text" name="naam" value="" id="search_leerling" autocomplete="off"></td></tr>
         </table>
                 
 HTML;

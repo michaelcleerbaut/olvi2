@@ -173,7 +173,8 @@
                 $result = query($query);
                 $row = mysql_fetch_assoc($result);
                 if($row['definschrijving'] == 0){            
-                    $query = "UPDATE inschrijving SET `definschrijving` = '1', `def_ingeschreven_door` = '{$_SESSION['gebruiker']['id']}' WHERE id_inschrijving = '{$row['id_inschrijving']}'";                            
+                    $date = date("Y-m-d H:i");
+                    $query = "UPDATE inschrijving SET `definschrijving` = '1', `datum_inschrijving` = '{$date}', `def_ingeschreven_door` = '{$_SESSION['gebruiker']['id']}' WHERE id_inschrijving = '{$row['id_inschrijving']}'";                            
                     query($query);
                 }
             }
@@ -193,11 +194,12 @@
                 $_SESSION['id_leerling'] = $row['id_leerling'];   
                 $_SESSION['id_inschrijving'] = $row['id_inschrijving'];
 
-                $query = "SELECT definschrijving FROM inschrijving WHERE id_inschrijving = '{$row['id_inschrijving']}'";
+                $query = "SELECT id_inschrijving, definschrijving FROM inschrijving WHERE id_inschrijving = '{$row['id_inschrijving']}'";
                 $result = query($query);
                 $row = mysql_fetch_assoc($result);
-                if($row['definschrijving'] == 0){                            
-                    $query = "UPDATE inschrijving SET `definschrijving` = '1', `def_ingeschreven_door` = '{$_SESSION['gebruiker']['id']}' WHERE id_inschrijving = '{$row['id_inschrijving']}'";                
+                if($row['definschrijving'] == 0){
+                    $date = date("Y-m-d H:i");                            
+                    $query = "UPDATE inschrijving SET `definschrijving` = '1', `datum_inschrijving` = '{$date}',`def_ingeschreven_door` = '{$_SESSION['gebruiker']['id']}' WHERE id_inschrijving = '{$row['id_inschrijving']}'";
                     query($query);
                 }
             }
@@ -293,7 +295,7 @@
             
             $date = date("Y-m-d H:i");
             
-            $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','B','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
+            $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum_voorinschrijving`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','B','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
             query($query);
             
             $_SESSION['id_inschrijving'] = mysql_insert_id();
@@ -594,7 +596,7 @@ HTML;
         
         $date = date("Y-m-d H:i");
         
-        $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`voorinschrijving`,`voor_ingeschreven_door`,`datum_voorinschrijving`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         $return = query($query);
         
 
@@ -1992,7 +1994,7 @@ HTML;
         $volgnummer = $volgnummer == 0 ? $maxNummer + 1 : $volgnummer; 
 
         $date = date("Y-m-d H:i");
-        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','A','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`voorinschrijving`,`voor_ingeschreven_door`,`datum_voorinschrijving`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','A','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         query($query);
         
         $_SESSION['id_inschrijving'] = mysql_insert_id();
@@ -2048,7 +2050,7 @@ HTML;
                 
         $date = date("Y-m-d H:i");
         
-        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`definschrijving`,`def_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','{$stroom}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
+        $query = "INSERT INTO inschrijving (`id_leerling`,`volgnummer`,`stroom`,`definschrijving`,`def_ingeschreven_door`,`datum_inschrijving`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','{$volgnummer}','{$stroom}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
         query($query);
         
         $_SESSION['id_inschrijving'] = mysql_insert_id();
@@ -3627,7 +3629,8 @@ HTML;
         if(mysql_num_rows($result) > 0){ // als er al een a stroom bestaat voor de leerling
             $leerling = mysql_fetch_assoc($result);
             
-            $query = "UPDATE inschrijving SET definschrijving = '1', def_ingeschreven_door = '{$_SESSION['gebruiker']['id']}' WHERE id_leerling = '{$_SESSION['id_leerling']}' AND stroom = 'A'";
+            $date = date("Y-m-d H:i");
+            $query = "UPDATE inschrijving SET definschrijving = '1', datum_inschrijving = '{$date}', def_ingeschreven_door = '{$_SESSION['gebruiker']['id']}' WHERE id_leerling = '{$_SESSION['id_leerling']}' AND stroom = 'A'";
             $return = query($query);
             
             $_SESSION['volgnummer_a'] = $leerling['volgnummer'];
@@ -3659,7 +3662,7 @@ HTML;
                     
             $date = date("Y-m-d H:i");
             
-            $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`definschrijving`,`def_ingeschreven_door`,`datum`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
+            $query = "INSERT INTO inschrijving (`id_leerling`,`stroom`,`volgnummer`,`definschrijving`,`def_ingeschreven_door`,`datum_inschrijving`,`schooljaar`) VALUES ('{$_SESSION['id_leerling']}','A','{$volgnummer_a}','1','{$_SESSION['gebruiker']['id']}','{$date}','{$_SESSION['schooljaar']}')";
             $return = query($query);
             
             $_SESSION['volgnummer_a'] = $volgnummer_a;
