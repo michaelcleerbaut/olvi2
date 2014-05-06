@@ -1,5 +1,6 @@
 <?php
-        
+    ini_set('session.gc_maxlifetime', 7200);
+            
     require_once('config.inc.php');
     require_once('global.functions.inc.php');    
     require_once('mysql.functions.inc.php');    
