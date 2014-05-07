@@ -66,6 +66,10 @@
                     "title" => "Definitieve Inschrijvingen",
                     "right"  => "inschrijvingen@@@default"
                 ),
+                "uitschrijvingen" => array(
+                    "title" => "Uitschrijvingen",
+                    "right"  => "uitschrijvingen@@@default"
+                ),
                 "inschrijvingsafspraken" => array(
                     "title" => "Inschrijvings afspraken",
                     "right"  => "inschrijvingsafspraken@@@default"

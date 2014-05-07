@@ -68,6 +68,13 @@
                         "delete" => 0
                     )
                 ),
+                "uitschrijvingen" => array(
+                    "name" => "Uitschrijvingen",
+                    "default" => 0,
+                    "options" => array(                        
+                        "bekijken" => 0                        
+                    )
+                ),
                 "inschrijvingsafspraken" => array(
                     "name" => "Inschrijvings afspraken",
                     "default" => 0,
