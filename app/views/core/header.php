@@ -83,7 +83,7 @@ if(!isset($isForm)){
         <td class="tdForm">
             <div class="content-container">
                 <div class="vakken">
-                    <div class="vak" style="margin-top: 50px;">
+                    <div class="vak <?=$panel_vak?>" style="margin-top: 50px;">
 
 <? } ?>
 

@@ -13,6 +13,7 @@
     switch($_GET['action']){
         case "show_all":
             $html .= Voorinschrijving::show_voorinschrijvingen($_GET['param1']);
+            $header_vars = array("panel_vak" => "panel_vak");
             break;
         case "show":
             array_push($crums,array("title" => "Stroom {$_GET['param1']}","url" => "/panel/voorinschrijvingen/show_all/{$_GET['param1']}"));            
@@ -36,7 +37,8 @@
     }
 
 
-    Template::view("core/header");
+
+    Template::view("core/header",$header_vars);
         echo build_crums($crums);    
         echo $html;
     Template::view("core/footer");

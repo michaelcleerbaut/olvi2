@@ -586,6 +586,11 @@ a.btnBig, a.btnMedium, a.btnSmall{
     padding: 20px 110px 20px 110px;
     min-height: 300px;
 }
+.content-container .vakken .panel_vak{    
+    width: 900px;
+    padding: 20px 10px 20px 50px;
+    min-height: 300px;
+}
 
 
 

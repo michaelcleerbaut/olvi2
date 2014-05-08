@@ -7,7 +7,7 @@
     switch($_GET['action']){
         case "show":
             array_push($crums,array("title" => "Alles","url" => "/panel/uitschrijvingen/show_all/{$_GET['param1']}"));
-            $html .= Uitschrijving::show_uitschrijving($_GET['param1']);
+            $html .= Uitschrijving::show_uitschrijving($_GET['param1']);            
         break;
         case "delete":
             $html .= Uitschrijving::delete_leerling($_GET['param1']);
@@ -22,11 +22,12 @@
         default:
             $html .= Uitschrijving::show_uitschrijvingen();
             $html .= Uitschrijving::show_uitschrijvingen_zonder_inschrijving();
+            $header_vars = array("panel_vak" => "panel_vak");
     }
     
 
 
-    Template::view("core/header");
+    Template::view("core/header",$header_vars);
     echo build_crums($crums);    
     echo $html;
     Template::view("core/footer");
