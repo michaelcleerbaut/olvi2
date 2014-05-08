@@ -1,4 +1,5 @@
 <?php
+exit;
     require_once('../app/inc/ajax.functions.inc.php');
     $dbh = MyPDO::getConnection();
 

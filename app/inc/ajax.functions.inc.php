@@ -3808,11 +3808,11 @@ MSG;
         
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             
-            //mail($leerling['email'], $subject, $message, $headers);
-            mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message, $headers);
-            //mail("coordinatie@olviboom.be", $subject. " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);   
+            //mail($email, $subject, $message, $headers);
+            //mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message, $headers);
+            //mail("coordinatie@olviboom.be", $subject. " - [KOPIE] - Verstuurd naar: {$email}", $message, $headers);   
         } else {
-            mail("michael@mcreations.pro", "ERROR - " . $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message . " => " . $id_inschrijving . ", " . $datum . ", " . $uur . ", " . $email, $headers);
+            //mail("michael@mcreations.pro", "ERROR - " . $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message . " => " . $id_inschrijving . ", " . $datum . ", " . $uur . ", " . $email, $headers);
         }
         
 
