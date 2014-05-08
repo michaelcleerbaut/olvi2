@@ -3755,6 +3755,69 @@ MSG;
 
         
     }
+    
+    function herinnering_email($id_inschrijving,$datum,$uur,$email){
+                                                    
+        
+        $filename = base64_encode("voorinschrijving_{$id_inschrijving}");
+                
+        $subject = 'Herinnering: Uw afspraak voor een definitieve inschrijving bij Olvi Middenschool Boom';
+        $headers = 'From: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
+            'Reply-To: Olvi Boom Middenschool <coordinatie@olviboom.be>' . "\r\n" .
+            'Content-Type: text/html';
+            
+        $web_domain = WEB_DOMAIN;
+            
+        $message = <<<MSG
+            
+            <img src="{$web_domain}/public/img/logo_jpg.jpg" alt="Olvi Boom Middenschool">
+            
+            <p>Beste, </p>
+            <br>
+            
+            <p>Bij deze herinneren wij u graag dat u op <strong>$datum mei om $uur</strong> een afspraak heeft om uw kind definitief in te schrijven bij Olvi Middenschool Boom.</p>
+                        
+            <p>
+                <strong>Wat mag u zeker niet vergeten mee te brengen naar uw afspraak?</strong><br>
+                - Uw bewijs van voorinschrijving<br>
+                - SIS-kaart en/of identiteitskaart van uw zoon/dochter
+            </p>
+                        
+            <p>Indien u het bewijs van voorinschrijving niet meer vindt kan u deze via onderstaande link downloaden:</p>
+               
+            <p>
+                <a href="{$web_domain}data/pdfs/{$filename}.pdf">{$web_domain}data/pdfs/{$filename}.pdf</a>
+            </p>
+            
+            
+            <p>Graag tot dan!</p>
+            
+            <br>
+            <p>
+                Met vriendelijke groeten,<br><br>
+                Sharon Sluyts
+            </p>
+            
+
+            <img src="{$web_domain}/public/img/handtekening.jpg" alt="Olvi Boom">
+                        
+MSG;
+                
+        
+        
+        
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+            
+            //mail($leerling['email'], $subject, $message, $headers);
+            mail("michael@mcreations.pro", $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message, $headers);
+            //mail("coordinatie@olviboom.be", $subject. " - [KOPIE] - Verstuurd naar: {$leerling['email']}", $message, $headers);   
+        } else {
+            mail("michael@mcreations.pro", "ERROR - " . $subject . " - [KOPIE] - Verstuurd naar: {$email}", $message . " => " . $id_inschrijving . ", " . $datum . ", " . $uur . ", " . $email, $headers);
+        }
+        
+
+        
+    }    
  
     
 ?>
