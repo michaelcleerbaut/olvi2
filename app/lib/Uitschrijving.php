@@ -20,26 +20,74 @@ HTML;
 
         static function show_uitschrijvingen(){
 
-            $query = "SELECT * FROM leerlingen WHERE deleted = 1 ORDER BY naam";    
-            $result = query($query);                        
-                        
+            $html = "<div class=\"subtitel\">Uitschrijvingen {$_SESSION['schooljaar']}</div>";
 
-            $html = "<div class=\"subtitel\">Uitschrijvingen (" . mysql_num_rows($result) . " resultaten gevonden)</div>";
-
-            $html .= "<table class=\"opties\" cellpadding=\"2\"><tr><th class=\"top\">Naam</th></th></tr>";
-
+            $query = "SELECT i.*, i.id_inschrijving as i_id, l.*, g.id, g.naam as gebruiker_naam FROM uitschrijving i
+            LEFT JOIN leerlingen l ON i.id_leerling = l.id_leerling
+            LEFT JOIN gebruikers g ON i.uitgeschreven_door = g.id
+            WHERE i.schooljaar LIKE '{$_SESSION['schooljaar']}' 
+            ORDER BY i.datum_uitschrijving
+            ";    
+            $result = query($query);
             while($row = mysql_fetch_assoc($result)){
+                $leerlingen[$row['id_leerling']] = $row;
+                $leerlingen[$row['id_leerling']]['volgnummer_a'] = $row['stroom'] == "A" ? $row['volgnummer'] : $leerlingen[$row['id_leerling']]['volgnummer_a'];
+                $leerlingen[$row['id_leerling']]['volgnummer_b'] = $row['stroom'] == "B" ? $row['volgnummer'] : $leerlingen[$row['id_leerling']]['volgnummer_b'];
+                $leerlingen[$row['id_leerling']]['voor'] = $row['voorinschrijving'] == "1" ? 1 : $leerlingen[$row['id_leerling']]['voorinschrijving'];
+                $leerlingen[$row['id_leerling']]['def'] = $row['definschrijving'] == "1" ? 1 : $leerlingen[$row['id_leerling']]['definschrijving'];
+                   
+            }
+            
 
+            $html .= "<table class=\"opties\" cellpadding=\"2\"><tr><th class=\"top\">Naam</th></th><th class=\"top\">V Nr A</th><th class=\"top\">V Nr B</th><th class=\"top\">Voor</th><th class=\"top\">Definitieve<th class=\"top\">Uitgeschreven door</th><th class=\"top\">op</th></tr>";
+
+            foreach($leerlingen as $LID => $row){
 
                 $naam = $row['voornaam'] != "" || $row['naam'] != "" ? $row['voornaam'] . " " . $row['naam'] : "<i>geen naam</i>";
+
+                $voor = $row['voor'] == 1 ? "Ja" : "";
+                $def = $row['def'] == 1 ? "Ja" : "";
                 
                 $html .= "<tr>";
-                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$row['id_leerling']}\">$naam</a></th>";                
+                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$_GET['param1']}/{$row['i_id']}\">$naam</a></th>";
+                $html .= "<td class=\"center\">{$row['volgnummer_a']} </td>";
+                $html .= "<td class=\"center\">{$row['volgnummer_b']}</td>";
+                $html .= "<td class=\"center\">{$voor}</td>";
+                $html .= "<td class=\"center\">{$def}</td>";
+                $html .= "<td class=\"center\">{$row['gebruiker_naam']}</td>";
+                $html .= "<td class=\"center\">&nbsp;&nbsp;{$row['datum_uitschrijving']}&nbsp;&nbsp;</td>";                
+                $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/uitschrijvingen/delete/{$row['i_id']}\" class=\"confirm\">Verwijder leerling</a></td>" : "";
                 $html .= "</tr>";
 
 
             }
 
+
+            $html .= "</table>";
+
+            return $html;
+        }
+        
+        static function show_uitschrijvingen_zonder_inschrijving(){
+
+            $query = "SELECT * FROM leerlingen l WHERE l.deleted = 1 ORDER BY l.id_leerling";    
+            $result = query($query);
+            
+            if(mysql_num_rows($result) == 0) return false;
+            
+            $html = "<br><br><div class=\"subtitel\">Uitschrijvingen die geen inschrijving gegevens meer hebben</div>";
+            $html .= "<table class=\"opties\" cellpadding=\"2\"><tr><th class=\"top\">Naam</th></th></tr>";
+
+            while($row = mysql_fetch_assoc($result)){
+
+                $naam = $row['voornaam'] != "" || $row['naam'] != "" ? $row['voornaam'] . " " . $row['naam'] : "<i>geen naam</i>";
+
+                $html .= "<tr>";
+                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$_GET['param1']}/{$row['i_id']}\">$naam</a></th>";
+                $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/uitschrijvingen/delete_leerling/{$row['id_leerling']}\" class=\"confirm\">Verwijder leerling</a></td>" : "";
+                $html .= "</tr>";
+
+            }
 
             $html .= "</table>";
 
@@ -280,6 +328,56 @@ HTML;
         }
 
 
+        static function delete_leerling($id,$id_sort = "inschrijving"){
+
+            if($id_sort == "inschrijving"){
+                $inschrijving_id = $id;            
+                $query = "SELECT id_leerling FROM uitschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
+                $result = query($query);
+                while($row = mysql_fetch_assoc($result)){
+                    $id_leerling = $row['id_leerling'];
+                }
+                
+                $query = "DELETE FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
+                query($query);
+                
+            } else {                
+                $id_leerling = $id;
+            }
+
+
+            $query = "DELETE FROM uitschrijving WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+                     
+            $query = "DELETE FROM communicatie WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM loopbaan WHERE leerling_id = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM vip WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM vader WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM moeder WHERE id_leerling = '{$id_leerling}'";
+            query($query);            
+            
+
+
+            Notification::set("success","Leerling is succesvol verwijderd");       
+
+        }
 
     }
 ?>

@@ -23,9 +23,13 @@
             $html .= Inschrijving::edit_inschrijving($_GET['param2']);
         break;
         case "delete":
-            $html .= Inschrijving::delete_inschrijving($_GET['param2']);
+            $html .= Inschrijving::delete_leerling($_GET['param2']);
             header("Location: /panel/inschrijvingen/show_all/{$_GET['param1']}");
             exit;                        
+        break;
+        case "uitschrijven":
+            $html .= Inschrijving::uitschrijven($_GET['param2']);
+            header("Location: /panel/inschrijvingen/show_all/{$_GET['param1']}");            
         break;
         default:
             $html .= Inschrijving::menu();

@@ -8,9 +8,20 @@
         case "show":
             array_push($crums,array("title" => "Alles","url" => "/panel/uitschrijvingen/show_all/{$_GET['param1']}"));
             $html .= Uitschrijving::show_uitschrijving($_GET['param1']);
-        break;        
+        break;
+        case "delete":
+            $html .= Uitschrijving::delete_leerling($_GET['param1']);
+            header("Location: /panel/uitschrijvingen/show_all/{$_GET['param2']}");
+            exit;            
+            break;                
+        case "delete_leerling":
+            $html .= Uitschrijving::delete_leerling($_GET['param1'],"leerling");
+            header("Location: /panel/uitschrijvingen/show_all/{$_GET['param2']}");
+            exit;            
+            break;                
         default:
             $html .= Uitschrijving::show_uitschrijvingen();
+            $html .= Uitschrijving::show_uitschrijvingen_zonder_inschrijving();
     }
     
 

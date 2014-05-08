@@ -23,10 +23,14 @@
             $html .= Voorinschrijving::edit_inschrijving($_GET['param2']);
             break;
         case "delete":
-            $html .= Voorinschrijving::delete_inschrijving($_GET['param1']);
+            $html .= Voorinschrijving::delete_leerling($_GET['param1']);
             header("Location: /panel/voorinschrijvingen/show_all/{$_GET['param2']}");
             exit;            
             break;
+        case "uitschrijven":
+            $html .= Voorinschrijving::uitschrijven($_GET['param1']);
+            header("Location: /panel/voorinschrijvingen/show_all/{$_GET['param2']}");            
+            break;            
         default:
             $html .= Voorinschrijving::menu();
     }

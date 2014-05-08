@@ -71,8 +71,9 @@ HTML;
                 $html .= "<td class=\"center\">{$row['volgnummer']} </td>";
                 $html .= "<td class=\"center\">$volgnummerandere</td>";
                 $html .= "<td class=\"center\"><a href=\"/prt/voorinschrijving/{$row['i_id']}/{$row['id_leerling']}\" target=\"_blank\"><div class=\"print_icon\"></div></a></td>";
-                $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['invullen'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/edit/{$_GET['param1']}/{$row['i_id']}\">Edit</a></td>" : "";
-                $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/delete/{$row['i_id']}/{$_GET['param1']}\" class=\"confirm\">Verwijder</a></td>" : "";
+                $html .= $_SESSION['gebruiker']['rights']['voorinschrijvingen']['invullen'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/edit/{$_GET['param1']}/{$row['i_id']}\">Edit</a></td>" : "";
+                $html .= $_SESSION['gebruiker']['rights']['voorinschrijvingen']['uitschrijven'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/uitschrijven/{$row['i_id']}/{$_GET['param1']}\" class=\"confirm\">Uitschrijven</a></td>" : "";
+                $html .= $_SESSION['gebruiker']['rights']['voorinschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/voorinschrijvingen/delete/{$row['i_id']}/{$_GET['param1']}\" class=\"confirm\">Verwijder leerling</a></td>" : "";
                 $html .= "</tr>";
 
 
@@ -510,43 +511,107 @@ HTML;
 
         }
 
-        static function delete_inschrijving($inschrijving_id){
+        static function delete_leerling($inschrijving_id){
 
-            
             $query = "SELECT id_leerling FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){
-            $id_leerling = $row['id_leerling'];
+                $id_leerling = $row['id_leerling'];
             }
-
 
             $query = "DELETE FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
             query($query);
-            
-            $query = "UPDATE leerlingen SET deleted = '1' WHERE id_leerling = '{$id_leerling}'";
+
+            $query = "DELETE FROM uitschrijving WHERE id_leerling = '{$id_leerling}'";
             query($query);
-            
+
+            $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
+            query($query);
 
             $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
             query($query);
-            
-            /*
-            $query = "DELETE FROM inschrijving WHERE id_leerling = '{$id_leerling}'";
-            query($query);
-
+                     
             $query = "DELETE FROM communicatie WHERE id_leerling = '{$id_leerling}'";
             query($query);
 
             $query = "DELETE FROM leerlingen WHERE id_leerling = '{$id_leerling}'";
             query($query);
-            */
-  
-            
 
-            Notification::set("success","Inschrijving is succesvol verwijderd");       
+            $query = "DELETE FROM loopbaan WHERE leerling_id = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM vip WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM vader WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+            $query = "DELETE FROM moeder WHERE id_leerling = '{$id_leerling}'";
+            query($query);            
+            
+            Notification::set("success","Leerling is succesvol verwijderd");       
 
 
         }
+        
+
+        static function uitschrijven($inschrijving_id){
+
+            $query = "SELECT * FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
+            $result = query($query);
+            while($row = mysql_fetch_assoc($result)){
+                $inschrijving = $row;
+            }
+            
+            $date = date("Y-m-d H:i");
+
+            $query = "INSERT INTO uitschrijving 
+                (                
+                    `id_inschrijving`,
+                    `id_leerling`,
+                    `stroom`,
+                    `volgnummer`,
+                    `voorinschrijving`,
+                    `definschrijving`,
+                    `def_ingeschreven_door`,
+                    `voor_ingeschreven_door`,
+                    `datum_voorinschrijving`,
+                    `datum_inschrijving`,
+                    `schooljaar`,
+                    `datum_uitschrijving`,
+                    `uitgeschreven_door`
+                )
+                    VALUES
+                (
+                    '{$inschrijving['id_inschrijving']}',
+                    '{$inschrijving['id_leerling']}',
+                    '{$inschrijving['stroom']}',
+                    '{$inschrijving['volgnummer']}',
+                    '{$inschrijving['voorinschrijving']}',
+                    '{$inschrijving['definschrijving']}',
+                    '{$inschrijving['def_ingeschreven_door']}',
+                    '{$inschrijving['voor_ingeschreven_door']}',
+                    '{$inschrijving['datum_voorinschrijving']}',
+                    '{$inschrijving['datum_inschrijving']}',
+                    '{$inschrijving['schooljaar']}',                    
+                    '$date',
+                    '{$_SESSION['gebruiker']['id']}'
+                )
+            ";
+            query($query);
+            
+            $query = "DELETE FROM inschrijving WHERE id_inschrijving = '{$inschrijving_id}'";
+            query($query);
+
+            $query = "DELETE FROM afspraken WHERE id_leerling = '{$id_leerling}'";
+            query($query);
+
+
+            Notification::set("success","Inschrijving is succesvol uitgeschreven");       
+
+        }
+        
+        
 
     }
 ?>

@@ -56,7 +56,8 @@
                     "options" => array(
                         "invullen" => 0,
                         "bekijken" => 0,
-                        "delete" => 0
+                        "delete" => 0,
+                        "uitschrijven" => 0
                     )
                 ),
                 "inschrijvingen" => array(
@@ -65,7 +66,8 @@
                     "options" => array(
                         "invullen" => 0,
                         "bekijken" => 0,
-                        "delete" => 0
+                        "delete" => 0,
+                        "uitschrijven" => 0
                     )
                 ),
                 "uitschrijvingen" => array(
