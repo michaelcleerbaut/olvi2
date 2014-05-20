@@ -1,23 +1,6 @@
 <?php
     Class Uitschrijving{
 
-        static function menu(){
-
-            $aantaluitschrijvingenA = self::get_aantal_uitschrijvingen("A");
-            $aantaluitschrijvingenB = self::get_aantal_uitschrijvingen("B");
-
-            $html = <<<HTML
-                <div class="subtitel">Wat wil u doen?</div>
-
-                <ul class="opties">
-                    <li><a href="/panel/uitschrijvingen/show_all/A">Bekijk uitschrijvingen Stroom A <strong>({$aantaluitschrijvingenA})</strong></a></li>
-                    <li><a href="/panel/uitschrijvingen/show_all/B">Bekijk uitschrijvingen Stroom B <strong>({$aantaluitschrijvingenB})</strong></a></li>
-                </ul>    
-HTML;
-            return $html; 
-        }
-
-
         static function show_uitschrijvingen(){
 
             $html = "<div class=\"subtitel\">Uitschrijvingen {$_SESSION['schooljaar']}</div>";
@@ -49,7 +32,7 @@ HTML;
                 $def = $row['def'] == 1 ? "Ja" : "";
                 
                 $html .= "<tr>";
-                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$_GET['param1']}/{$row['i_id']}\">$naam</a></th>";
+                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$LID}\">$naam</a></th>";
                 $html .= "<td class=\"center\">{$row['volgnummer_a']} </td>";
                 $html .= "<td class=\"center\">{$row['volgnummer_b']}</td>";
                 $html .= "<td class=\"center\">{$voor}</td>";
@@ -83,7 +66,7 @@ HTML;
                 $naam = $row['voornaam'] != "" || $row['naam'] != "" ? $row['voornaam'] . " " . $row['naam'] : "<i>geen naam</i>";
 
                 $html .= "<tr>";
-                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$_GET['param1']}/{$row['i_id']}\">$naam</a></th>";
+                $html .= "<th class=\"left\"><a href=\"/panel/uitschrijvingen/show/{$row['id_leerling']}\">$naam</a></th>";
                 $html .= $_SESSION['gebruiker']['rights']['inschrijvingen']['delete'] == "YES" ? "<td class=\"center\"><a href=\"/panel/uitschrijvingen/delete_leerling/{$row['id_leerling']}\" class=\"confirm\">Verwijder leerling</a></td>" : "";
                 $html .= "</tr>";
 
