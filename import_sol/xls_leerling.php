@@ -92,7 +92,7 @@
                 $value = $value . " ";
             }
 
-            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cel, $value);
+            $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cel, utf8_encode($value));
 
         }
         $kol_nr = 0;
