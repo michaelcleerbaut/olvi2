@@ -15,7 +15,7 @@
 
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.*, b.*, m.*, v.*, p.* FROM leerlingen l 
+            SELECT l.*, b.*, m.*, v.*, p.*, i.* FROM leerlingen l 
             LEFT JOIN loopbaan b ON l.id_leerling = b.leerling_id
             LEFT JOIN moeder m ON l.id_leerling = m.id_leerling
             LEFT JOIN vader v ON l.id_leerling = v.id_leerling
@@ -24,10 +24,15 @@
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
-        while($row = $sth->fetch(PDO::FETCH_ASSOC)){
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
             //$row['schooljaar'] = $settings['huidigschooljaar']['value'];
             $leerlingen[$row['id_leerling']] = $row;
+            if($row['stroom'] == "A"){
+                $leerlingen[$row['id_leerling']]['volgnummer_a'] = $row['volgnummer'];
+            } else if ($row['stroom'] == "B"){
+                $leerlingen[$row['id_leerling']]['volgnummer_b'] = $row['volgnummer'];
+            }
         }
 
         return $leerlingen;      
@@ -77,10 +82,19 @@
                     $value ="Half intern, dagen thuis: " . trim(substr($leerling['middag'],21));
                     break;
             }                           
+            break;
+            
+            case "leerling_id":
+                $value = array_key_exists('volgnummer_a',$leerling) ? "A: " . $leerling['volgnummer_a'] : "";
+                if(array_key_exists('volgnummer_b',$leerling)){
+                    $value .= $value != "" ? ", " : "";
+                    $value .= "B: " . $leerling['volgnummer_b'];
+                }                
             break; 
         }    
+        
 
-
+        
         return $value;
     }
 
@@ -90,6 +104,7 @@
         $table_rows = "";
         
         foreach($leerlingen as $id_leerling => $leerling){
+     
 
             foreach($import_kols as $sol => $ons){
                 $ons = trim($ons);
@@ -100,7 +115,7 @@
                     if(substr($ons,0,7) != "[ADAPT]"){                
                         $value = array_key_exists($ons,$leerling) ? $leerling[$ons] : "KOLOM NIET GEVONDEN";
                     } else {                
-                        $adapt_key = trim(substr($ons,7));                                        
+                        $adapt_key = trim(substr($ons,7));                         
                         $value = $adapt_key != "" ? get_adaption_value($leerling,$adapt_key) : "";
                     }
 
@@ -123,6 +138,7 @@
             }
 
         }
+    
 
         $table = "<table border=\"1\"><tr><th>KOL SOL</th><th>ONS</th><th>VALUE</th></tr>";
         $table .= $table_rows;
