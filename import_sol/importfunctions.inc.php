@@ -91,6 +91,10 @@
                     $value .= "B: " . $leerling['volgnummer_b'];
                 }                
             break; 
+            
+            case "datum_inschrijving":
+                $value = date("d/m/Y", strtotime($leerling['datum_inschrijving']));
+            break;
         }    
         
 
