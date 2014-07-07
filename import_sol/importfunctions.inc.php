@@ -120,10 +120,6 @@
             $leerlingen[$row['id_leerling']] = $row;                        
         }
         
-        echo "<pre>";
-        print_r($leerlingen);
-        echo "</pre>";
-
         return $leerlingen;     
         
         
