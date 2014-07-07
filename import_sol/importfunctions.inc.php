@@ -1,5 +1,6 @@
 <?php
 
+    // get data functions
     function get_leerlingen_data(){
     
         $dbh = MyPDO::getConnection();
@@ -38,7 +39,178 @@
         return $leerlingen;      
 
     }
+
+    function get_vip_gedragsproblemen_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            LEFT JOIN vip_gedragsproblemen g ON l.id_leerling = g.id_leerling            
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['naam_volledig'] = $row['naam'] . " " . $row['voornaam'];            
+            $row['categorie'] = "VIP Gedragsprobleem";
+            $row['datum'] = date("d/m/Y");
+                    
+            $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
+            $problemen_html = "";
+            if(is_array($problemen) && count($problemen) > 0){
+                foreach($problemen as $probleem => $value){
+                    if($value == "YES"){
+                        $problemen_html .= $probleem . ", ";
+                    } else if ($value != ""){
+                        $problemen_html .= $probleem . ": ". $value . ", ";
+                    }
+                }
+            }
+            if(strlen($problemen_html) > 0){
+                $problemen_html = substr($problemen_html,0,-2) . ".\n";
+            }
+            
+            $row['omschrijving'] = $problemen_html . $row['omschrijving'];                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+
+        return $leerlingen;     
+        
+        
+    }    
     
+    function get_vip_gezondheidsproblemen_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            LEFT JOIN vip_gezondheidsproblemen g ON l.id_leerling = g.id_leerling            
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['naam_volledig'] = $row['naam'] . " " . $row['voornaam'];            
+            $row['categorie'] = "VIP Gezondheidsprobleem";
+            $row['datum'] = date("d/m/Y");
+
+            $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
+            $problemen_html = "";
+            if(is_array($problemen) && count($problemen) > 0){
+                foreach($problemen as $probleem => $value){
+                    if($value == "YES"){
+                        $problemen_html .= $probleem . ", ";
+                    } else if ($value != ""){
+                        $problemen_html .= $probleem . ": ". $value . ", ";
+                    }
+                }
+            }
+            if(strlen($problemen_html) > 0){
+                $problemen_html = substr($problemen_html,0,-2) . ".\n";
+            }
+            
+            $row['omschrijving'] = $problemen_html . $row['omschrijving'];            
+                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+
+        return $leerlingen;     
+        
+        
+    }
+    
+    function get_vip_andereproblemen_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            LEFT JOIN vip_andereproblemen g ON l.id_leerling = g.id_leerling            
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['naam_volledig'] = $row['naam'] . " " . $row['voornaam'];            
+            $row['categorie'] = "VIP Andere problemen";
+            $row['datum'] = date("d/m/Y");
+                                     
+            $row['omschrijving'] = $row['soort'] . " " . $row['omschrijving'];            
+                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+
+        return $leerlingen;     
+        
+        
+    }
+    
+    function get_thuistaal_verschillend_van_nederlands_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
+            LEFT JOIN vip v ON l.id_leerling = v.id_leerling            
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+            AND v.thuistaal != 'Ja' AND v.thuistaal != ''
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['naam_volledig'] = $row['naam'] . " " . $row['voornaam'];            
+            $row['categorie'] = "VIP Andere problemen";
+            $row['datum'] = date("d/m/Y");
+                                     
+            $row['omschrijving'] = $row['thuistaal'];
+                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+
+        return $leerlingen;     
+        
+    }
+    
+    function get_maakt_gebruik_van_pc_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
+            LEFT JOIN vip_leerproblemen v ON l.id_leerling = v.id_leerling            
+            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+            AND v.maakt_gebruik_van_pc = 'Ja' 
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['naam_volledig'] = $row['naam'] . " " . $row['voornaam'];            
+            $row['categorie'] = "VIP Andere problemen";
+            $row['datum'] = date("d/m/Y");
+                                     
+            $row['omschrijving'] = $row['maakt_gebruik_van_pc_programmas'];
+                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+
+        return $leerlingen;     
+        
+    } 
+    
+
+    // parse functions    
     function get_adaption_value($leerling,$key){
 
         $value = "";

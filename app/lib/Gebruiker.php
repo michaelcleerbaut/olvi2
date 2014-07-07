@@ -131,7 +131,8 @@
                     "name" => "Exporteren naar Excel",
                     "default" => 0,
                     "options" => array(
-                        "leerlingen" => 0            
+                        "leerlingen" => 0,            
+                        "dossierlijnen" => 0            
                     )
                 ),
                 "afspraken" => array(
