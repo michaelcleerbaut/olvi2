@@ -54,7 +54,7 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
-            $row['naam_volledig'] = utf8_decode(html_entity_decode($row['naam'])) . " " . utf8_decode(html_entity_decode($row['voornaam']));            
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Gedragsprobleem";
             $row['datum'] = date("d/m/Y");
                     
@@ -96,7 +96,7 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
-            $row['naam_volledig'] = utf8_decode(html_entity_decode($row['naam'])) . " " . utf8_decode(html_entity_decode($row['voornaam']));            
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Gezondheidsprobleem";
             $row['datum'] = date("d/m/Y");
 
@@ -139,7 +139,7 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
-            $row['naam_volledig'] = utf8_decode(html_entity_decode($row['naam'])) . " " . utf8_decode(html_entity_decode($row['voornaam']));            
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Andere problemen";
             $row['datum'] = date("d/m/Y");
                                      
@@ -168,8 +168,8 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
-            $row['naam_volledig'] = utf8_decode(html_entity_decode($row['naam'])) . " " . utf8_decode(html_entity_decode($row['voornaam']));            
-            $row['categorie'] = "VIP Andere problemen";
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
+            $row['categorie'] = "VIP Thuistaal verschillend van nederlands";
             $row['datum'] = date("d/m/Y");
                                      
             $row['omschrijving'] = $row['thuistaal'];
@@ -196,8 +196,8 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = $_SESSION['schooljaar'];
-            $row['naam_volledig'] = utf8_decode(html_entity_decode($row['naam'])) . " " . utf8_decode(html_entity_decode($row['voornaam']));            
-            $row['categorie'] = "VIP Andere problemen";
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
+            $row['categorie'] = "VIP Maakt gebruik van PC";
             $row['datum'] = date("d/m/Y");
                                      
             $row['omschrijving'] = $row['maakt_gebruik_van_pc_programmas'];
