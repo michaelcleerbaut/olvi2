@@ -2479,7 +2479,7 @@ HTML;
         $result = query($query);
         if(mysql_num_rows($result) > 0){
             while($r = mysql_fetch_assoc($result)){
-                $problemen = unserialize($r['soorten_problemen']);
+                $problemen = unserialize(htmlspecialchars_decode($r['soorten_problemen']));
                     
                 $replacements = array(
                     "[chk_gedragsstoornis]"      => array_key_exists("gedragsstoornis",$problemen) ? " checked=\"checked\"" : "",
