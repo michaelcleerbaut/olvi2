@@ -47,8 +47,8 @@
         // GET DATA
         $sth = $dbh->query("
             SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
-            LEFT JOIN vip_gedragsproblemen g ON l.id_leerling = g.id_leerling            
-            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            INNER JOIN vip_gedragsproblemen g ON l.id_leerling = g.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
@@ -89,8 +89,8 @@
         // GET DATA
         $sth = $dbh->query("
             SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
-            LEFT JOIN vip_gezondheidsproblemen g ON l.id_leerling = g.id_leerling            
-            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            INNER JOIN vip_gezondheidsproblemen g ON l.id_leerling = g.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
@@ -132,8 +132,8 @@
         // GET DATA
         $sth = $dbh->query("
             SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
-            LEFT JOIN vip_andereproblemen g ON l.id_leerling = g.id_leerling            
-            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            INNER JOIN vip_andereproblemen g ON l.id_leerling = g.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
@@ -160,8 +160,8 @@
         // GET DATA
         $sth = $dbh->query("
             SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
-            LEFT JOIN vip v ON l.id_leerling = v.id_leerling            
-            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            INNER JOIN vip v ON l.id_leerling = v.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
             AND v.thuistaal != 'Ja' AND v.thuistaal != ''
         ");
@@ -188,8 +188,8 @@
         // GET DATA
         $sth = $dbh->query("
             SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
-            LEFT JOIN vip_leerproblemen v ON l.id_leerling = v.id_leerling            
-            LEFT JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            INNER JOIN vip_leerproblemen v ON l.id_leerling = v.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
             AND v.maakt_gebruik_van_pc = 'Ja' 
         ");
