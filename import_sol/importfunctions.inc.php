@@ -53,10 +53,10 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
-            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Gedragsprobleem";
-            $row['datum'] = date("d/m/Y");
+            $row['datum'] = date("Y-m-d");
                     
             $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
             $problemen_html = "";
@@ -95,10 +95,10 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
-            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Gezondheidsprobleem";
-            $row['datum'] = date("d/m/Y");
+            $row['datum'] = date("Y-m-d");
 
             $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
             $problemen_html = "";
@@ -138,10 +138,10 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
-            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Andere problemen";
-            $row['datum'] = date("d/m/Y");
+            $row['datum'] = date("Y-m-d");
                                      
             $row['omschrijving'] = $row['soort'] . " " . $row['omschrijving'];            
                         
@@ -167,10 +167,10 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
-            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Thuistaal verschillend van nederlands";
-            $row['datum'] = date("d/m/Y");
+            $row['datum'] = date("Y-m-d");
                                      
             $row['omschrijving'] = $row['thuistaal'];
                         
@@ -195,10 +195,10 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
-            $row['schooljaar'] = $_SESSION['schooljaar'];
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "VIP Maakt gebruik van PC";
-            $row['datum'] = date("d/m/Y");
+            $row['datum'] = date("Y-m-d");
                                      
             $row['omschrijving'] = $row['maakt_gebruik_van_pc_programmas'];
                         
