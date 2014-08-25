@@ -12,6 +12,7 @@
 * 
 * leerling (naam + voornaam)
 * dossier schooljaar
+* geboortedatum
 * categorie
 * datum
 * omschrijving
@@ -21,8 +22,7 @@
 
 $import_kols = array(
   "leerling" => "naam_volledig",
-  "dossier schooljaar" => "schooljaar",
-  "geboortedatum" => "geboortedatum",
+  "dossier schooljaar" => "schooljaar",  
   "categorie" => "categorie",
   "datum" => "datum",
   "dossier periode" => "[SKIP]",
@@ -41,7 +41,7 @@ $import_kols = array(
   "aanwezigen" => "[SKIP]",
   "groeps werk plan" => "[SKIP]",
   "klas" => "[SKIP]",
-  "geboortedatum" => "[SKIP]",
+  "geboortedatum" => "geboortedatum",
   "schooljaar" => "[SKIP]"  
 );
 

@@ -277,7 +277,7 @@
     }
 
     function parse_results($leerlingen, $import_kols,$show_table = 0){
-
+        
 
         $table_rows = "";
         
