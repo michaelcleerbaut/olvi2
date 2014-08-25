@@ -56,8 +56,8 @@
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "Gedragsproblemen";
-            $row['datum'] = date("d/m/Y");
-            $row['geboortedatum'] = date("d/m/Y", strtotime($row['geboortedatum']));
+            $row['datum'] = date("Y-m-d");
+            $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
                     
             $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
             $problemen_html = "";
