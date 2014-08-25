@@ -46,7 +46,7 @@
         
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, g.* FROM leerlingen l
             INNER JOIN vip_gedragsproblemen g ON l.id_leerling = g.id_leerling            
             INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
@@ -55,8 +55,9 @@
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "VIP Gedragsprobleem";
-            $row['datum'] = date("Y-m-d");
+            $row['categorie'] = "Gedragsproblemen";
+            $row['datum'] = date("d/m/Y");
+            $row['geboortedatum'] = date("d/m/Y", strtotime($row['geboortedatum']));
                     
             $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
             $problemen_html = "";

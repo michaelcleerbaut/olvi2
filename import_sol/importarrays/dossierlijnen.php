@@ -22,6 +22,7 @@
 $import_kols = array(
   "leerling" => "naam_volledig",
   "dossier schooljaar" => "schooljaar",
+  "geboortedatum" => "geboortedatum",
   "categorie" => "categorie",
   "datum" => "datum",
   "dossier periode" => "[SKIP]",
