@@ -75,7 +75,7 @@
                 $problemen_html = substr($problemen_html,0,-2) . ".\n";
             }
             
-            $row['omschrijving'] = $problemen_html . $row['omschrijving'];                        
+            $row['omschrijving'] = $problemen_html . " " . $row['omschrijving'];                        
             $leerlingen[$row['id_leerling']] = $row;                        
         }
 
@@ -120,7 +120,7 @@
                 $problemen_html = substr($problemen_html,0,-2) . ".\n";
             }
             
-            $row['omschrijving'] = $problemen_html . $row['omschrijving'];            
+            $row['omschrijving'] = $problemen_html . " ". $row['omschrijving'];            
                         
             $leerlingen[$row['id_leerling']] = $row;                        
         }
