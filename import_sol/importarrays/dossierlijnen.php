@@ -42,7 +42,7 @@ $import_kols = array(
   "groeps werk plan" => "[SKIP]",
   "klas" => "[SKIP]",
   "geboortedatum" => "geboortedatum",
-  "schooljaar" => "[SKIP]"  
+  "schooljaar" => "schooljaar"  
 );
 
 

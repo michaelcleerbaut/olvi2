@@ -54,6 +54,7 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
+            $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "Gedragsproblemen";
             $row['datum'] = date("Y-m-d");
