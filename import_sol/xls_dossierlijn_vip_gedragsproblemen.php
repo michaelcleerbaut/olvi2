@@ -75,6 +75,7 @@
     // PARSE DATA INTO EXCEL
     $row_nr = 1;
     $kol_nr = 0;
+    
     foreach($rows as $id_leerling => $row){
         if($row_nr == 1){
             foreach($row as $key => $value){

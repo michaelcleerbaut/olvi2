@@ -98,9 +98,12 @@
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
+            $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "VIP Gezondheidsprobleem";
+            $row['categorie'] = "Gezondheidsproblemen";
             $row['datum'] = date("Y-m-d");
+            $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
+            
 
             $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
             $problemen_html = "";
@@ -142,7 +145,7 @@
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "VIP Andere problemen";
+            $row['categorie'] = "VIP andere problemen";
             $row['datum'] = date("Y-m-d");
                                      
             $row['omschrijving'] = $row['soort'] . " " . $row['omschrijving'];            
@@ -171,8 +174,10 @@
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "VIP Thuistaal verschillend van nederlands";
-            $row['datum'] = date("Y-m-d");
+            $row['categorie'] = "Thuistaal";
+            $row['datum'] = date("Y-m-d");                        
+            $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
+
                                      
             $row['omschrijving'] = $row['thuistaal'];
                         
@@ -199,8 +204,10 @@
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "VIP Maakt gebruik van PC";
-            $row['datum'] = date("Y-m-d");
+            $row['categorie'] = "PC in de klas";
+            $row['datum'] = date("Y-m-d");                        
+            $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
+
                                      
             $row['omschrijving'] = $row['maakt_gebruik_van_pc_programmas'];
                         
