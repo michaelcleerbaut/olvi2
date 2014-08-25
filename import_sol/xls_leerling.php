@@ -80,6 +80,12 @@
             foreach($row as $key => $value){
                 $kol_nr++;
                 $cel = $kols[$kol_nr] . $row_nr;
+
+                /** SMALL FIX NEEDS TO BE SOLVED PROPERLY **/                
+                if($key == "datum inschr"){
+                    $key = "datum inschr.";
+                }
+                
                 $objPHPExcel->setActiveSheetIndex(0)->setCellValue($cel, $key);            
             }        
             $kol_nr = 0;
@@ -87,7 +93,7 @@
         $row_nr++;
         foreach($row as $key => $value){
             $kol_nr++;
-            $cel = $kols[$kol_nr] . $row_nr;
+            $cel = $kols[$kol_nr] . $row_nr;            
             if(is_numeric($value)){
                 $value = $value . " ";
             }
@@ -98,8 +104,7 @@
         $kol_nr = 0;
 
     }
-
-
+               
     // Rename worksheet
     $objPHPExcel->getActiveSheet()->setTitle('Leerlingen');
 
