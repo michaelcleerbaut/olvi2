@@ -90,7 +90,7 @@
         
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, g.* FROM leerlingen l
             INNER JOIN vip_gezondheidsproblemen g ON l.id_leerling = g.id_leerling            
             INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
@@ -136,7 +136,7 @@
         
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.id_leerling, l.naam, l.voornaam, i.*, g.* FROM leerlingen l
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, g.* FROM leerlingen l
             INNER JOIN vip_andereproblemen g ON l.id_leerling = g.id_leerling            
             INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
@@ -164,7 +164,7 @@
         
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, v.* FROM leerlingen l
             INNER JOIN vip v ON l.id_leerling = v.id_leerling            
             INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
@@ -194,7 +194,7 @@
         
         // GET DATA
         $sth = $dbh->query("
-            SELECT l.id_leerling, l.naam, l.voornaam, i.*, v.* FROM leerlingen l
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, v.* FROM leerlingen l
             INNER JOIN vip_leerproblemen v ON l.id_leerling = v.id_leerling            
             INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
