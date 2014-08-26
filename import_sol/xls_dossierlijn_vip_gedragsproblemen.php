@@ -109,8 +109,14 @@
 
 
     // Redirect output to a client’s web browser (Excel5)
-    header('Content-Type: application/vnd.ms-excel');
-    $filename = "dossierlijnen_vip_gedragsproblemen_" . date("Ymd_Hi") . ".xls";
+    
+    if($_GET['type'] == "CSV"){
+        header('Content-Type: text/csv; charset=utf-8');
+        $filename = "dossierlijnen_vip_gedragsproblemen_" . date("Ymd_Hi") . ".csv";
+    } else {
+        header('Content-Type: application/vnd.ms-excel; charset=iso-8859-1');    
+        $filename = "dossierlijnen_vip_gedragsproblemen_" . date("Ymd_Hi") . ".xls";
+    } 
     header("Content-Disposition: attachment;filename='$filename'");
     header('Cache-Control: max-age=0');
 
