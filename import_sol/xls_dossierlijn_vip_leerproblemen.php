@@ -52,10 +52,11 @@
 
 
     // GET DATA
-    $leerlingen = get_vip_gedragsproblemen_data();
+    $leerlingen = get_vip_leerproblemen_data();
 
+    
     // PARSE DATA TO XLS ARRAY
-    $results = parse_results($leerlingen,$import_kols,$show_table);    
+    $results = parse_results($leerlingen,$import_kols,$show_table);
     $rows = $results['rows'];
     $table = $results['table'];
     
@@ -74,7 +75,6 @@
     // PARSE DATA INTO EXCEL
     $row_nr = 1;
     $kol_nr = 0;
-    
     foreach($rows as $id_leerling => $row){
         if($row_nr == 1){
             foreach($row as $key => $value){
@@ -101,7 +101,7 @@
 
 
     // Rename worksheet
-    $objPHPExcel->getActiveSheet()->setTitle('Leerlingen');
+    $objPHPExcel->getActiveSheet()->setTitle('Leerlingen met leerproblemen');
 
 
     // Set active sheet index to the first sheet, so Excel opens this as the first sheet
@@ -110,7 +110,7 @@
 
     // Redirect output to a client’s web browser (Excel5)
     header('Content-Type: application/vnd.ms-excel');
-    $filename = "dossierlijnen_vip_gedragsproblemen_" . date("Ymd_Hi") . ".xls";
+    $filename = "dossierlijnen_vip_leerproblemen_" . date("Ymd_Hi") . ".xls";
     header("Content-Disposition: attachment;filename='$filename'");
     header('Cache-Control: max-age=0');
 

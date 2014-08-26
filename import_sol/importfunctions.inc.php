@@ -53,29 +53,80 @@
         ");
         $leerlingen = array();
         while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+            
+            // init needed keys and values
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
             $row['categorie'] = "Gedragsproblemen";
             $row['datum'] = date("Y-m-d");
             $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
-                    
-            $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
-            $problemen_html = "";
-            if(is_array($problemen) && count($problemen) > 0){
-                foreach($problemen as $probleem => $value){
-                    if($value == "YES"){
-                        $problemen_html .= $probleem . ", ";
-                    } else if ($value != ""){
-                        $problemen_html .= $probleem . ": ". $value . ", ";
+
+            // build omschrijving
+            
+                // problemen                                     
+                $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));            
+                $problemen_html = "";    
+                if(is_array($problemen) && count($problemen) > 0){
+                    $omschrijving = "Soorten problemen ";
+                    $omschrijving .= "\n---------------------------------------\n";
+                    foreach($problemen as $probleem => $value){
+                        $probleem = str_replace("anderegedragsproblemen","andere gedragsproblemen",$probleem); 
+                        if($value == "YES"){
+                            $omschrijving .= $probleem . "\n";
+                        } else if ($value != "" && $value != "NO"){
+                            $omschrijving .= $probleem . ": ". $value . "\n";
+                        }
                     }
                 }
-            }
-            if(strlen($problemen_html) > 0){
-                $problemen_html = substr($problemen_html,0,-2) . ".\n";
-            }
+                 
+                $omschrijving .= "\nGedragsproblemen thuis ";                
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['gedragsproblemen_thuis'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['gedragsproblemen_thuis'] == "Ja"){                    
+                    $omschrijving .= "Welke: " . $row['gedragsproblemen_thuis_welke'] . "\n";
+                    $omschrijving .= "Extra: ".$row['gedragsproblemen_thuis_extra'] ; "\n";                    
+                }
+                
+                $omschrijving .= "\nGedragsproblemen school ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['gedragsproblemen_school'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['gedragsproblemen_school'] == "Ja"){                    
+                    $omschrijving .= "Welke: " . $row['gedragsproblemen_school_welke'] . "\n";
+                    $omschrijving .= "Extra: ".$row['gedragsproblemen_school_extra'] ; "\n";                    
+                }
+
+                $omschrijving .= "\nBegeleiding ";                
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['begeleiding'] == "Ja" ? "Ja\n" : "Nee\n";
+                if($row['begeleiding'] == "Ja"){                    
+                    $omschrijving .= "Wanneer? " . $row['begeleiding_wanneer'] . "\n";
+                    $omschrijving .= "Waar? " . $row['begeleiding_waar'] . "\n";
+                    $omschrijving .= "Nu nog? " . $row['begeleiding_nunog'] . "\n";
+                    $omschrijving .= "Extra: " . $row['begeleiding_extra'] . "\n";
+                }
+                
+                $omschrijving .= "\nAlgemene omschrijving ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['omschrijving'] . "\n";
+                
+                $omschrijving .= "\nAttesten ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['attesten'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['attesten'] == "Ja"){            
+                    $omschrijving .= "Extra: ".$row['attesten_extra'] . "\n";                    
+                }                
+                
+                if($row['omgang'] != ""){
+                    $omschrijving .= "\nOmgang ";
+                    $omschrijving .= "\n---------------------------------------\n";
+                    $omschrijving .= $row['omgang'];
+                }                                   
             
-            $row['omschrijving'] = $problemen_html . " " . $row['omschrijving'];                        
+            
+            $row['omschrijving'] = $omschrijving; 
+            
+                                    
             $leerlingen[$row['id_leerling']] = $row;                        
         }
 
@@ -96,7 +147,9 @@
             WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
         ");
         $leerlingen = array();
-        while($row = $sth->fetch(PDO::FETCH_ASSOC)){         
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){
+        
+            // init needed keys and values         
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
@@ -105,22 +158,148 @@
             $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
             
 
-            $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));
-            $problemen_html = "";
-            if(is_array($problemen) && count($problemen) > 0){
-                foreach($problemen as $probleem => $value){
-                    if($value == "YES"){
-                        $problemen_html .= $probleem . ", ";
-                    } else if ($value != ""){
-                        $problemen_html .= $probleem . ": ". $value . ", ";
+            // build omschrijving
+            
+                // problemen                
+                $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));            
+                $problemen_html = "";    
+                if(is_array($problemen) && count($problemen) > 0){
+                    $omschrijving = "Soorten problemen ";
+                    $omschrijving .= "\n---------------------------------------\n";
+                    foreach($problemen as $probleem => $value){
+                        $probleem = str_replace("anderegezondheidsproblemen","andere gezondheidsproblemen",$probleem);                    
+                        if($value == "YES"){
+                            $omschrijving .= $probleem . "\n";
+                        } else if ($value != "" && $value != "NO"){
+                            $omschrijving .= $probleem . ": ". $value . "\n";
+                        }
+                    }
+                }    
+                                
+                $omschrijving .= "\nAlgemene omschrijving ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['omschrijving'] . "\n";
+                
+                $omschrijving .= "\nAttesten ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['attesten'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['attesten'] == "Ja"){            
+                    $omschrijving .= "Extra: ".$row['attesten_extra'] . "\n";                    
+                }  
+            
+            
+            $row['omschrijving'] = $omschrijving;            
+                        
+            $leerlingen[$row['id_leerling']] = $row;                        
+        }
+        
+        return $leerlingen;     
+        
+        
+    }
+    
+    function get_vip_leerproblemen_data(){
+        
+        $dbh = MyPDO::getConnection();
+        
+        // GET DATA
+        $sth = $dbh->query("
+            SELECT l.id_leerling, l.naam, l.voornaam, l.geboortedatum, i.*, g.* FROM leerlingen l
+            INNER JOIN vip_leerproblemen g ON l.id_leerling = g.id_leerling            
+            INNER JOIN inschrijving i ON l.id_leerling = i.id_leerling            
+            WHERE l.deleted != '1' AND i.schooljaar LIKE '{$_SESSION['schooljaar']}'
+        ");
+        $leerlingen = array();
+        while($row = $sth->fetch(PDO::FETCH_ASSOC)){
+        
+            // init needed keys and values         
+            $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
+            $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
+            $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
+            $row['categorie'] = "Gezondheidsproblemen";
+            $row['datum'] = date("Y-m-d");
+            $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
+            
+
+            // build omschrijving
+            
+                // problemen                
+                $problemen = unserialize(htmlspecialchars_decode($row['soorten_problemen']));            
+                $problemen_html = "";    
+                if(is_array($problemen) && count($problemen) > 0){
+                    $omschrijving = "Soorten problemen ";
+                    $omschrijving .= "\n---------------------------------------\n";
+                    foreach($problemen as $probleem => $value){
+                        $probleem = str_replace("andereleerproblemen","andere leerproblemen",$probleem);                    
+                        if($value == "YES"){
+                            $omschrijving .= $probleem . "\n";
+                        } else if ($value != "" && $value != "NO"){
+                            $omschrijving .= $probleem . ": ". $value . "\n";
+                        }
                     }
                 }
-            }
-            if(strlen($problemen_html) > 0){
-                $problemen_html = substr($problemen_html,0,-2) . ".\n";
-            }
+                
+                $omschrijving .= "\nJaar over gedaan?";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['jaar_overgedaan'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['jaar_overgedaan'] == "Ja"){            
+                    $omschrijving .= "Leerjaar: ".$row['jaar_overgedaan_leerjaar'] . "\n";                    
+                    $omschrijving .= "Reden: ".$row['jaar_overgedaan_reden'] . "\n";                    
+                    $omschrijving .= "Extra: ".$row['jaar_overgedaan_extra'] . "\n";                    
+                }
+                
+                $omschrijving .= "\nVakgebonden?";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['vakgebonden'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['vakgebonden'] == "Ja"){            
+                    $omschrijving .= "Vakken: ".$row['vakgebonden_vakken'] . "\n";                    
+                    $omschrijving .= "Soort: ".$row['vakgebonden_soort'] . "\n";                    
+                    $omschrijving .= "Extra: ".$row['vakgebonden_extra'] . "\n";                    
+                }
+                
+                $omschrijving .= "\nMaakt gebruik van pc?";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['maakt_gebruik_van_pc'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['maakt_gebruik_van_pc'] == "Ja"){            
+                    $omschrijving .= "Programmas: ".$row['maakt_gebruik_van_pc_programmas'] . "\n";                                                            
+                }                
+
+                $omschrijving .= "\nBijkomende gedragsproblemen?";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['gedragsproblemen'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['gedragsproblemen'] == "Ja"){            
+                    $omschrijving .= "Welke: ".$row['gedragsproblemen_welke'] . "\n";                                                            
+                    $omschrijving .= "Extra: ".$row['gedragsproblemen_extra'] . "\n";                                                            
+                }
+                
+                $omschrijving .= "\nTaakleraar in L.O.?";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['taakleraar_lo'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['taakleraar_lo'] == "Ja"){            
+                    $omschrijving .= "Reden: ".$row['taakleraar_lo_reden'] . "\n";                                                            
+                    $omschrijving .= "Extra: ".$row['taakleraar_lo_extra'] . "\n";                                                            
+                }                
+                
+                $omschrijving .= "\nBegeleiding ";                
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['begeleiding'] == "Ja" ? "Ja\n" : "Nee\n";
+                if($row['begeleiding'] == "Ja"){                    
+                    $omschrijving .= "Wanneer? " . $row['begeleiding_wanneer'] . "\n";
+                    $omschrijving .= "Waar? " . $row['begeleiding_waar'] . "\n";
+                    $omschrijving .= "Nu nog? " . $row['begeleiding_nunog'] . "\n";
+                    $omschrijving .= "Extra: " . $row['begeleiding_extra'] . "\n";
+                }
+                
+                
+                $omschrijving .= "\nAttesten ";
+                $omschrijving .= "\n---------------------------------------\n";
+                $omschrijving .= $row['attesten'] == "Ja" ? "Ja\n" : "Nee\n";                 
+                if($row['attesten'] == "Ja"){            
+                    $omschrijving .= "Extra: ".$row['attesten_extra'] . "\n";                    
+                }  
             
-            $row['omschrijving'] = $problemen_html . " ". $row['omschrijving'];            
+            
+            $row['omschrijving'] = $omschrijving;            
                         
             $leerlingen[$row['id_leerling']] = $row;                        
         }

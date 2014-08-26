@@ -129,8 +129,8 @@
                 } else {
                     $attesten = "Nee <br> {$leerling['attesten_extra']}";
                 }
-
-
+                
+                
                 $html = <<<HTML
         
             <div style="float:right;">
@@ -168,6 +168,11 @@
                 <td class="right">$vakgebonden</td>
                 <td>{$leerling['vakgebonden_extra']}</td>
             </tr>
+            <tr>
+                <th class="left">Maakt gebruik van pc?</th>
+                <td class="right">{$leerling['maakt_gebruik_van_pc']}</td>
+                <td>{$leerling['maakt_gebruik_van_pc_programmas']}</td>                
+            </tr>            
             <tr>
                 <th class="left">Bijkomende gedragsproblemen?</th>
                 <td class="right">$gedragsproblemen</td>
@@ -250,7 +255,10 @@ HTML;
                 $chk_jaarovergedaan_nee = $leerling['jaar_overgedaan'] == "Nee" ? " checked=\"checked\"" : "";                    
 
                 $chk_vakgebonden_ja = $leerling['vakgebonden'] == "Ja" ? " checked=\"checked\"" : "";
-                $chk_vakgebonden_nee = $leerling['vakgebonden'] == "Nee" ? " checked=\"checked\"" : "";      
+                $chk_vakgebonden_nee = $leerling['vakgebonden'] == "Nee" ? " checked=\"checked\"" : "";
+                
+                $chk_pc_ja = $leerling['maakt_gebruik_van_pc'] == "Ja" ? " checked=\"checked\"" : "";
+                $chk_pc_nee = $leerling['maakt_gebruik_van_pc'] == "Nee" ? " checked=\"checked\"" : "";      
 
                 $chk_gedragsproblemen_ja = $leerling['gedragsproblemen'] == "Ja" ? " checked=\"checked\"" : "";
                 $chk_gedragsproblemen_nee = $leerling['gedragsproblemen'] == "Nee" ? " checked=\"checked\"" : "";
@@ -330,6 +338,18 @@ HTML;
                     </table>
                 </td>                
             </tr>
+            <tr>
+                <th class="left" valign="top">
+                    Maakt gebruik van pc?<br><br><br>
+                    <label><input type="radio" name="maakt_gebruik_van_pc" value="Ja" style="width: 20px;" $chk_pc_ja> Ja </label>
+                    <label><input type="radio" name="maakt_gebruik_van_pc" value="Nee" style="width: 20px;" $chk_pc_nee> Nee </label>
+                </th>
+                <td class="right">
+                    <table>
+                        <tr><td>Programmas?</td><td><textarea name="maakt_gebruik_van_pc_programmas" style="width:430px;height:100px;">{$leerling['maakt_gebruik_van_pc_programmas']}</textarea></td></tr>
+                    </table>
+                </td>                
+            </tr>            
             <tr>
                 <th class="left" valign="top">
                     Bijkomende gedragsproblemen?<br><br><br>
