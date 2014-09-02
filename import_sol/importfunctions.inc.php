@@ -216,7 +216,7 @@
             $row['schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['dossier schooljaar'] = str_replace(" ","",$_SESSION['schooljaar']);
             $row['naam_volledig'] = htmlspecialchars_decode($row['naam']) . " " . htmlspecialchars_decode($row['voornaam']);            
-            $row['categorie'] = "Gezondheidsproblemen";
+            $row['categorie'] = "Leerproblemen";
             $row['datum'] = date("Y-m-d");
             $row['geboortedatum'] = date("Y-m-d", strtotime($row['geboortedatum']));
             
