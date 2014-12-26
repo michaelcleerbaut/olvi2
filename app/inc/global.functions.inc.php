@@ -81,7 +81,9 @@
         
         $start_year = "2013";
         
-        for($year = $start_year ; $year <= date("Y"); $year++){
+        $end_year = date("m") == "12" ? date("Y") + 1 : date("Y");
+        
+        for($year = $start_year ; $year <= $end_year ; $year++){            
             
             $year_value = $year . " - " . ($year+1);
              

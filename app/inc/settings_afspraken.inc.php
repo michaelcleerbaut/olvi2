@@ -30,6 +30,20 @@ $afspr_settings = array(
             "9" => "9 Mei",
             "10" => "10 Mei"
         )        
+    ),
+    "2015 - 2016" => array(
+        "blocks" => array(
+            "1" => array("start" => "13:00", "eind" => "21:00")
+        ),
+        "days" => array(
+            "9" => array("start" => "17:00", "eind" => "21:00"),
+            "10" => array("start" => "13:00", "eind" => "17:00")            
+        ),
+        "max_inschrijvingen_per_halfuur" => 7,
+        "full" => array(
+            "9" => "9 Mei",
+            "10" => "10 Mei"
+        )        
     )
 );
 ?>
