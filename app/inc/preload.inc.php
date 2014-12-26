@@ -9,7 +9,7 @@
 
     session_start();
 
-    $nologin_needed = array("/index.php","/oops.php","/scripts/test.php","/cronjobs.php");
+    $nologin_needed = array("/waaier/waaier.php","/index.php","/oops.php","/scripts/test.php","/cronjobs.php");
     
                                           
     if(!$_SESSION['gebruiker']){
