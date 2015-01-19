@@ -119,11 +119,11 @@ Laatst bezochte school: <?=$leerling['school_vorig_schooljaar'];?>
 <table style="margin-top: 30px;" cellspacing="10">
     <tr>
         <td valign="top"><div style="width: 10px;height:10px;border: solid thin #000;"></div></td>
-        <td>Ik heb mijn zoon/dochter reeds ingeschreven in een andere school en zal de inschrijving in OLVI-middenschool voor 1-jul-2014 bevestigen of annuleren.</td>
+        <td>Ik heb mijn zoon/dochter reeds ingeschreven in een andere school en zal de inschrijving in OLVI-middenschool voor 1-jul-2015 bevestigen of annuleren.</td>
     </tr>
     <tr>
         <td valign="top"><div style="width: 10px;height:10px;border: solid thin #000;"></div></td>    
-        <td>Ik zal mijn zoon/dochter ook nog in een andere school inschrijven en zal de inschrijving in OLVI-middenschool voor 01-jul-2014 bevestigen of annuleren.</td>
+        <td>Ik zal mijn zoon/dochter ook nog in een andere school inschrijven en zal de inschrijving in OLVI-middenschool voor 01-jul-2015 bevestigen of annuleren.</td>
     </tr>
 </table>
 
