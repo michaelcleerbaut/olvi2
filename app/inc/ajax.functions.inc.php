@@ -3624,25 +3624,25 @@ HTML;
         
         $keuzevakken = convert_fields_to_array($keuzevakken);
         
-        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND id_leerling = '{$_SESSION['id_leerling']}'";
+        $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND id_leerling = '{$_SESSION['id_leerling']}' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
         $result = query($query);
         if(mysql_num_rows($result) > 0){ // als er al een a stroom bestaat voor de leerling
             $leerling = mysql_fetch_assoc($result);
             
             $date = date("Y-m-d H:i");
-            $query = "UPDATE inschrijving SET definschrijving = '1', datum_inschrijving = '{$date}', def_ingeschreven_door = '{$_SESSION['gebruiker']['id']}' WHERE id_leerling = '{$_SESSION['id_leerling']}' AND stroom = 'A'";
+            $query = "UPDATE inschrijving SET definschrijving = '1', datum_inschrijving = '{$date}', def_ingeschreven_door = '{$_SESSION['gebruiker']['id']}' WHERE id_leerling = '{$_SESSION['id_leerling']}' AND stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}'";
             $return = query($query);
             
             $_SESSION['volgnummer_a'] = $leerling['volgnummer'];
         } else { // anders volgend volgnummer voor a stroom zoeken en nieuwe maken
             
-            $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer ASC";
+            $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer ASC";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){            
                 $volgnummers[$row['volgnummer']] = "YES";            
             }
         
-            $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' ORDER BY volgnummer DESC LIMIT 0,1";
+            $query = "SELECT volgnummer FROM inschrijving WHERE stroom = 'A' AND schooljaar LIKE '{$_SESSION['schooljaar']}' ORDER BY volgnummer DESC LIMIT 0,1";
             $result = query($query);
             while($row = mysql_fetch_assoc($result)){            
                 $maxNummer = $row['volgnummer'];
